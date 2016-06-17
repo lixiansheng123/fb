@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <View
+        android:id="@+id/view_gap"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+<LinearLayout
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@color/whiteF8F8F7"
+    android:layout_height="126dp">
+
+    <ImageView
+        android:id="@+id/iv_man"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/ic_sex_man"
+        />
+
+    <ImageView
+        android:id="@+id/iv_woman"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/ic_sex_woman"
+        />
+
+    <ImageView
+        android:id="@+id/iv_secrecy"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/ic_sex_secrecy"
+        />
+
+</LinearLayout>
+</LinearLayout>

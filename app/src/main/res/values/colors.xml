@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="green4B8D7F">#4B8D7F</color>
+    <color name="green488B7D">#488B7D</color>
+    <color name="green99CC33">#99CC33</color>
+    <color name="greenE5EEEC">#E5EEEC</color>
+    <color name="green7FACA0">#7FACA0</color>
+    <color name="greenA3C2BA">#A3C2BA</color>
+    <color name="green589588">#589588</color>
+    <color name="greenBED965">#BED965</color>
+    <color name="greenA5C4BB">#A5C4BB</color>
+
+    <color name="whiteF8F8F7">#F8F8F7</color>
+
+    <color name="greyE5E5E5">#E5E5E5</color>
+    <color name="greycccccc">#cccccc</color>
+    <color name="greyEEEEEE">#EEEEEE</color>
+    <color name="grey666666">#666666</color>
+    <color name="greyC9C9C9">#C9C9C9</color>
+    <color name="greyC9CACA">#C9CACA</color>
+    <color name="greyA1A1A1">#A1A1A1</color>
+    <color name="grey5F5F5F">#5F5F5F</color>
+    <color name="greyEEEEEF">#EEEEEF</color>
+
+    <color name="blue566892">#566892</color>
+    <color name="blue31D4FF">#31D4FF</color>
+    <color name="blue8895B2">#8895B2</color>
+
+    <color name="black474443">#474443</color>
+    <color name="black5F5D5D">#5F5D5D</color>
+
+    <color name="orangeD6BC52">#D6BC52</color>
+    <color name="orangeF08519">#F08519</color>
+    <color name="orangeD6BC53">#D6BC53</color>
+    <color name="orangeFFD303">#FFD303</color>
+    <color name="orangeFF6600">#FF6600</color>
+
+    <color name="whiteFDFDFD">#FDFDFD</color>
+
+    <color name="pinkFE6D76">#FE6D76</color>
+    <color name="purple6F65A4">#6F65A4</color>
+    <color name="blackb2000000">#b2000000</color>
+
+</resources>

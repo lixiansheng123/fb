@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Football-mad</string>
+    <string name="action_settings">Settings</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">松开手刷新</string>
+    <string name="str_loading">正在加载更多</string>
+    <string name="str_test">测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容</string>
+    <string name="key_click_icon">key_click_icon</string>
+    <string name="key_unclick_icon">key_unclick_icon</string>
+    <string name="str_time">30小时前</string>
+    <string name="str_modify_succeed">修改成功</string>
+</resources>

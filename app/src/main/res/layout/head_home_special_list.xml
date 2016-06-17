@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyE5E5E5"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/green4B8D7F" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_hot_special" />
+
+    <com.yuedong.lib_develop.view.SupportScrollConflictGridView
+        android:id="@+id/gv_hot_special"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/whiteFDFDFD" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_lately_update" />
+
+    <View
+        style="@style/line_blue_1px"
+        android:layout_height="2px" />
+</LinearLayout>

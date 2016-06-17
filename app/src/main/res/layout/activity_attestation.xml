@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="143dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/bg_round_black666">
+
+                <com.yuedong.lib_develop.view.RoundImageView
+                    android:layout_width="81dp"
+                    android:layout_height="81dp"
+                    android:src="@drawable/bg_white"
+                    android:layout_centerInParent="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_purple_camera" />
+            </RelativeLayout>
+
+            <TextView
+                style="@style/text_blue_12sp"
+                android:layout_marginTop="2dp"
+                android:singleLine="true"
+                android:text="上传真实头像" />
+
+            <TextView
+                style="@style/text_green_12sp"
+                android:text="发表权威观点" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/greyE5E5E5" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/bg_round_aircle_black666666">
+
+                <com.yuedong.lib_develop.view.RoundImageView
+                    android:layout_width="81dp"
+                    android:layout_height="81dp"
+                    android:layout_centerInParent="true"
+                    app:borderRadius="11dp"
+                    android:src="@drawable/bg_white"
+                    app:type="round" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_purple_camera" />
+            </RelativeLayout>
+
+            <TextView
+                style="@style/text_blue_12sp"
+                android:layout_marginTop="2dp"
+                android:singleLine="true"
+                android:text="上传真实头像"
+                android:visibility="invisible" />
+
+            <TextView
+                style="@style/text_green_12sp"
+                android:text="发表权威观点" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/line_grey_1px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/cb_football" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:button="@drawable/cb_football_jizhe" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/greyE5E5E5" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/cb_football_jiaolian" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:button="@drawable/cb_football_qita" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/grey666666"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="一句话让自己看起来更专业"
+            android:maxEms="50"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:textColor="@color/greyC9CACA"
+            android:textColorHint="@color/greyC9CACA"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="不超过50个字"
+            android:textColor="@color/greyC9CACA"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_green_12sp"
+                android:text="认证姓名" />
+
+            <EditText
+                android:layout_width="95dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/bg_round_green_border1dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/greyE5E5E5" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_green_12sp"
+                android:text="从业城市" />
+
+            <EditText
+                android:layout_width="95dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/bg_round_green_border1dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/line_grey_1px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp">
+
+        <TextView
+            style="@style/text_green_12sp"
+            android:text="所属机构" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_green_border1dp" />
+    </LinearLayout>
+
+    <View style="@style/line_grey_1px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp">
+
+        <TextView
+            style="@style/text_green_12sp"
+            android:text="联系方式" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_green_border1dp" />
+    </LinearLayout>
+    <include layout="@layout/item_home_touch"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        />
+</LinearLayout>

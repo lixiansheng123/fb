@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="10dp">
+
+    <com.yuedong.lib_develop.view.RoundImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/text_bold_blue_12sp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+         />
+
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <View
+        android:id="@+id/view_gap"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:background="@color/whiteF8F8F7"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="160dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="3">
+
+            <kankan.wheel.widget.WheelView
+                android:id="@+id/id_wheelview_year"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+            </kankan.wheel.widget.WheelView>
+
+            <kankan.wheel.widget.WheelView
+                android:id="@+id/id_wheelview_month"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+            </kankan.wheel.widget.WheelView>
+
+            <kankan.wheel.widget.WheelView
+                android:id="@+id/id_wheelview_day"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+            </kankan.wheel.widget.WheelView>
+        </LinearLayout>
+        <View
+            style="@style/line_grey_1px"
+            android:layout_height="1dp"
+            />
+        <RelativeLayout
+            android:background="@color/greyEEEEEF"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/id_select_cancle"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_green_cancel"
+                />
+            <ImageView
+                android:id="@+id/id_select_confirm"
+                android:layout_alignParentRight="true"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_green_confirm"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

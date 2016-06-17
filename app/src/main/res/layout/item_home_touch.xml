@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.84"
+        android:orientation="vertical"
+        android:paddingLeft="11dp">
+
+        <RelativeLayout
+            android:id="@+id/item_top"
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/icon1"
+                style="@style/w_h_ww"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_small_blue_say" />
+
+            <TextView
+                style="@style/text_blue_10sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/icon1"
+                android:text="123" />
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_yellow_jiandi" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/text_bold_blue_16sp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/str_test" />
+
+        <TextView
+            style="@style/text_dark_black_14sp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/str_test" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:background="@color/greycccccc" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <com.yuedong.lib_develop.view.RoundImageView
+            android:id="@+id/id_pic"
+            android:layout_width="81dp"
+            android:layout_height="81dp"
+            android:src="@drawable/haizeiwang"
+            app:borderRadius="@dimen/round_radius_1"
+            app:type="round" />
+    </LinearLayout>
+
+</LinearLayout>

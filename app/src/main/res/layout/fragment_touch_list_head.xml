@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="162dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="1px"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image_small1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="1px"
+            android:layout_weight="1" />
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image_small2"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="1px"
+            android:layout_weight="1" />
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image_small3"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <com.yuedong.lib_develop.view.BannerView
+        android:id="@+id/banner"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.76" />
+
+</LinearLayout>

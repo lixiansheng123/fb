@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="101dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="85dp"
+        android:layout_height="85dp" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_bold_blue_15sp"
+            android:singleLine="true" />
+
+        <View
+            android:id="@+id/line"
+            style="@style/line_blue_1px"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            style="@style/text_black_12sp"
+            android:layout_below="@+id/line"
+            android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/ll_user_info"
+            android:maxLines="3" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_info"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/line"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_user_level"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:background="@drawable/level_quan_expert">
+
+                <com.yuedong.lib_develop.view.RoundImageView
+                    android:id="@+id/iv_user_head"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_user_nick"
+                style="@style/text_bold_blue_10sp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                style="@style/text_blue_8sp"
+                android:singleLine="true"
+                android:text="资深评论员" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
