@@ -79,7 +79,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         }else{
             rightIcon = R.drawable.ic_white_add_friend;
         }
-        buildUi(new TitleViewHelper(this).getNomarlCenterTitle(R.drawable.ic_round_return, "作者用户名",rightIcon, null, rightClickListener),
+        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, "作者用户名", rightIcon, null, rightClickListener),
                 R.layout.activity_user_info);
         other = getIntent().getExtras().getBoolean(Constant.KEY_BOOL, false);
         userSid = getIntent().getExtras().getString(Constant.KEY_STR);

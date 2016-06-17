@@ -3,6 +3,7 @@ package com.yuedong.football_mad.ui;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -19,7 +20,9 @@ import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
+import com.yuedong.lib_develop.ioc.annotation.event.OnItemClick;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.T;
 import com.yuedong.lib_develop.view.BannerView;
 
@@ -123,6 +126,10 @@ public class TouchFragment extends BaseFragment {
                 });
             }
         }
+    }
+    @OnItemClick(R.id.listview)
+    public void itemClick(AdapterView<?> parent, View view, int position, long id){
+        LaunchWithExitUtils.startActivity(getActivity(),NewsDetailActivity.class);
     }
 
     private void bannerRequest(int type) {

@@ -138,6 +138,9 @@
     <style name="text_grey666666_15sp" parent="text_grey666666_13sp">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="text_white_8sp" parent="text_white_14sp">
+        <item name="android:textSize">8sp</item>
+    </style>
 
     <style name="text_white_14sp" parent="w_h_ww">
         <item name="android:textSize">14sp</item>

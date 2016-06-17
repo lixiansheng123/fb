@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="90dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="13dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_head"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/level_quan_common">
+
+                <com.yuedong.lib_develop.view.RoundImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/haizeiwang" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/text_bold_blue_12sp"
+                android:layout_alignTop="@+id/rl_head"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/rl_head"
+                android:singleLine="true"
+                android:text="@string/str_test" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                style="@style/text_blue_10sp"
+                android:layout_alignLeft="@+id/tv_name"
+                android:layout_below="@+id/tv_name"
+                android:text="专业评论员 5小时前" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                style="@style/text_dark_black_14sp"
+                android:layout_alignLeft="@+id/tv_name"
+                android:layout_below="@+id/tv_level"
+                android:layout_marginTop="15dp"
+                android:ellipsize="end"
+                android:lines="3"
+                android:text="@string/str_test"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_content"
+                android:src="@drawable/ic_blue_more_text" />
+
+        </RelativeLayout>
+
+        <View style="@style/line_vertical_grey_1px" />
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="21dp">
+
+            <ImageView
+                style="@style/w_h_ww"
+                android:src="@drawable/sel_big_zan" />
+
+            <TextView
+                style="@style/text_blue_12sp"
+                android:text="123" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        style="@style/line_grey_1px"
+        android:layout_marginTop="5dp"
+        />
+</LinearLayout>

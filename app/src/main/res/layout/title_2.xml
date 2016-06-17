@@ -6,36 +6,61 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/title_btn_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/title_btn_left"
         android:scaleType="center"
-        android:src="@drawable/ic_title_more" />
+        android:src="@drawable/ic_round_return" />
 
-    <RelativeLayout
-        android:id="@+id/title_center"
-        style="@style/w_h_wm"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/ic_title_bar_logo">
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/tv_title"
-            android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_icon1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="作者用户名"
-            android:textColor="@android:color/white"
-            />
-    </RelativeLayout>
+            android:src="@drawable/ic_share_wechat" />
 
-    <ImageView
+        <ImageView
+            android:id="@+id/iv_icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_share_pengyouquan" />
+
+        <ImageView
+            android:id="@+id/iv_icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_share_sina" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/title_btn_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:scaleType="center"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_title_send" />
+        android:gravity="center"
+        android:minWidth="50dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_small_blue_say" />
+
+        <TextView
+            style="@style/text_white_8sp"
+            android:layout_marginTop="2dp"
+            android:text="123" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

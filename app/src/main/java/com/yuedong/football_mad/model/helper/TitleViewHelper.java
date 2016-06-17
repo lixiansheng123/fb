@@ -29,7 +29,7 @@ public class TitleViewHelper {
         this.context = context;
     }
 
-    public View getNomarlCenterIcon(@DrawableRes int leftIcon, @DrawableRes int centerIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
+    public View getTitle1NomarlCenterIcon(@DrawableRes int leftIcon, @DrawableRes int centerIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
         initTitle1View();
         title1Left.requestLayout();
         title1Left.setImageResource(leftIcon);
@@ -58,13 +58,39 @@ public class TitleViewHelper {
     }
 
 
-    public View getNomarlCenterTitle(@DrawableRes int leftIcon, String title, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
+    public View getTitle1NomarlCenterTitle(@DrawableRes int leftIcon, String title, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
         initTitle1View();
         title1Left.setImageResource(leftIcon);
         title1Right.setImageResource(rightIcon);
         titleTvTitle.setVisibility(View.VISIBLE);
         titleTvTitle.setText(title);
         titleCenter.setBackgroundResource(android.R.color.transparent);
+        title1Left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (leftListenr != null) {
+                    leftListenr.onClick(v);
+                } else {
+                    LaunchWithExitUtils.back(context);
+                }
+            }
+        });
+        if (rightListenr != null) {
+            title1Right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rightListenr.onClick(v);
+                }
+            });
+        }
+        return titile1;
+    }
+
+    public View getTitle1NonentityCenter(@DrawableRes int leftIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
+        initTitle1View();
+        title1Left.setImageResource(leftIcon);
+        title1Right.setImageResource(rightIcon);
+        titleCenter.setVisibility(View.GONE);
         title1Left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,7 +13,7 @@ public class AttestationActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buildUi(new TitleViewHelper(this).getNomarlCenterIcon(R.drawable.ic_round_return, R.drawable.ic_renzheng_logo, R.drawable.ic_round_renzheng, new View.OnClickListener() {
+        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterIcon(R.drawable.ic_round_return, R.drawable.ic_renzheng_logo, R.drawable.ic_round_renzheng, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 back();

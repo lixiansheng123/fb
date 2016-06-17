@@ -15,6 +15,7 @@ import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.football_mad.ui.AttestationActivity;
 import com.yuedong.football_mad.ui.LoginActivity;
+import com.yuedong.football_mad.ui.MyAttentionActivity;
 import com.yuedong.football_mad.ui.UserInfoActivity;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
@@ -68,6 +69,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         tvUsername = (TextView) menu.findViewById(R.id.tv_username);
         tvUserLevel = (TextView) menu.findViewById(R.id.tv_level);
         rlUserHead = menu.findViewById(R.id.rl_head);
+        menu.findViewById(R.id.ll_my_attention).setOnClickListener(this);
         changeUi();
     }
 
@@ -104,6 +106,9 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                     data.putString(Constant.KEY_STR,loginUser.getSid());
                     LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class,data);
                 }
+                break;
+            case R.id.ll_my_attention:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyAttentionActivity.class);
                 break;
         }
     }

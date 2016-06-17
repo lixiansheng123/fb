@@ -28,7 +28,10 @@
             android:name=".ui.UserInfoActivity"
             android:hardwareAccelerated="false" />
         <!-- 关闭硬件加速 -->
-        <activity android:name=".ui.WebActivity"></activity>
+        <activity android:name=".ui.WebActivity" />
+        <activity android:name=".ui.NewsDetailActivity" />
+        <activity android:name=".ui.CommentListActivity" />
+        <activity android:name=".ui.MyAttentionActivity"></activity>
     </application>
 
 </manifest>

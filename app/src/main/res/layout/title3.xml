@@ -10,29 +10,30 @@
         android:layout_height="match_parent"
         android:id="@+id/title_btn_left"
         android:scaleType="center"
-        android:src="@drawable/ic_title_more" />
+        android:src="@drawable/ic_round_return" />
 
-    <RelativeLayout
-        android:id="@+id/title_center"
-        style="@style/w_h_wm"
-        android:layout_centerInParent="true"
-        android:background="@drawable/ic_title_bar_logo">
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_title"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="作者用户名"
+            android:text="我的关注"
             android:textColor="@android:color/white"
             />
-    </RelativeLayout>
-    <ImageView
+    <LinearLayout
         android:id="@+id/title_btn_right"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:scaleType="center"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_title_send" />
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:minWidth="50dp">
+       <TextView
+           android:background="@drawable/bg_round_borderwhite1dp"
+           android:text="编辑"
+           android:padding="4dp"
+           style="@style/text_white_14sp"
+           android:textSize="12sp"
+           />
+    </LinearLayout>
 </RelativeLayout>
