@@ -32,7 +32,12 @@
         <activity android:name=".ui.NewsDetailActivity" />
         <activity android:name=".ui.CommentListActivity" />
         <activity android:name=".ui.MyAttentionActivity" />
-        <activity android:name=".ui.MyCommentListActivity"></activity>
+        <activity android:name=".ui.MyCommentListActivity" />
+        <activity android:name=".ui.MyBallFriendActivity" />
+        <activity android:name=".ui.MyHonorActivity" />
+        <activity android:name=".ui.MyCollectActivity" />
+        <activity android:name=".ui.MyMsgActivity" />
+        <activity android:name=".ui.MyArticleActivity"></activity>
     </application>
 
 </manifest>

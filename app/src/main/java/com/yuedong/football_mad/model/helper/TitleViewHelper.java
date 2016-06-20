@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,7 +24,14 @@ public class TitleViewHelper {
     private ImageView title1Right;
     private RelativeLayout titleCenter;
     private TextView titleTvTitle;
+    //---------title3
+    private View title3;
+    private ImageView title3Left;
+    private TextView title3Title;
+    private LinearLayout title3Right;
     private FragmentActivity context;
+
+
 
     public TitleViewHelper(FragmentActivity context) {
         this.context = context;
@@ -110,6 +118,38 @@ public class TitleViewHelper {
             });
         }
         return titile1;
+    }
+
+    public View getTitle3(@DrawableRes int leftIcon,String title, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr){
+        initTitle3View();
+        title3Left.setImageResource(leftIcon);
+        title3Title.setText(title);
+        title3Left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (leftListenr != null) {
+                    leftListenr.onClick(v);
+                } else {
+                    LaunchWithExitUtils.back(context);
+                }
+            }
+        });
+        if (rightListenr != null) {
+            title3Right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rightListenr.onClick(v);
+                }
+            });
+        }
+        return title3;
+    }
+
+    private void initTitle3View(){
+        title3 = LayoutInflater.from(App.getInstance().getAppContext()).inflate(R.layout.title3,null);
+        title3Left = (ImageView) title3.findViewById(R.id.title_btn_left);
+        title3Title = (TextView) title3.findViewById(R.id.tv_title);
+        title3Right = (LinearLayout) title3.findViewById(R.id.title_btn_right);
     }
 
 

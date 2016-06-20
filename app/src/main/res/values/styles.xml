@@ -126,6 +126,10 @@
         <item name="android:textColor">@color/green4B8D7F</item>
     </style>
 
+    <style name="text_greyEEEEEE_8.5pt" parent="text_greyEEEEEE_9pt">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="text_greyEEEEEE_9pt" parent="w_h_ww">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/greyEEEEEE</item>
@@ -137,7 +141,9 @@
         <item name="android:textStyle">bold</item>
 
     </style>
-
+    <style name="text_grey666666_6pt" parent="text_grey666666_10pt">
+        <item name="android:textSize">8sp</item>
+    </style>
     <style name="text_grey666666_7pt" parent="text_grey666666_10pt">
         <item name="android:textSize">9sp</item>
     </style>

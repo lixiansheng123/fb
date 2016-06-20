@@ -30,7 +30,7 @@ public class NewsDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.iv_icon, R.id.iv_icon2, R.id.iv_icon3, R.id.title_btn_left, R.id.title_btn_right})
+    @OnClick({R.id.iv_icon, R.id.iv_icon2, R.id.iv_icon3, R.id.title_btn_left, R.id.title_btn_right,R.id.btn_comment})
     public void clickEvent(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
@@ -45,6 +45,7 @@ public class NewsDetailActivity extends BaseActivity {
             case R.id.title_btn_right:
                 LaunchWithExitUtils.startActivity(NewsDetailActivity.this,CommentListActivity.class);
                 break;
+            case R.id.btn_comment:break;
         }
         T.showShort(NewsDetailActivity.this, "btn click...");
     }

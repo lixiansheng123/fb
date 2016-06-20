@@ -21,10 +21,6 @@ import java.util.List;
 public class CommentListActivity extends BaseActivity {
     @ViewInject(R.id.listview)
     private PulltoRefreshListView listView;
-    @ViewInject(R.id.iv_hot)
-    private ImageView ivHot;
-    @ViewInject(R.id.iv_new)
-    private ImageView ivNew;
     private View curTag;
 
     @Override
@@ -40,7 +36,6 @@ public class CommentListActivity extends BaseActivity {
 
     @Override
     protected void ui() {
-        ivHot.setSelected(true);
         List<User> data = new ArrayList<User>();
         data.add(null);
         data.add(null);
@@ -52,21 +47,5 @@ public class CommentListActivity extends BaseActivity {
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
 
-    }
-
-    @OnClick({R.id.iv_hot, R.id.iv_new})
-    public void clickEvent(View view) {
-        if (view == curTag) return;
-        curTag = view;
-        switch (view.getId()) {
-            case R.id.iv_hot:
-                ivHot.setSelected(true);
-                ivNew.setSelected(false);
-                break;
-            case R.id.iv_new:
-                ivHot.setSelected(false);
-                ivNew.setSelected(true);
-                break;
-        }
     }
 }

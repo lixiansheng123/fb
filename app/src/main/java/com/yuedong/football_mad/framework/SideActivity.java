@@ -15,8 +15,13 @@ import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.football_mad.ui.AttestationActivity;
 import com.yuedong.football_mad.ui.LoginActivity;
+import com.yuedong.football_mad.ui.MyArticleActivity;
 import com.yuedong.football_mad.ui.MyAttentionActivity;
+import com.yuedong.football_mad.ui.MyBallFriendActivity;
+import com.yuedong.football_mad.ui.MyCollectActivity;
 import com.yuedong.football_mad.ui.MyCommentListActivity;
+import com.yuedong.football_mad.ui.MyHonorActivity;
+import com.yuedong.football_mad.ui.MyMsgActivity;
 import com.yuedong.football_mad.ui.UserInfoActivity;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
@@ -72,6 +77,11 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         rlUserHead = menu.findViewById(R.id.rl_head);
         menu.findViewById(R.id.ll_my_attention).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_comment).setOnClickListener(this);
+        menu.findViewById(R.id.ll_my_ball_friend).setOnClickListener(this);
+        menu.findViewById(R.id.ll_my_honor).setOnClickListener(this);
+        menu.findViewById(R.id.ll_my_collect).setOnClickListener(this);
+        menu.findViewById(R.id.ll_my_article).setOnClickListener(this);
+        menu.findViewById(R.id.ll_msg).setOnClickListener(this);
         changeUi();
     }
 
@@ -115,6 +125,25 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
 
             case R.id.ll_my_comment:
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyCommentListActivity.class);
+                break;
+            case R.id.ll_my_ball_friend:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyBallFriendActivity.class);
+                break;
+
+            case R.id.ll_my_honor:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyHonorActivity.class);
+                break;
+
+            case R.id.ll_my_collect:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyCollectActivity.class);
+                break;
+
+            case R.id.ll_my_article:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyArticleActivity.class);
+                break;
+
+            case R.id.ll_msg:
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyMsgActivity.class);
                 break;
         }
     }

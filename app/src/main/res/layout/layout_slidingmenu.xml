@@ -299,6 +299,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_my_article"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -336,6 +337,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_msg"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -389,6 +391,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_my_collect"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -407,6 +410,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_my_ball_friend"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -462,6 +466,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_my_honor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -495,7 +500,8 @@
                         <ImageView
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:background="@drawable/bg_round_oranged6bc53a" />
+                            android:background="@drawable/bg_round_oranged6bc53a"/>
+
 
                         <TextView
                             style="@style/text_bold_green_5pt"
