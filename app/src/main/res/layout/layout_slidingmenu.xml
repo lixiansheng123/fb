@@ -51,9 +51,9 @@
 
             <TextView
                 android:id="@+id/tv_username"
-                style="@style/text_green_15sp"
+                style="@style/text_green_12pt"
                 android:layout_alignTop="@+id/rl_head"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:layout_toRightOf="@+id/rl_head"
                 android:singleLine="true"
                  />
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/rl_head"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="6dp"
                 android:layout_toRightOf="@+id/rl_head"
                 android:background="@drawable/bg_green_round"
                 android:paddingBottom="1dp"
@@ -72,7 +72,7 @@
                 android:paddingTop="1dp"
                 android:text="普通评论员"
                 android:textColor="@color/greyEEEEEE"
-                android:textSize="10sp" />
+                android:textSize="9sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -96,7 +96,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -107,7 +107,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="见地" />
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -135,7 +135,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="帖子" />
                 </LinearLayout>
 
@@ -152,7 +152,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -163,7 +163,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="评论" />
                 </LinearLayout>
 
@@ -196,7 +196,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -207,7 +207,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="评论-跟帖" />
                 </LinearLayout>
 
@@ -224,7 +224,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -235,7 +235,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="文章获赞" />
                 </LinearLayout>
 
@@ -252,7 +252,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_grey666666_13sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="13" />
 
                     <View
@@ -263,7 +263,7 @@
                         android:background="@color/greenA3C2BA" />
 
                     <TextView
-                        style="@style/text_grey666666_15sp"
+                        style="@style/text_grey666666_10pt"
                         android:text="评论获赞" />
                 </LinearLayout>
 
@@ -312,11 +312,12 @@
                         android:src="@drawable/ic_my_article" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text="文章" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_my_comment"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -330,7 +331,7 @@
                         android:src="@drawable/ic_my_comment" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="评论" />
                 </LinearLayout>
 
@@ -364,7 +365,7 @@
                     </RelativeLayout>
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text=" @我" />
                 </LinearLayout>
 
@@ -401,7 +402,7 @@
                         android:src="@drawable/ic_my_collect" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text="收藏" />
                 </LinearLayout>
 
@@ -419,7 +420,7 @@
                         android:src="@drawable/ic_my_ball_friend" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text="球友" />
                 </LinearLayout>
 
@@ -438,7 +439,7 @@
                         android:src="@drawable/ic_my_attention" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text="关注" />
                 </LinearLayout>
             </LinearLayout>
@@ -474,9 +475,8 @@
                         android:src="@drawable/ic_my_article" />
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_10pt"
                         android:text="荣誉"
-                        android:textSize="17sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -498,7 +498,7 @@
                             android:background="@drawable/bg_round_oranged6bc53a" />
 
                         <TextView
-                            style="@style/text_bold_green_8sp"
+                            style="@style/text_bold_green_5pt"
                             android:layout_marginTop="2dp"
                             android:text="开山元老" />
                     </LinearLayout>
@@ -516,7 +516,7 @@
                             android:background="@drawable/bg_round_oranged6bc53a" />
 
                         <TextView
-                            style="@style/text_bold_green_8sp"
+                            style="@style/text_bold_green_5pt"
                             android:layout_marginTop="2dp"
                             android:text="评论达人" />
                     </LinearLayout>
@@ -539,7 +539,7 @@
                                 android:background="@drawable/bg_round_oranged6bc53a" />
 
                             <TextView
-                                style="@style/text_bold_green_8sp"
+                                style="@style/text_bold_green_5pt"
                                 android:layout_marginTop="2dp"
                                 android:text="666" />
                         </LinearLayout>
@@ -593,7 +593,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="看球" />
 
                     <TextView
@@ -637,7 +637,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="数据酷" />
 
                     <TextView
@@ -681,7 +681,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="球坛" />
 
                     <TextView
@@ -725,7 +725,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="视频派" />
 
                     <TextView
@@ -768,7 +768,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="活动" />
 
                     <TextView
@@ -812,7 +812,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/text_green_15sp"
+                        style="@style/text_green_12pt"
                         android:text="设置" />
 
                     <TextView
@@ -845,7 +845,7 @@
                     android:gravity="center"
                     android:text="退出登录"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <RelativeLayout
@@ -863,15 +863,15 @@
                     android:background="@color/green4B8D7F">
 
                     <TextView
-                        style="@style/text_grey666666_11sp"
-                        android:textSize="8sp"
+                        style="@style/text_grey666666_8.5pt"
+                        android:textSize="7sp"
                         android:text="未认证"
                         android:paddingLeft="1dp"
                         android:paddingRight="1dp"
                         android:background="@drawable/bg_round2dp_greena5c4bb"
                         />
                     <TextView
-                        style="@style/text_greyEEEEEE_12sp"
+                        style="@style/text_greyEEEEEE_9pt"
                         android:text="我是足球从业人员"
                         android:layout_marginLeft="4dp"
                         />

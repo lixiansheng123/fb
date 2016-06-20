@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingTop="11dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingRight="38dp"
+            android:layout_width="0dp"
+            android:layout_weight="6.71"
+            style="@style/text_black_10pt"
+            android:text="@string/str_test"
+            />
+        <LinearLayout
+            android:minHeight="34dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/str_time"
+                style="@style/text_grey666666_7pt"
+                />
+            <TextView
+                android:layout_marginTop="3dp"
+                style="@style/text_blue_7pt"
+                android:text="  2015"
+                android:drawableLeft="@drawable/ic_small_blue_zan"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="19dp"
+        style="@style/text_bold_blue_10pt"
+        android:text="@string/str_test"
+        android:singleLine="true"
+        />
+
+</LinearLayout>
+    <View
+      style="@style/line_grey_1px"/>
+</LinearLayout>

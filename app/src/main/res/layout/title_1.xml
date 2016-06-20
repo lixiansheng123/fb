@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:text="作者用户名"
             android:textColor="@android:color/white"
             />

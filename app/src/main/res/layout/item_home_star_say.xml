@@ -27,7 +27,7 @@
         </RelativeLayout>
 
         <TextView
-            style="@style/text_bold_blue_11sp"
+            style="@style/text_bold_blue_8pt"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_toLeftOf="@+id/iv_collect"
@@ -59,7 +59,7 @@
                 android:src="@drawable/ic_small_blue_say" />
 
             <TextView
-                style="@style/text_blue_10sp"
+                style="@style/text_blue_7pt"
                 android:text="99" />
         </LinearLayout>
     </RelativeLayout>
@@ -90,7 +90,7 @@
                 android:layout_marginTop="5dp" />
 
             <TextView
-                style="@style/text_black_14sp"
+                style="@style/text_black_11pt"
                 android:text="@string/str_test" />
         </LinearLayout>
 
@@ -108,7 +108,7 @@
 
             <TextView
                 android:layout_marginTop="5dp"
-                style="@style/text_blue_10sp"
+                style="@style/text_blue_7pt"
                 android:text="@string/str_time" />
         </LinearLayout>
     </LinearLayout>

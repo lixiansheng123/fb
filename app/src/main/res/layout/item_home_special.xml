@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/text_bold_blue_12sp"
+        style="@style/text_bold_blue_8.5pt"
         android:layout_marginTop="3dp"
         android:singleLine="true"
          />

@@ -6,34 +6,33 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/title_btn_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/title_btn_left"
         android:scaleType="center"
         android:src="@drawable/ic_round_return" />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="我的关注"
-            android:textColor="@android:color/white"
-            />
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="我的关注"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
     <LinearLayout
         android:id="@+id/title_btn_right"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:gravity="center"
         android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
         android:minWidth="50dp">
-       <TextView
-           android:background="@drawable/bg_round_borderwhite1dp"
-           android:text="编辑"
-           android:padding="4dp"
-           style="@style/text_white_14sp"
-           android:textSize="12sp"
-           />
+
+        <TextView
+            style="@style/text_white_14sp"
+            android:background="@drawable/bg_round_borderwhite1dp"
+            android:padding="4dp"
+            android:text="编辑" />
     </LinearLayout>
 </RelativeLayout>

@@ -26,7 +26,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="球友"
                     />
             </LinearLayout>
@@ -46,7 +46,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="收藏"
                     />
             </LinearLayout>
@@ -66,7 +66,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="关注"
                      />
             </LinearLayout>
@@ -136,7 +136,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="性别"
                    />
             </LinearLayout>
@@ -156,7 +156,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="城市"
                      />
             </LinearLayout>
@@ -176,7 +176,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="上场"
                      />
             </LinearLayout>
@@ -269,7 +269,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="出生日期"
                      />
             </LinearLayout>
@@ -316,7 +316,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="绑定手机"
                      />
             </LinearLayout>
@@ -362,7 +362,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="职业类型"
                      />
             </LinearLayout>
@@ -408,7 +408,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="认证姓名"
                      />
             </LinearLayout>
@@ -454,7 +454,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="从业城市"
                      />
             </LinearLayout>
@@ -500,7 +500,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="所属机构"
                      />
             </LinearLayout>
@@ -546,7 +546,7 @@
 
                 <TextView
                     android:layout_marginLeft="8dp"
-                    style="@style/text_green_12sp"
+                    style="@style/text_green_8.5pt"
                     android:text="联系方式"
                     />
             </LinearLayout>

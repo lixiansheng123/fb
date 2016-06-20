@@ -63,11 +63,11 @@ public class DoubleTabView extends LinearLayout implements View.OnClickListener 
 
     private void clickStyle(View clickView){
         item1.setTextColor(Color.parseColor("#666666"));
-        item1.setTextSize(12);
+        item1.setTextSize(13);
         item2.setTextColor(Color.parseColor("#666666"));
-        item2.setTextSize(12);
+        item2.setTextSize(13);
         ((TextView)clickView).setTextColor(Color.parseColor("#4B8D7F"));
-        ((TextView)clickView).setTextSize(15);
+        ((TextView)clickView).setTextSize(16);
     }
 
     @Override
