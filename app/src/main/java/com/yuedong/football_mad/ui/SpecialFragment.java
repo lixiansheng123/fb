@@ -68,7 +68,7 @@ public class SpecialFragment extends BaseFragment {
             }
 
             @Override
-            public void executeTask(int page, int count, VolleyNetWorkCallback listener) {
+            public void executeTask(int page, int count,int max, VolleyNetWorkCallback listener) {
                 Map<String, String> data = new HashMap<String, String>();
                 data.put("count", count + "");
                 data.put("pageindex", page + "");

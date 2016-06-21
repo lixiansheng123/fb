@@ -31,7 +31,7 @@ public class SpecialListBean extends ListResponse<SpecialBean> {
         return getData().getList();
     }
 
-    public class Data {
+    public class Data extends ListResponse.Data {
         private List<SpecialBean> list;
 
         public List<SpecialBean> getList() {

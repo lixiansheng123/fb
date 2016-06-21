@@ -21,6 +21,11 @@ public class ListUser extends ListResponse<User> {
     }
 
     @Override
+    public Data getData() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "ListUser{" +
                 "list=" + list +

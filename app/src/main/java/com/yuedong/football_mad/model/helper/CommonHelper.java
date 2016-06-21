@@ -27,24 +27,25 @@ public class CommonHelper {
     public static DisplayUserLevelBean getUserLevelDisplayInfo(int userLevel) {
         DisplayUserLevelBean bean = new DisplayUserLevelBean() ;
         switch (userLevel) {
-            case 2:
+
+            case 1:
                 bean.textDesc = "资深评论员";
                 bean.headBg = R.drawable.level_quan_senior;
                 bean.partTextColor = Color.parseColor("#4B8D7F");
                 break;
 
-            case 3:
+            case 2:
                 bean.textDesc = "专业评论员";
                 bean.headBg = R.drawable.level_quan_expert;
                 bean.partTextColor = Color.parseColor("#D6BC52");
                 break;
-
-            case 1:
+            case 0:
             default:
                 bean.textDesc = "普通评论员";
                 bean.headBg = R.drawable.level_quan_common;
                 bean.partTextColor = Color.parseColor("#99CC33");
                 break;
+
         }
         return bean;
     }

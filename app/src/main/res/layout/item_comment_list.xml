@@ -30,7 +30,7 @@
                 android:src="@drawable/sel_big_zan" />
 
             <TextView
-                style="@style/text_blue_8.5pt"
+                style="@style/text_blue_12sp"
                 android:text="123" />
         </LinearLayout>
     </LinearLayout>

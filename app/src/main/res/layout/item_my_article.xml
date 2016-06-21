@@ -24,7 +24,7 @@
                 android:src="@drawable/ic_small_blue_zan" />
 
             <TextView
-                style="@style/text_blue_7pt"
+                style="@style/text_blue_9sp"
                 android:text="100" />
         </LinearLayout>
 
@@ -41,7 +41,7 @@
                 android:src="@drawable/ic_small_blue_say" />
 
             <TextView
-                style="@style/text_blue_7pt"
+                style="@style/text_blue_9sp"
                 android:text="99" />
         </LinearLayout>
     </LinearLayout>

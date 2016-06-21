@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/text_bold_blue_8.5pt"
+        style="@style/text_bold_blue_12sp"
         android:layout_alignTop="@+id/rl_head"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/rl_head"
@@ -33,14 +33,14 @@
 
     <TextView
         android:id="@+id/tv_level"
-        style="@style/text_blue_7pt"
+        style="@style/text_blue_9sp"
         android:layout_alignLeft="@+id/tv_name"
         android:layout_below="@+id/tv_name"
         android:text="专业评论员 5小时前" />
 
     <TextView
         android:id="@+id/tv_content"
-        style="@style/text_dark_black_10pt"
+        style="@style/text_dark_black_12sp"
         android:layout_alignLeft="@+id/tv_name"
         android:layout_below="@+id/tv_level"
         android:layout_marginTop="15dp"

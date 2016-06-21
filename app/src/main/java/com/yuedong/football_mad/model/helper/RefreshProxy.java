@@ -26,6 +26,7 @@ public class RefreshProxy<T> {
 
     public boolean refresh = false;
     private boolean one = true;
+    private int max;
 
     public PulltoRefreshListView getListView() {
         return listView;
@@ -40,6 +41,7 @@ public class RefreshProxy<T> {
      * @param proxyRefreshListener
      */
     public void setPulltoRefreshRefreshProxy(PulltoRefreshListView listView, final ProxyRefreshListener<T> proxyRefreshListener) {
+        max = 0;
         this.listView = listView;
         if (listView == null || proxyRefreshListener == null) return;
         this.mProxyRefreshListener = proxyRefreshListener;
@@ -50,6 +52,7 @@ public class RefreshProxy<T> {
             @Override
             public void onRefresh() {
                 if (!refresh) refresh = true;
+                max = 0;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -108,7 +111,7 @@ public class RefreshProxy<T> {
         } else if (mode == 1) {
             refreshStatus();
         }
-        proxyRefreshListener.executeTask(currentPager, count, new VolleyNetWorkCallback() {
+        proxyRefreshListener.executeTask(currentPager, count,max, new VolleyNetWorkCallback() {
             @Override
             public void onNetworkStart(String tag) {
 
@@ -120,10 +123,10 @@ public class RefreshProxy<T> {
                 if (data instanceof ListResponse)
                     list = (ListResponse) data;
                 L.d("executeTask- onFinish");
-//                L.d(list.toString());
                 listView.onRefreshComplete();
                 proxyRefreshListener.networkSucceed(list);
                 if (list != null && !list.getDataList().isEmpty()) {
+                    max = list.getData().getMax();
                     updateData(list.getDataList(), mode);
                 } else {
                     listView.setLoadFull();
@@ -185,7 +188,7 @@ public class RefreshProxy<T> {
         /**
          * 执行网络方法
          */
-        void executeTask(int page, int count, VolleyNetWorkCallback listener);
+        void executeTask(int page, int count, int max,VolleyNetWorkCallback listener);
 
         /**
          * 成功回调

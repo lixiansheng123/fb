@@ -20,7 +20,7 @@
             android:paddingRight="38dp"
             android:layout_width="0dp"
             android:layout_weight="6.71"
-            style="@style/text_black_10pt"
+            style="@style/text_black_14sp"
             android:text="@string/str_test"
             />
         <LinearLayout
@@ -33,11 +33,11 @@
 
             <TextView
                 android:text="@string/str_time"
-                style="@style/text_grey666666_7pt"
+                style="@style/text_grey666666_9sp"
                 />
             <TextView
                 android:layout_marginTop="3dp"
-                style="@style/text_blue_7pt"
+                style="@style/text_blue_9sp"
                 android:text="  2015"
                 android:drawableLeft="@drawable/ic_small_blue_zan"/>
 
@@ -45,7 +45,7 @@
     </LinearLayout>
     <TextView
         android:layout_marginTop="19dp"
-        style="@style/text_bold_blue_10pt"
+        style="@style/text_bold_blue_14sp"
         android:text="@string/str_test"
         android:singleLine="true"
         />

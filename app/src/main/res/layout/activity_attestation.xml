@@ -37,13 +37,13 @@
             </RelativeLayout>
 
             <TextView
-                style="@style/text_blue_8.5pt"
+                style="@style/text_blue_12sp"
                 android:layout_marginTop="2dp"
                 android:singleLine="true"
                 android:text="上传真实头像" />
 
             <TextView
-                style="@style/text_green_8.5pt"
+                style="@style/text_green_12sp"
                 android:text="发表权威观点" />
         </LinearLayout>
 
@@ -81,14 +81,14 @@
             </RelativeLayout>
 
             <TextView
-                style="@style/text_blue_8.5pt"
+                style="@style/text_blue_12sp"
                 android:layout_marginTop="2dp"
                 android:singleLine="true"
                 android:text="上传真实头像"
                 android:visibility="invisible" />
 
             <TextView
-                style="@style/text_green_8.5pt"
+                style="@style/text_green_12sp"
                 android:text="发表权威观点" />
         </LinearLayout>
     </LinearLayout>
@@ -185,7 +185,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/text_green_10pt"
+                style="@style/text_green_14sp"
                 android:text="认证姓名" />
 
             <EditText
@@ -208,7 +208,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/text_green_10pt"
+                style="@style/text_green_14sp"
                 android:text="从业城市" />
 
             <EditText
@@ -230,7 +230,7 @@
         android:paddingRight="11dp">
 
         <TextView
-            style="@style/text_green_10pt"
+            style="@style/text_green_14sp"
             android:text="所属机构" />
 
         <EditText
@@ -252,7 +252,7 @@
         android:paddingRight="11dp">
 
         <TextView
-            style="@style/text_green_10pt"
+            style="@style/text_green_14sp"
             android:text="联系方式" />
 
         <EditText

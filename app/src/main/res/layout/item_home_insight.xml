@@ -22,6 +22,7 @@
             android:background="@drawable/level_quan_senior">
 
             <com.yuedong.lib_develop.view.RoundImageView
+                android:id="@+id/iv_userhead"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_centerInParent="true"
@@ -29,7 +30,8 @@
         </RelativeLayout>
 
         <TextView
-            style="@style/text_bold_blue_8pt"
+            android:id="@+id/tv_name"
+            style="@style/text_bold_blue_11sp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_toLeftOf="@+id/ll_commontator"
@@ -46,12 +48,13 @@
 
             <TextView
                 android:id="@+id/tv_commentator"
-                style="@style/text_bold_blue_7pt"
+                style="@style/text_bold_blue_9sp"
                 android:layout_marginRight="13dp"
                 android:text="普通评论员" />
 
             <TextView
-                style="@style/text_blue_7pt"
+                android:id="@+id/tv_time"
+                style="@style/text_blue_9sp"
                 android:text="@string/str_time" />
         </LinearLayout>
 
@@ -74,7 +77,8 @@
                     android:src="@drawable/ic_small_blue_zan" />
 
                 <TextView
-                    style="@style/text_blue_7pt"
+                    android:id="@+id/tv_zan_num"
+                    style="@style/text_blue_9sp"
                     android:text="100" />
             </LinearLayout>
 
@@ -91,7 +95,8 @@
                     android:src="@drawable/ic_small_blue_say" />
 
                 <TextView
-                    style="@style/text_blue_7pt"
+                    android:id="@+id/tv_comment_num"
+                    style="@style/text_blue_9sp"
                     android:text="99" />
             </LinearLayout>
         </LinearLayout>

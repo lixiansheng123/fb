@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/text_bold_blue_12pt"
+            style="@style/text_bold_blue_16sp"
             android:singleLine="true" />
 
         <View
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="match_parent"
             android:id="@+id/tv_desc"
-            style="@style/text_black_8.5pt"
+            style="@style/text_black_12sp"
             android:layout_below="@+id/line"
             android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/ll_user_info"
@@ -62,12 +62,12 @@
 
             <TextView
                 android:id="@+id/tv_user_nick"
-                style="@style/text_bold_blue_7pt"
+                style="@style/text_bold_blue_9sp"
                 android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_level"
-                style="@style/text_blue_4.5pt"
+                style="@style/text_blue_6sp"
                 android:singleLine="true"
                 android:text="资深评论员" />
         </LinearLayout>

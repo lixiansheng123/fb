@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yuedong.lib_develop.view.SupportScrollConflictListView
+    android:id="@+id/spListView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@null"
+    android:listSelector="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

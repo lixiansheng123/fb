@@ -17,6 +17,10 @@ public class Constant {
     public static String URL_BANNEL_CHINA = URL + "banner/getChinaBanner";
     public static String URL_SPECIAL_LIST = URL + "special/getSpecialList";
     public static String URL_GET_USER_BY_SID = URL + "user/getUserBySid";
+    public static String URL_WORLD_NEWS  = URL+"news/getWorldNews";
+    public static String URL_HOME_NEWS  = URL+"news/getHomeNews";
+    public static String URL_HOT_INSIGNLIST= URL+"news/getHotInsign";
+    public static String URL_INSIGNLIST= URL+"news/getInsignList";
     // 注入
     public static boolean AUTO_INJECT = true;
     // 状态是正常的

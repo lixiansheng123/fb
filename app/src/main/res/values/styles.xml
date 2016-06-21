@@ -42,11 +42,11 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="text_blue_4.5pt" parent="text_blue_7pt">
+    <style name="text_blue_6sp" parent="text_blue_9sp">
         <item name="android:textSize">6sp</item>
     </style>
 
-    <style name="text_blue_7pt" parent="w_h_ww">
+    <style name="text_blue_9sp" parent="w_h_ww">
         <item name="android:textColor">@color/blue566892</item>
         <item name="android:textSize">9sp</item>
     </style>
@@ -56,81 +56,81 @@
         <item name="android:textSize">11sp</item>
     </style>
 
-    <style name="text_blue_8.5pt" parent="w_h_ww">
+    <style name="text_blue_12sp" parent="w_h_ww">
         <item name="android:textColor">@color/blue566892</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="text_blue_10pt" parent="text_blue_8.5pt">
+    <style name="text_blue_14sp" parent="text_blue_12sp">
         <item name="android:textSize">14sp</item>
     </style>
 
 
-    <style name="text_bold_blue_12pt" parent="text_blue_7pt">
+    <style name="text_bold_blue_16sp" parent="text_blue_9sp">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="text_dark_black_10pt" parent="text_blue_7pt">
+    <style name="text_dark_black_12sp" parent="text_blue_9sp">
         <item name="android:textColor">@color/black474443</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="text_black_8.5pt" parent="text_black_11pt">
+    <style name="text_black_12sp" parent="text_black_15sp">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="text_black_10pt" parent="text_dark_black_10pt">
+    <style name="text_black_14sp" parent="text_dark_black_12sp">
         <item name="android:textColor">@color/black5F5D5D</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="text_black_11pt" parent="text_dark_black_10pt">
+    <style name="text_black_15sp" parent="text_dark_black_12sp">
         <item name="android:textColor">@color/black5F5D5D</item>
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="text_bold_blue_7pt" parent="text_bold_blue_8pt">
+    <style name="text_bold_blue_9sp" parent="text_bold_blue_11sp">
         <item name="android:textSize">9sp</item>
     </style>
 
-    <style name="text_bold_blue_8pt" parent="text_blue_11sp">
+    <style name="text_bold_blue_11sp" parent="text_blue_11sp">
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="text_bold_blue_8.5pt" parent="text_bold_blue_8pt">
+    <style name="text_bold_blue_12sp" parent="text_bold_blue_11sp">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="text_bold_blue_10pt" parent="text_bold_blue_8pt">
+    <style name="text_bold_blue_14sp" parent="text_bold_blue_11sp">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="text_bold_green_5pt" parent="text_green_8.5pt">
+    <style name="text_bold_green_7sp" parent="text_green_12sp">
         <item name="android:textSize">7sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="text_green_8.5pt" parent="text_green_12pt">
+    <style name="text_green_12sp" parent="text_green_16sp">
         <item name="android:textSize">12sp</item>
     </style>
 
 
-    <style name="text_green_10pt" parent="text_green_12pt">
+    <style name="text_green_14sp" parent="text_green_16sp">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="text_green_12pt" parent="w_h_ww">
+    <style name="text_green_16sp" parent="w_h_ww">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/green4B8D7F</item>
     </style>
 
-    <style name="text_greyEEEEEE_8.5pt" parent="text_greyEEEEEE_9pt">
+    <style name="text_greyEEEEEE_12sp" parent="text_greyEEEEEE_13sp">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="text_greyEEEEEE_9pt" parent="w_h_ww">
+    <style name="text_greyEEEEEE_13sp" parent="w_h_ww">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/greyEEEEEE</item>
     </style>
@@ -141,23 +141,23 @@
         <item name="android:textStyle">bold</item>
 
     </style>
-    <style name="text_grey666666_6pt" parent="text_grey666666_10pt">
+    <style name="text_grey666666_8sp" parent="text_grey666666_14sp">
         <item name="android:textSize">8sp</item>
     </style>
-    <style name="text_grey666666_7pt" parent="text_grey666666_10pt">
+    <style name="text_grey666666_9sp" parent="text_grey666666_14sp">
         <item name="android:textSize">9sp</item>
     </style>
 
-    <style name="text_grey666666_8.5pt" parent="text_grey666666_10pt">
+    <style name="text_grey666666_12sp" parent="text_grey666666_14sp">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="text_grey666666_10pt" parent="w_h_ww">
+    <style name="text_grey666666_14sp" parent="w_h_ww">
         <item name="android:textColor">@color/grey666666</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="text_grey666666_15sp" parent="text_grey666666_10pt">
+    <style name="text_grey666666_15sp" parent="text_grey666666_14sp">
         <item name="android:textSize">15sp</item>
     </style>
     <style name="text_white_8sp" parent="text_white_14sp">
