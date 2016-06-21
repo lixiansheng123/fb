@@ -120,6 +120,25 @@ public class TitleViewHelper {
         return titile1;
     }
 
+
+    public View getTitle1NoRight(@DrawableRes int leftIcon, @DrawableRes int centerIcon, final View.OnClickListener leftListenr) {
+        initTitle1View();
+        title1Left.setImageResource(leftIcon);
+        title1Right.setVisibility(View.GONE);
+        titleCenter.setBackgroundResource(centerIcon);
+        title1Left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (leftListenr != null) {
+                    leftListenr.onClick(v);
+                } else {
+                    LaunchWithExitUtils.back(context);
+                }
+            }
+        });
+        return titile1;
+    }
+
     public View getTitle3(@DrawableRes int leftIcon,String title, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr){
         initTitle3View();
         title3Left.setImageResource(leftIcon);
