@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/tv_content"
+    android:paddingLeft="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="41dp"
+    android:textColor="@color/black5D5D5D"
+    android:textSize="15sp"
+    android:gravity="center_vertical"
+    android:text="内容"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -14,6 +14,7 @@ import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.football_mad.ui.AttestationActivity;
+import com.yuedong.football_mad.ui.DataKuActivity;
 import com.yuedong.football_mad.ui.LoginActivity;
 import com.yuedong.football_mad.ui.MyArticleActivity;
 import com.yuedong.football_mad.ui.MyAttentionActivity;
@@ -82,6 +83,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_my_collect).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_article).setOnClickListener(this);
         menu.findViewById(R.id.ll_msg).setOnClickListener(this);
+        menu.findViewById(R.id.ll_dataku).setOnClickListener(this);
         changeUi();
     }
 
@@ -144,6 +146,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
 
             case R.id.ll_msg:
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyMsgActivity.class);
+                break;
+
+            case R.id.ll_dataku:
+                LaunchWithExitUtils.startActivity(activity, DataKuActivity.class);
                 break;
         }
     }

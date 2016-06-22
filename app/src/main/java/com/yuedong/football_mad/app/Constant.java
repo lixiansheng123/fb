@@ -22,6 +22,18 @@ public class Constant {
     public static String URL_HOT_INSIGNLIST= URL+"news/getHotInsign";
     public static String URL_INSIGNLIST= URL+"news/getInsignList";
     public static String URL_REGISTER = URL +"user/userRegister";
+    public static String URL_GET_HOTGAME = URL +"game/getHotGame";
+    public static String URL_GET_GAMELIST = URL +"game/getGameList";
+    public static String URL_GET_HOTTEAM = URL+"team/getHotTeam";
+    public static String URL_GET_TEAM_LIST = URL+"team/getTeamList";
+    public static String URL_GET_HOTATHLETE = URL +"athlete/getHotAthlete";
+    public static String URL_GET_ATHLETELIST = URL +"athlete/getAthleteList";
+    public static String URL_GET_HOTCOUNTRY = URL +"country/getHotCountry";
+    public static String URL_GET_COUNTRYLIST = URL +"country/getHotCountry";
+    public static String URL_GET_HOTOTHER = URL +"other/getHotOther";
+    public static String URL_GET_OTHERLIST = URL +"other/getOtherList";
+
+
     // 注入
     public static boolean AUTO_INJECT = true;
     // 状态是正常的
@@ -29,5 +41,6 @@ public class Constant {
 
     public static String KEY_BOOL = "key-bool";
     public static String KEY_OBJ = "key-obj";
-    public static java.lang.String KEY_STR = "key-str";
+    public static String KEY_STR = "key-str";
+    public static String KEY_ACTION = "key-action";
 }

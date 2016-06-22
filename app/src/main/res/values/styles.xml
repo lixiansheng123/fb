@@ -170,6 +170,12 @@
     </style>
 
 
+    <style name="text_black5D5D5D_14sp" parent="w_h_ww">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black5D5D5D</item>
+    </style>
+
+
     <style name="line_black_2px">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2px</item>
@@ -220,5 +226,7 @@
         <item name="android:windowEnterAnimation">@anim/anim_go_up</item>
         <item name="android:windowExitAnimation">@anim/anim_decline</item>
     </style>
+
+
 
 </resources>

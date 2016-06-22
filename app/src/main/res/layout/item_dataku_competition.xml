@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   >
+ <include
+     layout="@layout/layout_item_dataku_top"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent">
+            <com.android.volley.toolbox.NetworkImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:id="@+id/iv_pic"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_content"
+                style="@style/text_black5D5D5D_14sp"
+                android:layout_gravity="center"
+                android:text="测试内容"
+                android:singleLine="true"
+                />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

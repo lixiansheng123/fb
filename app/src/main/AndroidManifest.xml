@@ -39,7 +39,9 @@
         <activity android:name=".ui.MyMsgActivity" />
         <activity android:name=".ui.MyArticleActivity" />
         <activity android:name=".ui.MobileTestActivity" />
-        <activity android:name=".ui.RegisterActivity"></activity>
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.ForgetPasswordActivity" />
+        <activity android:name=".ui.DataKuActivity"></activity>
     </application>
 
 </manifest>

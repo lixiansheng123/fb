@@ -152,7 +152,7 @@ public class TouchFragment extends BaseFragment {
             url = Constant.URL_BANNEL_CHINA;
         }
         bannerTask = RequestHelper.post(url, null, TouchBannerListBean.class, true, true, this);
-        L.d("bannerRequest===>" + bannerTask);
+//        L.d("bannerRequest===>" + bannerTask);
     }
 
     private void listRequest(int type) {

@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -73,7 +74,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_login})
+    @OnClick({R.id.btn_login, R.id.ll_forget_password})
     public void btnClick(View view) {
         switch (view.getId()) {
 //            case R.id.btn_info:
@@ -106,6 +107,12 @@ public class LoginActivity extends BaseActivity {
                 data.put("name", inpUsername);
                 data.put("password", SignUtils.md5(inpPassword));
                 loginTask = RequestHelper.post(Constant.URL_LONGIN, data, LoginResBean.class, false, false, this);
+                break;
+
+            case R.id.ll_forget_password:
+                Intent it = new Intent(activity, MobileTestActivity.class);
+                it.putExtra(Constant.KEY_ACTION, MobileTestActivity.ACTION_FORGET_PASSWORD);
+                LaunchWithExitUtils.startActivity(activity, it);
                 break;
         }
     }
