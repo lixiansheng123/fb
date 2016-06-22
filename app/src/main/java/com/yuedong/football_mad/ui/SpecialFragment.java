@@ -68,11 +68,14 @@ public class SpecialFragment extends BaseFragment {
             }
 
             @Override
-            public void executeTask(int page, int count,int max, VolleyNetWorkCallback listener) {
+            public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
                 Map<String, String> data = new HashMap<String, String>();
                 data.put("count", count + "");
                 data.put("pageindex", page + "");
-                RequestHelper.post(Constant.URL_SPECIAL_LIST, data, SpecialListBean.class, true, listener);
+                boolean useCache = false;
+                if (type == 1)
+                    useCache = true;
+                RequestHelper.post(Constant.URL_SPECIAL_LIST, data, SpecialListBean.class, true, useCache, listener);
             }
 
             @Override
@@ -93,7 +96,7 @@ public class SpecialFragment extends BaseFragment {
      */
     private void hotSpecialList() {
 
-        topTask = RequestHelper.post(Constant.URL_HOT_SPECIAL, null, HotSpecialListBean.class, true, this);
+        topTask = RequestHelper.post(Constant.URL_HOT_SPECIAL, null, HotSpecialListBean.class, true, true, this);
     }
 
 

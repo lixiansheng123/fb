@@ -1,9 +1,11 @@
 package com.yuedong.football_mad.framework;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Config;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.view.LoadDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.ViewUtils;
 import com.yuedong.lib_develop.utils.L;
@@ -29,6 +32,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
     protected LinearLayout mTitleLayout;
     public MultiStateView mMultiStateView;
     private boolean one = true;
+    private LoadDialog loadDialog;
 
     @Nullable
     @Override
@@ -38,6 +42,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
     }
 
     private void init() {
+        loadDialog = new LoadDialog(getActivity());
         mMainLayout = new RelativeLayout(getActivity());
         mTitleLayout = new LinearLayout(getActivity());
         mMultiStateView = new MultiStateView(getActivity());
@@ -109,20 +114,44 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
         mTitleLayout.addView(titleView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Config.TITLE_HEIGHT));
     }
 
+
+    protected void showLoadView(boolean isShow) {
+        AnimationDrawable animationDrawable = (AnimationDrawable) loadDialog.mLoaderPic.getDrawable();
+        if (isShow) {
+            if (loadDialog != null && !loadDialog.isShowing()) {
+                animationDrawable.start();
+                if (!getActivity().isFinishing())
+                    loadDialog.show();
+            }
+        } else {
+            if (loadDialog != null && loadDialog.isShowing()) {
+                animationDrawable.stop();
+                loadDialog.dismiss();
+            }
+        }
+    }
+
+
     public abstract void ui();
 
     public abstract void networdSucceed(String tag, BaseResponse data);
 
+    protected boolean autoLoadView = true;
+
     @Override
     public void onNetworkStart(String tag) {
-        L.d(tag + "请求开始");
+        if (autoLoadView)
+            showLoadView(true);
     }
 
     @Override
     public void onNetworkSucceed(String tag, BaseResponse data) {
+        if (autoLoadView)
+            showLoadView(false);
         if (data == null) return;
-        L.d("状态码" + data.getState().getCode());
+        L.d(tag+"状态码" + data.getState().getCode());
         if (data.getState().getCode() != Constant.OK) {
+            showLoadView(false);
             T.showShort(getActivity(), data.getState().getMsg());
         } else {
             networdSucceed(tag, data);
@@ -131,7 +160,8 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
 
     @Override
     public void onNetworkError(String tag, VolleyError error) {
-        L.d(tag + "请求失败");
-        T.showShort(getActivity(), error.getMessage());
+        showLoadView(false);
+        if (error != null && !TextUtils.isEmpty(error.getMessage()))
+            T.showShort(getActivity(), error.getMessage());
     }
 }

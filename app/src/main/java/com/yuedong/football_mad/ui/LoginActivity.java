@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
     private EditText etUsername;
     @ViewInject(R.id.et_password)
     private EditText etPassword;
+    private boolean isBackLogin; // 是否是退出登录
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,11 @@ public class LoginActivity extends BaseActivity {
         buildUi(new TitleViewHelper(this).getTitle1NomarlCenterIcon(R.drawable.ic_round_return, R.drawable.ic_title_bar_logo, R.drawable.ic_white_register, null, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LaunchWithExitUtils.startActivity(LoginActivity.this,MobileTestActivity.class);
+                LaunchWithExitUtils.startActivity(LoginActivity.this, MobileTestActivity.class);
             }
         }), R.layout.activity_login);
+        isBackLogin = getIntent().getBooleanExtra(Constant.KEY_BOOL, false);
+        autoLoadView = false;
     }
 
     @Override
@@ -55,13 +59,16 @@ public class LoginActivity extends BaseActivity {
         if (tag.equals(loginTask)) {
             LoginResBean bean = (LoginResBean) data;
             String sid = bean.getData().getSid();
-            userInfoTask = CommonHelper.getUserInfo(sid,this);
+            userInfoTask = CommonHelper.getUserInfo(sid, this);
         } else if (tag.equals(cangePasswordTask)) {
 
         } else if (tag.equals(userInfoTask)) {
+            showLoadView(false);
             GetUserInfoByIdResBean bean = (GetUserInfoByIdResBean) data;
             MyApplication.getInstance().setLoginuser(bean.getData().getList());
             MyApplication.getInstance().userInfoChange = true;
+            if (isBackLogin)
+                LaunchWithExitUtils.startActivity(LoginActivity.this, HomeActivity.class);
             back();
         }
     }
@@ -85,19 +92,20 @@ public class LoginActivity extends BaseActivity {
             case R.id.btn_login:
                 String inpUsername = etUsername.getText().toString();
                 String inpPassword = etPassword.getText().toString();
-                if(TextUtils.isEmpty(inpUsername)){
-                    T.showShort(LoginActivity.this,"用户名不能为空");
+                if (TextUtils.isEmpty(inpUsername)) {
+                    T.showShort(LoginActivity.this, "用户名不能为空");
                     return;
                 }
-                if(TextUtils.isEmpty(inpPassword)){
-                    T.showShort(LoginActivity.this,"密码不能为空");
+                if (TextUtils.isEmpty(inpPassword)) {
+                    T.showShort(LoginActivity.this, "密码不能为空");
                     return;
                 }
-               //  登录
-               Map<String, String> data = new HashMap<String, String>();
-              data.put("name", inpUsername);
-              data.put("password", SignUtils.md5(inpPassword));
-              loginTask = RequestHelper.post(Constant.URL_LONGIN, data, LoginResBean.class, false, this);
+                showLoadView(true);
+                //  登录
+                Map<String, String> data = new HashMap<String, String>();
+                data.put("name", inpUsername);
+                data.put("password", SignUtils.md5(inpPassword));
+                loginTask = RequestHelper.post(Constant.URL_LONGIN, data, LoginResBean.class, false, false, this);
                 break;
         }
     }

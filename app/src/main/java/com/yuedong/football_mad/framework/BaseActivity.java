@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.framework;
 
+import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     protected LinearLayout mTitleLayout;
     public MultiStateView mMultiStateView;
     private LoadDialog loadDialog;
+    protected Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     }
 
     private void init() {
+        activity = this;
         mMainLayout = new RelativeLayout(this);
         mTitleLayout = new LinearLayout(this);
         mMultiStateView = new MultiStateView(this);
@@ -65,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
         loadDialog = new LoadDialog(this);
     }
 
-    protected void showLoadView(boolean isShow){
+    protected void showLoadView(boolean isShow) {
         AnimationDrawable animationDrawable = (AnimationDrawable) loadDialog.mLoaderPic.getDrawable();
         if (isShow) {
             if (loadDialog != null && !loadDialog.isShowing()) {
@@ -220,21 +224,27 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     protected Fragment getDefaultFrag() {
         return null;
     }
+
     protected abstract void ui();
+
     public abstract void networdSucceed(String tag, BaseResponse data);
+
     protected boolean autoLoadView = true;
+
     @Override
     public void onNetworkStart(String tag) {
-        if(autoLoadView)
-           showLoadView(true);
+        if (autoLoadView)
+            showLoadView(true);
     }
 
     @Override
     public void onNetworkSucceed(String tag, BaseResponse data) {
-        showLoadView(false);
+        if (autoLoadView)
+            showLoadView(false);
         if (data == null) return;
         L.d("状态码" + data.getState().getCode());
         if (data.getState().getCode() != Constant.OK) {
+            showLoadView(false);
             T.showShort(this, data.getState().getMsg());
         } else {
             networdSucceed(tag, data);
@@ -244,7 +254,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     @Override
     public void onNetworkError(String tag, VolleyError error) {
         showLoadView(false);
-        if(error!=null)
-             T.showShort(BaseActivity.this,error.getMessage());
+        if (error != null && !TextUtils.isEmpty(error.getMessage()))
+            T.showShort(BaseActivity.this, error.getMessage());
     }
 }

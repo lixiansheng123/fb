@@ -1,15 +1,24 @@
 package com.yuedong.football_mad.ui;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.yuedong.football_mad.R;
+import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.SideActivity;
+import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
+import com.yuedong.lib_develop.utils.FileUtils;
+import com.yuedong.lib_develop.utils.L;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
+
+import java.io.File;
 
 /**
  * @author
@@ -113,6 +122,17 @@ public class HomeActivity extends SideActivity {
         switch (view.getId()) {
             case R.id.title_btn_left:
                 toggle(false);
+                break;
+
+            case R.id.title_btn_right:
+                // 暂时退出登录操作
+                MyApplication.getInstance().setLoginuser(null);
+                String cacheFile = FileUtils.getDiskCacheDir(App.getInstance().getAppContext()) + "userinfo.c";
+                boolean flag = FileUtils.deleteFile(new File(cacheFile));
+                Intent it = new Intent(HomeActivity.this, LoginActivity.class);
+                it.putExtra(Constant.KEY_BOOL, true);
+                LaunchWithExitUtils.startActivity(HomeActivity.this, it);
+                back();
                 break;
         }
     }

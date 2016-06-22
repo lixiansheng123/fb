@@ -7,11 +7,9 @@ import com.yuedong.lib_develop.bean.BaseResponse;
  */
 public class LoginResBean extends BaseResponse {
     public User data;
-
     public User getData() {
         return data;
     }
-
     public void setData(User data) {
         this.data = data;
     }

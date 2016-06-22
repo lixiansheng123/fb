@@ -122,13 +122,16 @@ public class VolleyRequst {
      * @param request
      */
     public static void doPostByJson(final RequestParamsJson request) {
-        L.d("请求的URL==" + request.getUrl());
+        L.d("请求的URL==" + request.getUrl() + "===tag为=========>>" + request.getTag());
         JSONObject params = request.getJsonObject();
         if (params != null)
             L.d("请求的参数==" + params.toString());
         request.getCallback().onNetworkStart(request.getTag());
         if (!NetUtils.isConnected(App.getInstance().getAppContext())) {
-            request.getCallback().onNetworkSucceed(request.getTag(), toObj(mNCache.getData(request.getTag()), request.getResponseObj()));
+            BaseResponse baseResponse = null;
+            if (request.isUseCache())
+                baseResponse = toObj(mNCache.getData(request.getTag()), request.getResponseObj());
+            request.getCallback().onNetworkSucceed(request.getTag(), baseResponse);
             VolleyError error = new VolleyError("网络异常,请检查网络");
             request.getCallback().onNetworkError(request.getTag(), error);
             return;
@@ -137,14 +140,14 @@ public class VolleyRequst {
         mJsonRequest = new JsonStringRequest(Method.POST, request.getUrl(), request.getJsonObject(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
-                L.d("响应头" + response.headers);
-                if (request.getTag().equals(SignUtils.md5(SAVE_SESSION_FLAG))) {
-                    String sessionId = response.headers.get("Set-Cookie");
-                    sessionId = sessionId.split("=")[1];
-                    sessionId = sessionId.substring(sessionId.indexOf("=") + 1, sessionId.lastIndexOf(";"));
-                    L.d("sessionId===" + sessionId);
-                    SPUtils.put(App.getInstance().getAppContext(), "key_session_id", sessionId);
-                }
+//                L.d("响应头" + response.headers);
+//                if (request.getTag().equals(SignUtils.md5(SAVE_SESSION_FLAG))) {
+//                    String sessionId = response.headers.get("Set-Cookie");
+//                    sessionId = sessionId.split("=")[1];
+//                    sessionId = sessionId.substring(sessionId.indexOf("=") + 1, sessionId.lastIndexOf(";"));
+//                    L.d("sessionId===" + sessionId);
+//                    SPUtils.put(App.getInstance().getAppContext(), "key_session_id", sessionId);
+//                }
                 String data;
                 try {
                     data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));

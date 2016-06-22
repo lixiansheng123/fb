@@ -27,13 +27,14 @@ public class RequestHelper {
      * @param callback
      * @return
      */
-    public static String post(String url, Map<String, String> data, Class<? extends BaseResponse> cls, boolean cache, VolleyNetWorkCallback callback) {
+    public static String post(String url, Map<String, String> data, Class<? extends BaseResponse> cls, boolean cache, boolean useCache, VolleyNetWorkCallback callback) {
         String task = null;
         try {
             RequestParamsJson baseRequest = new RequestParamsJson();
             baseRequest.setUrl(url);
             baseRequest.setResponseObj(cls);
             baseRequest.setCacheData(cache);
+            baseRequest.setUseCache(useCache);
             baseRequest.setCallback(callback);
             JSONObject allObj = new JSONObject();
             JSONObject clientObj = new JSONObject();

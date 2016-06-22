@@ -10,16 +10,19 @@ public class MyApplication extends App {
     // 用户信息变更
     public boolean userInfoChange = false;
     private Integer[] phoneWh;
-    public Integer[] getPhoneWh(){
+
+    public Integer[] getPhoneWh() {
         return phoneWh;
     }
+
     public static MyApplication getInstance() {
         return instance;
     }
 
     public void setLoginuser(User user) {
-        if (User.setUserToLocal(user))
-            this.user = user;
+        if (user != null)
+            User.setUserToLocal(user);
+        this.user = user;
     }
 
     public User getLoginUser() {

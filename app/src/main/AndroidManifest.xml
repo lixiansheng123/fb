@@ -38,7 +38,8 @@
         <activity android:name=".ui.MyCollectActivity" />
         <activity android:name=".ui.MyMsgActivity" />
         <activity android:name=".ui.MyArticleActivity" />
-        <activity android:name=".ui.MobileTestActivity"></activity>
+        <activity android:name=".ui.MobileTestActivity" />
+        <activity android:name=".ui.RegisterActivity"></activity>
     </application>
 
 </manifest>

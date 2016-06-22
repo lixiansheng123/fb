@@ -37,6 +37,7 @@ public class InsightFragment extends BaseFragment {
     private SupportScrollConflictListView spListView;
     private String hotListTask;
     private RefreshProxy<InsightBean> refreshProxy = new RefreshProxy<>();
+
     @Override
     protected View getTitleView() {
         return null;
@@ -50,9 +51,9 @@ public class InsightFragment extends BaseFragment {
     @Override
     public void ui() {
         stopView.setVisibility(View.GONE);
-        View header = LayoutInflater.from(getActivity()).inflate(R.layout.listview,listView,false);
+        View header = LayoutInflater.from(getActivity()).inflate(R.layout.listview, listView, false);
         spListView = (SupportScrollConflictListView) header.findViewById(R.id.spListView);
-        listView.addHeaderView(header,null,false);
+        listView.addHeaderView(header, null, false);
         getHotInsignList();
     }
 
@@ -60,30 +61,33 @@ public class InsightFragment extends BaseFragment {
      * 最后见地列表
      */
     private void getHotInsignList() {
-        hotListTask =   RequestHelper.post(Constant.URL_HOT_INSIGNLIST,null, InsightListRespBean.class,true,this);
+        hotListTask = RequestHelper.post(Constant.URL_HOT_INSIGNLIST, null, InsightListRespBean.class, true, true, this);
     }
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-        if(tag.equals(hotListTask)){
+        if (tag.equals(hotListTask)) {
             InsightListRespBean bean = (InsightListRespBean) data;
-            InsihtAdapter hotAdapter = new InsihtAdapter(getActivity(),bean.getDataList());
+            InsihtAdapter hotAdapter = new InsihtAdapter(getActivity(), bean.getDataList());
             hotAdapter.setIsHot(true);
             spListView.setAdapter(hotAdapter);
             // 设置代理
             refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<InsightBean>() {
                 @Override
                 public BaseAdapter<InsightBean> getAdapter(List<InsightBean> data) {
-                    return new InsihtAdapter(getActivity(),data);
+                    return new InsihtAdapter(getActivity(), data);
                 }
 
                 @Override
-                public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener) {
-                    Map<String,String> post = new HashMap<String, String>();
-                    post.put("pageindex",page+"");
-                    post.put("count",count+"");
-                    post.put("max",max+"");
-                    RequestHelper.post(Constant.URL_INSIGNLIST,post,InsightListRespBean.class,true,listener);
+                public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
+                    Map<String, String> post = new HashMap<String, String>();
+                    post.put("pageindex", page + "");
+                    post.put("count", count + "");
+                    post.put("max", max + "");
+                    boolean useCache = false;
+                    if (type == 1)
+                        useCache = true;
+                    RequestHelper.post(Constant.URL_INSIGNLIST, post, InsightListRespBean.class, true, useCache, listener);
                 }
 
                 @Override

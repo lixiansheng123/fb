@@ -90,6 +90,6 @@ public class CommonHelper {
     public static String getUserInfo(String sid,VolleyNetWorkCallback callback){
         Map<String, String> post = new HashMap<String, String>();
         post.put("sid", sid);
-        return RequestHelper.post(Constant.URL_GET_USER_BY_SID, post, GetUserInfoByIdResBean.class, false, callback);
+        return RequestHelper.post(Constant.URL_GET_USER_BY_SID, post, GetUserInfoByIdResBean.class, false,false, callback);
     }
 }

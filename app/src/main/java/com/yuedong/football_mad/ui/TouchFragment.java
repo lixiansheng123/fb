@@ -28,6 +28,7 @@ import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
 import com.yuedong.lib_develop.ioc.annotation.event.OnItemClick;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.T;
 import com.yuedong.lib_develop.view.BannerView;
@@ -48,7 +49,7 @@ public class TouchFragment extends BaseFragment {
     @ViewInject(R.id.iv_icon_china)
     private ImageView iconChina;
     private View curTab;
-//    private TouchAdapter TouchAdapter;
+    //    private TouchAdapter TouchAdapter;
     private ImageView[] tabs = new ImageView[2];
     private String bannerTask;
     private NetworkImageView small1, small2, small3;
@@ -92,53 +93,55 @@ public class TouchFragment extends BaseFragment {
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
+        L.d("banner 成功响应...." + tag);
+        L.d("bannerTask" + bannerTask);
         if (tag.equals(bannerTask)) {
-            if (data != null) {
-                TouchBannerListBean listBean = (TouchBannerListBean) data;
-                List<TouchBannerBean> verlist = listBean.getData().getVerlist();
-                for (int i = 0; i < verlist.size(); i++) {
-                    TouchBannerBean touchBannerBean = verlist.get(i);
-                    switch (i) {
-                        case 0:
-                            small1.setTag(touchBannerBean);
-                            DisplayImageByVolleyUtils.loadImage(small1, UrlHelper.checkUrl(touchBannerBean.getPic()));
-                            break;
-                        case 1:
-                            small2.setTag(touchBannerBean);
-                            DisplayImageByVolleyUtils.loadImage(small2, UrlHelper.checkUrl(touchBannerBean.getPic()));
-                            break;
-                        case 2:
-                            small3.setTag(touchBannerBean);
-                            DisplayImageByVolleyUtils.loadImage(small3, UrlHelper.checkUrl(touchBannerBean.getPic()));
-                            break;
-                    }
+            L.d("banner 成功响应....2" + tag);
+            TouchBannerListBean listBean = (TouchBannerListBean) data;
+            List<TouchBannerBean> verlist = listBean.getData().getVerlist();
+            for (int i = 0; i < verlist.size(); i++) {
+                TouchBannerBean touchBannerBean = verlist.get(i);
+                switch (i) {
+                    case 0:
+                        small1.setTag(touchBannerBean);
+                        DisplayImageByVolleyUtils.loadImage(small1, UrlHelper.checkUrl(touchBannerBean.getPic()));
+                        break;
+                    case 1:
+                        small2.setTag(touchBannerBean);
+                        DisplayImageByVolleyUtils.loadImage(small2, UrlHelper.checkUrl(touchBannerBean.getPic()));
+                        break;
+                    case 2:
+                        small3.setTag(touchBannerBean);
+                        DisplayImageByVolleyUtils.loadImage(small3, UrlHelper.checkUrl(touchBannerBean.getPic()));
+                        break;
                 }
-                List<TouchBannerBean> horlist = listBean.getData().getHorlist();
-                List<String> bannerList = new ArrayList<String>();
-                for (int i = 0; i < horlist.size(); i++) {
-                    bannerList.add(UrlHelper.checkUrl(horlist.get(i).getPic()));
-                }
-                bannerView.setIsNeedIndicator(true);
-                bannerView.buildData(bannerList);
-                bannerView.use();
-                bannerView.setIPagerSelectListener(new BannerView.IPagerSelectListener() {
-                    @Override
-                    public void onPagerSelect(int index) {
-
-                    }
-                });
-                bannerView.setIClickListener(new BannerView.IClickListener() {
-                    @Override
-                    public void onClick(ViewPager viewPager, View view, int position) {
-                        T.showShort(getActivity(), "click item pos:" + position);
-                    }
-                });
             }
+            List<TouchBannerBean> horlist = listBean.getData().getHorlist();
+            List<String> bannerList = new ArrayList<String>();
+            for (int i = 0; i < horlist.size(); i++) {
+                bannerList.add(UrlHelper.checkUrl(horlist.get(i).getPic()));
+            }
+            bannerView.setIsNeedIndicator(true);
+            bannerView.buildData(bannerList);
+            bannerView.use();
+            bannerView.setIPagerSelectListener(new BannerView.IPagerSelectListener() {
+                @Override
+                public void onPagerSelect(int index) {
+
+                }
+            });
+            bannerView.setIClickListener(new BannerView.IClickListener() {
+                @Override
+                public void onClick(ViewPager viewPager, View view, int position) {
+                    T.showShort(getActivity(), "click item pos:" + position);
+                }
+            });
         }
     }
+
     @OnItemClick(R.id.listview)
-    public void itemClick(AdapterView<?> parent, View view, int position, long id){
-        LaunchWithExitUtils.startActivity(getActivity(),NewsDetailActivity.class);
+    public void itemClick(AdapterView<?> parent, View view, int position, long id) {
+        LaunchWithExitUtils.startActivity(getActivity(), NewsDetailActivity.class);
     }
 
     private void bannerRequest(int type) {
@@ -148,32 +151,36 @@ public class TouchFragment extends BaseFragment {
         } else {
             url = Constant.URL_BANNEL_CHINA;
         }
-        bannerTask = RequestHelper.post(url, null, TouchBannerListBean.class, true, this);
+        bannerTask = RequestHelper.post(url, null, TouchBannerListBean.class, true, true, this);
+        L.d("bannerRequest===>" + bannerTask);
     }
 
-    private void listRequest(int type){
+    private void listRequest(int type) {
         refreshProxy.setEmptyUi();
         refreshProxy.setEmpty();
         String url = "";
-        if(type == 1){
+        if (type == 1) {
             url = Constant.URL_WORLD_NEWS;
-        }else{
+        } else {
             url = Constant.URL_HOME_NEWS;
         }
         final String finalUrl = url;
         refreshProxy.setPulltoRefreshRefreshProxy(pulltoRefreshListView, new RefreshProxy.ProxyRefreshListener<TouchBean>() {
             @Override
             public BaseAdapter<TouchBean> getAdapter(List<TouchBean> data) {
-                return new TouchAdapter(getActivity(),data);
+                return new TouchAdapter(getActivity(), data);
             }
 
             @Override
-            public void executeTask(int page, int count,int max, VolleyNetWorkCallback listener) {
-                Map<String,String> post = new HashMap<String, String>();
-                post.put("count",count+"");
-                post.put("pageindex",page+"");
-                post.put("max",max +"");
-                RequestHelper.post(finalUrl,post, TouchListRespBean.class,true,listener);
+            public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
+                Map<String, String> post = new HashMap<String, String>();
+                post.put("count", count + "");
+                post.put("pageindex", page + "");
+                post.put("max", max + "");
+                boolean useCache = false;
+                if (type == 1)
+                    useCache = true;
+                RequestHelper.post(finalUrl, post, TouchListRespBean.class, true, useCache, listener);
             }
 
             @Override

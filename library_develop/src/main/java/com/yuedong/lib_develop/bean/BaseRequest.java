@@ -9,6 +9,16 @@ public class BaseRequest {
     private Class<? extends BaseResponse> responseObj;
     private boolean cacheData = false;
 
+    public boolean isUseCache() {
+        return useCache;
+    }
+
+    public void setUseCache(boolean useCache) {
+        this.useCache = useCache;
+    }
+
+    private boolean useCache = true;
+
     public Class<? extends BaseResponse> getResponseObj() {
         return responseObj;
     }

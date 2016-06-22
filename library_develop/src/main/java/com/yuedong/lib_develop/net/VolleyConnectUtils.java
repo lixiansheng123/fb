@@ -1,5 +1,7 @@
 package com.yuedong.lib_develop.net;
 
+import android.os.Handler;
+
 import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.bean.BaseRequest;
 import com.yuedong.lib_develop.bean.RequestParamsJson;
@@ -11,6 +13,7 @@ import java.util.LinkedList;
 
 public class VolleyConnectUtils {
     private static VolleyConnectUtils connectUtils;
+    private Handler handler = new Handler();
     private LinkedList<String> mTasks = new LinkedList<String>();
     private NCache nCache;
 
@@ -49,7 +52,7 @@ public class VolleyConnectUtils {
         return goToNetWork(baseRequest, 2);
     }
 
-    private String goToNetWork(BaseRequest baseRequest, int type) {
+    private String goToNetWork(final BaseRequest baseRequest, final int type) {
         String task = "";
         if (baseRequest != null) {
             task = SignUtils.md5(baseRequest.getUrl());
@@ -57,12 +60,17 @@ public class VolleyConnectUtils {
         }
         mTasks.add(task);
         VolleyRequst.setNCacheWay(nCache);
-        if (type == 0)
-            VolleyRequst.doGet(baseRequest);
-        else if (type == 1)
-            VolleyRequst.doPost((RequestParamsMap) baseRequest);
-        else
-            VolleyRequst.doPostByJson((RequestParamsJson) baseRequest);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (type == 0)
+                    VolleyRequst.doGet(baseRequest);
+                else if (type == 1)
+                    VolleyRequst.doPost((RequestParamsMap) baseRequest);
+                else
+                    VolleyRequst.doPostByJson((RequestParamsJson) baseRequest);
+            }
+        }, 300);
         return task;
     }
 

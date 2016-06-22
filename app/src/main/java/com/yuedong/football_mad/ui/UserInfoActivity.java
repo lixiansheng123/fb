@@ -68,7 +68,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         // 控制头部
         int rightIcon = -1;
         View.OnClickListener rightClickListener = null;
-        if(!other){
+        if (!other) {
             rightIcon = R.drawable.ic_green_finish;
             rightClickListener = new View.OnClickListener() {
                 @Override
@@ -76,7 +76,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     updateUserInfo();
                 }
             };
-        }else{
+        } else {
             rightIcon = R.drawable.ic_white_add_friend;
         }
         buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, "作者用户名", rightIcon, null, rightClickListener),
@@ -86,26 +86,26 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         selectSexDialog = new SelectSexDialog(this);
         selectBallPosDialog = new SelectBallPosDialog(this);
         daySelectDialog = new DaySelectDialog(this);
-        daySelectDialog.setCallback(new CommonCallback(){
+        daySelectDialog.setCallback(new CommonCallback() {
             @Override
             public void callbackYMR(String year, String month, String day) {
-                birthday = year+'-'+month+"-"+day;
+                birthday = year + '-' + month + "-" + day;
                 L.d(birthday);
-                text(etBirthday,birthday);
+                text(etBirthday, birthday);
             }
         });
         selectSexDialog.setCallback(new CommonCallback() {
             @Override
             public void callback(int id, String text) {
                 mSex = id;
-                text(etSex,text);
+                text(etSex, text);
             }
         });
-        selectBallPosDialog.setCallback(new CommonCallback(){
+        selectBallPosDialog.setCallback(new CommonCallback() {
             @Override
             public void callback(int id, String text) {
                 mBallPos = id;
-                text(etShangechange,text);
+                text(etShangechange, text);
             }
         });
     }
@@ -114,16 +114,16 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
      * 更新用户信息
      */
     private void updateUserInfo() {
-        Map<String,String> post = new HashMap<String,String>();
-        if(mSex != -1)
-             post.put("gender",mSex+"");
-        if(mBallPos != -1)
-            post.put("pos",mBallPos+"");
-        if(!TextUtils.isEmpty(birthday))
-            post.put("birthday",birthday);
-        if(!post.isEmpty()){
-            post.put("sid",userSid);
-            updateTask=  RequestHelper.post(Constant.URL_ADD_DETAIL,post,BaseResponse.class,false,this);
+        Map<String, String> post = new HashMap<String, String>();
+        if (mSex != -1)
+            post.put("gender", mSex + "");
+        if (mBallPos != -1)
+            post.put("pos", mBallPos + "");
+        if (!TextUtils.isEmpty(birthday))
+            post.put("birthday", birthday);
+        if (!post.isEmpty()) {
+            post.put("sid", userSid);
+            updateTask = RequestHelper.post(Constant.URL_ADD_DETAIL, post, BaseResponse.class, false, false, this);
         }
     }
 
@@ -148,7 +148,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         });
         viewPager.setCurrentItem(0);
         // 获取用户信息
-        userInfoTsak = CommonHelper.getUserInfo(userSid,this);
+        userInfoTsak = CommonHelper.getUserInfo(userSid, this);
 
     }
 
@@ -187,10 +187,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             etJigou.setClickable(false);
             etContact.setClickable(false);
         }
-        String gender =  user.getGender();
+        String gender = user.getGender();
         //TODO 填充textview未完成不知道数据结构
         text(etSex, CommonHelper.getTextBySex(Integer.parseInt(gender)));
-        text(etBirthday,user.getBirthday());
+        text(etBirthday, user.getBirthday());
 
     }
 
@@ -215,9 +215,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-        if(!tag.equals(userInfoTsak))T.showShort(this,R.string.str_modify_succeed);
-        if(tag.equals(updateTask)){
-        }else if(tag.equals(userInfoTsak)){
+        if (!tag.equals(userInfoTsak)) T.showShort(this, R.string.str_modify_succeed);
+        if (tag.equals(updateTask)) {
+        } else if (tag.equals(userInfoTsak)) {
             GetUserInfoByIdResBean bean = (GetUserInfoByIdResBean) data;
             this.user = bean.getData().getList();
             item2Ui();
@@ -256,16 +256,17 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 设置文本
+     *
      * @param textView
      * @param text
      */
-    private void text(TextView textView,String text){
-        if(!TextUtils.isEmpty(text)){
+    private void text(TextView textView, String text) {
+        if (!TextUtils.isEmpty(text)) {
             textView.setBackgroundResource(android.R.color.transparent);
             textView.setText(text);
-        }else{
+        } else {
             // 如果是看别人的详情
-            if(other){
+            if (other) {
                 textView.setBackgroundResource(android.R.color.transparent);
                 textView.setText("");
             }

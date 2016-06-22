@@ -111,7 +111,7 @@ public class RefreshProxy<T> {
         } else if (mode == 1) {
             refreshStatus();
         }
-        proxyRefreshListener.executeTask(currentPager, count,max, new VolleyNetWorkCallback() {
+        proxyRefreshListener.executeTask(currentPager, count, max, new VolleyNetWorkCallback() {
             @Override
             public void onNetworkStart(String tag) {
 
@@ -144,7 +144,7 @@ public class RefreshProxy<T> {
                     com.yuedong.lib_develop.utils.T.showShort(App.getInstance().getAppContext(), error.getMessage());
                 }
             }
-        });
+        }, mode);
     }
 
     private void updateData(List<T> list, int mode) {
@@ -188,7 +188,7 @@ public class RefreshProxy<T> {
         /**
          * 执行网络方法
          */
-        void executeTask(int page, int count, int max,VolleyNetWorkCallback listener);
+        void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type);
 
         /**
          * 成功回调

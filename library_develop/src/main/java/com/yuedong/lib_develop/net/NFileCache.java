@@ -24,6 +24,7 @@ public class NFileCache extends NCache {
         cacheDir = new File(dir);
         if (!cacheDir.exists())
             cacheDir.mkdirs();
+        L.d("缓存文件目录" + dir.toString());
     }
 
     @Override
@@ -51,6 +52,7 @@ public class NFileCache extends NCache {
             try {
                 FileInputStream fis = new FileInputStream(read);
                 String json = StreamUtils.conversionInputStreamToString(fis);
+                L.d("缓存json数据======>>" + json);
                 return json;
             } catch (IOException e) {
                 e.printStackTrace();

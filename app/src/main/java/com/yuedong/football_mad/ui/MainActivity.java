@@ -46,28 +46,28 @@ public class MainActivity extends BaseActivity {
         T.showShort(MainActivity.this, "test click succeed....");
     }
 
-    private void test2() {
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("name", "123");
-        data.put("password", SignUtils.md5("123123131"));
-        RequestHelper.post(Constant.URL_LONGIN, data, null, false, new VolleyNetWorkCallback() {
-            @Override
-            public void onNetworkStart(String tag) {
-                L.d(tag + "开始请求");
-            }
-
-            @Override
-            public void onNetworkSucceed(String tag, BaseResponse data) {
-                L.d(tag + "请求成功");
-            }
-
-            @Override
-            public void onNetworkError(String tag, VolleyError error) {
-                L.d(tag + "请求失败");
-                L.d(error.getMessage());
-            }
-        });
-    }
+//    private void test2() {
+//        Map<String, String> data = new HashMap<String, String>();
+//        data.put("name", "123");
+//        data.put("password", SignUtils.md5("123123131"));
+//        RequestHelper.post(Constant.URL_LONGIN, data, null, false, new VolleyNetWorkCallback() {
+//            @Override
+//            public void onNetworkStart(String tag) {
+//                L.d(tag + "开始请求");
+//            }
+//
+//            @Override
+//            public void onNetworkSucceed(String tag, BaseResponse data) {
+//                L.d(tag + "请求成功");
+//            }
+//
+//            @Override
+//            public void onNetworkError(String tag, VolleyError error) {
+//                L.d(tag + "请求失败");
+//                L.d(error.getMessage());
+//            }
+//        });
+//    }
 
 //    private void initView() {
 //        listView = (PulltoRefreshListView) findViewById(R.id.id_list);

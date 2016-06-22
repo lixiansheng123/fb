@@ -21,6 +21,7 @@ public class Constant {
     public static String URL_HOME_NEWS  = URL+"news/getHomeNews";
     public static String URL_HOT_INSIGNLIST= URL+"news/getHotInsign";
     public static String URL_INSIGNLIST= URL+"news/getInsignList";
+    public static String URL_REGISTER = URL +"user/userRegister";
     // 注入
     public static boolean AUTO_INJECT = true;
     // 状态是正常的
