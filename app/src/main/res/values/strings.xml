@@ -10,5 +10,8 @@
     <string name="str_time">30小时前</string>
     <string name="str_modify_succeed">修改成功</string>
     <string name="str_dataku_detail_rank">世界足球联赛排名：%s</string>
+    <string name="str_dataku_detail_club_rank">世界俱乐部排名：%s</string>
     <string name="str_test_short">测试内容</string>
+    <string name="str_dataku_detail_price">转会市场身价：%s</string>
+    <string name="str_dataku_detail_fifa_rank">国家队FIFA排名：%s</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.ui;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,7 +142,10 @@ public class TouchFragment extends BaseFragment {
 
     @OnItemClick(R.id.listview)
     public void itemClick(AdapterView<?> parent, View view, int position, long id) {
-        LaunchWithExitUtils.startActivity(getActivity(), NewsDetailActivity.class);
+        TouchBean bean = (TouchBean) parent.getAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.KEY_ID,bean.getId());
+        LaunchWithExitUtils.startActivity(getActivity(), NewsDetailActivity.class,bundle);
     }
 
     private void bannerRequest(int type) {

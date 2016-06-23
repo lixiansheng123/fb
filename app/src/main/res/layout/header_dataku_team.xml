@@ -25,6 +25,7 @@
     <com.yuedong.lib_develop.view.SupportScrollConflictGridView
         android:layout_width="match_parent"
         android:id="@+id/gv_qianfeng"
+        android:listSelector="@android:color/transparent"
         android:numColumns="4"
         android:background="@android:color/white"
         android:layout_height="wrap_content"/>
@@ -52,6 +53,7 @@
     <com.yuedong.lib_develop.view.SupportScrollConflictGridView
         android:layout_width="match_parent"
         android:id="@+id/gv_zhongchang"
+        android:listSelector="@android:color/transparent"
         android:numColumns="4"
         android:background="@android:color/white"
         android:layout_height="wrap_content"/>
@@ -79,6 +81,7 @@
     <com.yuedong.lib_develop.view.SupportScrollConflictGridView
         android:layout_width="match_parent"
         android:id="@+id/gv_houwei"
+        android:listSelector="@android:color/transparent"
         android:numColumns="4"
         android:background="@android:color/white"
         android:layout_height="wrap_content"/>
@@ -105,6 +108,7 @@
     <com.yuedong.lib_develop.view.SupportScrollConflictGridView
         android:layout_width="match_parent"
         android:id="@+id/gv_menjiang"
+        android:listSelector="@android:color/transparent"
         android:numColumns="4"
         android:background="@android:color/white"
         android:layout_height="wrap_content"/>

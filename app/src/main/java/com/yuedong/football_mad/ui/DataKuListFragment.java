@@ -71,9 +71,15 @@ public class DataKuListFragment extends BaseFragment {
             case ACTION_COMPETITION:
                 cls = CompetitionDetailActivity.class;
                 break;
-            case ACTION_TEAM:break;
-            case ACTION_ATHLETE:break;
-            case ACTION_COUNTRY:break;
+            case ACTION_TEAM:
+                cls = TeamDetailActivity.class;
+                break;
+            case ACTION_ATHLETE:
+                cls = PlayerDetailActivity.class;
+                break;
+            case ACTION_COUNTRY:
+                cls = CountryDetailActivity.class;
+                break;
             case ACTION_OTHER:break;
         }
         if(cls != null)

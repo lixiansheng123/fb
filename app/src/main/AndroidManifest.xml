@@ -43,7 +43,9 @@
         <activity android:name=".ui.ForgetPasswordActivity" />
         <activity android:name=".ui.DataKuActivity" />
         <activity android:name=".ui.CompetitionDetailActivity" />
-        <activity android:name=".ui.TeamDetailActivity"></activity>
+        <activity android:name=".ui.TeamDetailActivity" />
+        <activity android:name=".ui.PlayerDetailActivity" />
+        <activity android:name=".ui.CountryDetailActivity"></activity>
     </application>
 
 </manifest>

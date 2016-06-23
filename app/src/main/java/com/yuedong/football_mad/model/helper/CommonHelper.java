@@ -73,7 +73,7 @@ public class CommonHelper {
     public static String getTextByBallPos(int ballpos){
         String text = null;
         switch(ballpos){
-            case 1:text="千锋";break;
+            case 1:text="前锋";break;
             case 2:text="中场";break;
             case 3:text="后卫";break;
             case 4:text="门将";break;

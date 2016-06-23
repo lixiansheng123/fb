@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.yuedong.football_mad.R;
+import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.view.NewsStyleDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
@@ -24,11 +25,13 @@ public class NewsDetailActivity extends BaseActivity {
     @ViewInject(R.id.webView)
     private WebView webView;
     private NewsStyleDialog newsStyleDialog;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         buildUi(null, R.layout.activity_news_detail);
+        id = getIntent().getExtras().getString(Constant.KEY_ID);
         outAnim = AnimationUtils.loadAnimation(this, R.anim.anim_decline);
         inAnim = AnimationUtils.loadAnimation(this, R.anim.anim_go_up);
         newsStyleDialog = new NewsStyleDialog(this);
@@ -65,7 +68,9 @@ public class NewsDetailActivity extends BaseActivity {
                 back();
                 break;
             case R.id.title_btn_right:
-                LaunchWithExitUtils.startActivity(NewsDetailActivity.this, CommentListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.KEY_ID,id);
+                LaunchWithExitUtils.startActivity(NewsDetailActivity.this, CommentListActivity.class,bundle);
                 break;
             case R.id.btn_comment:
                 if (llComment.getVisibility() == View.GONE) {

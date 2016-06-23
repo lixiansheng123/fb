@@ -27,6 +27,7 @@ public class TouchAdapter extends BaseAdapter<TouchBean> {
     @Override
     public void convert(ViewHolder viewHolder, TouchBean bean, int position, View convertView) {
         viewHolder.getIdByView(R.id.item_top).setVisibility(View.VISIBLE);
+        if(bean == null)return;
         RoundImageView imageView = viewHolder.getIdByView(R.id.id_pic);
         ImageView icon = viewHolder.getIdByView(R.id.iv_icon);
         viewHolder.setText(R.id.tv_title,bean.getTitle()).setText(R.id.tv_content, bean.getDigest()).setText(R.id.tv_comment_num, bean.getComment());

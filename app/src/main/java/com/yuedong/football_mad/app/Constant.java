@@ -40,12 +40,18 @@ public class Constant {
     public static String URL_GET_TEAM_BY_ID= URL+"team/getTeamById";
     public static String URL_GET_HOTATHLETE = URL +"athlete/getHotAthlete";
     public static String URL_GET_ATHLETELIST = URL +"athlete/getAthleteList";
+    public static String URL_GET_ATHLETE_BY_ID = URL +"athlete/getAthleteById";
+
     public static String URL_SEARCH_ALL = URL +"athlete/SearchAll";
     public static String URL_GET_HOTCOUNTRY = URL +"country/getHotCountry";
     public static String URL_GET_COUNTRYLIST = URL +"country/getHotCountry";
+    public static String URL_GET_COUNTRY_BY_ID = URL +"country/getCountryById";
     public static String URL_GET_HOTOTHER = URL +"other/getHotOther";
     public static String URL_GET_OTHERLIST = URL +"other/getOtherList";
     public static String URL_GETGAMEINFO_BYID = URL +"game/getGameById";
+
+    // 评论
+    public static String URL_GET_COMMENT_BY_NEWS = URL +"comment/getCommentByNews";
 
 
     // 注入
