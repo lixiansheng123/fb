@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="90dp">
+    
+    <RelativeLayout
+        android:layout_width="53dp"
+        android:background="@drawable/level_quan_senior"
+        android:layout_height="53dp">
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="45dp"
+            android:id="@+id/iv_pic"
+            android:layout_centerInParent="true"
+            android:layout_height="45dp"
+            android:background="@drawable/haizeiwang"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginTop="4dp"
+        style="@style/text_black5D5D5D_14sp"
+        android:text="@string/str_test_short"
+        />
+
+</LinearLayout>

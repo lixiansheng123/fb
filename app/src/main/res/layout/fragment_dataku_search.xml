@@ -42,6 +42,6 @@
         android:divider="@null"
         android:id="@+id/recordList"
         />
-    <include layout="@layout/layout_common_list"/>
+    <include layout="@layout/listview"/>
 
 </LinearLayout>

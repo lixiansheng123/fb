@@ -1,6 +1,9 @@
 package com.yuedong.football_mad.ui;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
@@ -9,13 +12,17 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.bean.DataKuListRespBean;
+import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
+import com.yuedong.lib_develop.ioc.annotation.event.OnItemClick;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,16 +32,16 @@ import java.util.Map;
  * @author 俊鹏 on 2016/6/22
  */
 public class DataKuListFragment extends BaseFragment {
-    @ViewInject(R.id.listview)
-    private PulltoRefreshListView listView;
-    private RefreshProxy<FinalCompetitionBean> refreshProxy = new RefreshProxy<>();
-    private String hotTask;
     public static final int ACTION_COMPETITION = 0x001;
     public static final int ACTION_TEAM = 0x002;
     public static final int ACTION_ATHLETE = 0x003;
     public static final int ACTION_COUNTRY = 0x004;
     public static final int ACTION_OTHER = 0x005;
-
+    @ViewInject(R.id.listview)
+    private PulltoRefreshListView listView;
+    private RefreshProxy<FinalCompetitionBean> refreshProxy = new RefreshProxy<>();
+    private String hotTask;
+    private DataKuListAdapter adapter;
     private int action;
     @Override
     protected View getTitleView() {
@@ -50,6 +57,27 @@ public class DataKuListFragment extends BaseFragment {
     public void ui() {
         action = getArguments().getInt(Constant.KEY_ACTION,ACTION_COMPETITION);
         getHotList();
+    }
+
+    @OnItemClick(value = R.id.listview)
+    protected void itemClick(AdapterView<?> parent, View view, int position, long id){
+        FinalCompetitionBean bean = (FinalCompetitionBean) parent.getAdapter().getItem(position);
+        if(bean == null)return;
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.KEY_ID,bean.getId());
+        bundle.putString(Constant.KEY_STR,bean.getAbbrname());
+        Class<? extends Activity> cls = null;
+        switch(action){
+            case ACTION_COMPETITION:
+                cls = CompetitionDetailActivity.class;
+                break;
+            case ACTION_TEAM:break;
+            case ACTION_ATHLETE:break;
+            case ACTION_COUNTRY:break;
+            case ACTION_OTHER:break;
+        }
+        if(cls != null)
+           LaunchWithExitUtils.startActivity(getActivity(),cls,bundle);
     }
 
     /**
@@ -81,7 +109,7 @@ public class DataKuListFragment extends BaseFragment {
             refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<FinalCompetitionBean>() {
                 @Override
                 public BaseAdapter<FinalCompetitionBean> getAdapter(List<FinalCompetitionBean> data) {
-                    return new DataKuListAdapter(getActivity(),data);
+                    return adapter = new DataKuListAdapter(getActivity(),data);
                 }
 
                 @Override

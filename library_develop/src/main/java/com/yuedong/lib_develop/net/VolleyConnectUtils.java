@@ -1,6 +1,7 @@
 package com.yuedong.lib_develop.net;
 
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.bean.BaseRequest;
@@ -8,7 +9,6 @@ import com.yuedong.lib_develop.bean.RequestParamsJson;
 import com.yuedong.lib_develop.bean.RequestParamsMap;
 import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.SignUtils;
-
 import java.util.LinkedList;
 
 public class VolleyConnectUtils {
@@ -53,11 +53,14 @@ public class VolleyConnectUtils {
     }
 
     private String goToNetWork(final BaseRequest baseRequest, final int type) {
+        if(baseRequest == null)return null;
         String task = "";
-        if (baseRequest != null) {
-            task = SignUtils.md5(baseRequest.getUrl());
-            baseRequest.setTag(task);
-        }
+            if(TextUtils.isEmpty(baseRequest.getTag())){
+                task = SignUtils.md5(baseRequest.getUrl());
+                baseRequest.setTag(task);
+            }else{
+                task = baseRequest.getTag();
+            }
         mTasks.add(task);
         VolleyRequst.setNCacheWay(nCache);
         handler.postDelayed(new Runnable() {

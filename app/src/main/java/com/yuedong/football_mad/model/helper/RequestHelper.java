@@ -45,6 +45,13 @@ public class RequestHelper {
 //            allObj.put("encrypt", "md5");
 //            allObj.put("format", "json");
 //            allObj.put("v", "1.0");
+            if(data!=null){
+                // 详情页的话缓存tag要做特别处理
+                if(data.containsKey("id")){
+                    String tag = SignUtils.md5(url +"="+ data.get("id"));
+                    baseRequest.setTag(tag);
+                }
+            }
             String sign = null;
             JSONObject dataObj = new JSONObject();
             if (data != null) {
