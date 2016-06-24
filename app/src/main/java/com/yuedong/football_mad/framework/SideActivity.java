@@ -24,6 +24,7 @@ import com.yuedong.football_mad.ui.MyCommentListActivity;
 import com.yuedong.football_mad.ui.MyHonorActivity;
 import com.yuedong.football_mad.ui.MyMsgActivity;
 import com.yuedong.football_mad.ui.UserInfoActivity;
+import com.yuedong.football_mad.ui.WatchBallActivity;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
@@ -84,6 +85,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_my_article).setOnClickListener(this);
         menu.findViewById(R.id.ll_msg).setOnClickListener(this);
         menu.findViewById(R.id.ll_dataku).setOnClickListener(this);
+        menu.findViewById(R.id.ll_watch_ball).setOnClickListener(this);
         changeUi();
     }
 
@@ -150,6 +152,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
 
             case R.id.ll_dataku:
                 LaunchWithExitUtils.startActivity(activity, DataKuActivity.class);
+                break;
+
+            case R.id.ll_watch_ball:
+                LaunchWithExitUtils.startActivity(activity, WatchBallActivity.class);
                 break;
         }
     }

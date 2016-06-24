@@ -50,21 +50,30 @@ public class DisplayImageByVolleyUtils {
         SimplePicConfig simplePicConfig = new SimplePicConfig();
         simplePicConfig.setErrorPic(R.drawable.ic_default3);
         simplePicConfig.setLoadPic(R.drawable.ic_default3);
-        loadImage(url, imageView, simplePicConfig);
+        if(imageView instanceof NetworkImageView)
+            loadImage((NetworkImageView)imageView,url,simplePicConfig);
+        else
+            loadImage(url, imageView, simplePicConfig);
     }
 
     public static void loadUserPic(String url,ImageView imageView){
         SimplePicConfig simplePicConfig = new SimplePicConfig();
         simplePicConfig.setErrorPic(R.drawable.ic_default_head);
         simplePicConfig.setLoadPic(R.drawable.ic_default_head);
-        loadImage(url, imageView, simplePicConfig);
+        if(imageView instanceof NetworkImageView)
+            loadImage((NetworkImageView)imageView,url,simplePicConfig);
+        else
+            loadImage(url, imageView, simplePicConfig);
     }
 
     public static void loadQuadratePic(String url,ImageView imageView){
         SimplePicConfig simplePicConfig = new SimplePicConfig();
         simplePicConfig.setErrorPic(R.drawable.ic_default2);
         simplePicConfig.setLoadPic(R.drawable.ic_default2);
-        loadImage(url, imageView, simplePicConfig);
+        if(imageView instanceof NetworkImageView)
+            loadImage((NetworkImageView)imageView,url,simplePicConfig);
+        else
+            loadImage(url, imageView, simplePicConfig);
     }
 
 
