@@ -11,8 +11,8 @@ public class SimplePicConfig {
     private int errorPic;
 
     public SimplePicConfig() {
-        loadPic = R.drawable.test_default;
-        errorPic = R.drawable.test_default;
+        loadPic = R.drawable.ic_default1;
+        errorPic = R.drawable.ic_default1;
     }
 
     public int getLoadPic() {

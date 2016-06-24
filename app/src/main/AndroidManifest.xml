@@ -45,7 +45,9 @@
         <activity android:name=".ui.CompetitionDetailActivity" />
         <activity android:name=".ui.TeamDetailActivity" />
         <activity android:name=".ui.PlayerDetailActivity" />
-        <activity android:name=".ui.CountryDetailActivity"></activity>
+        <activity android:name=".ui.CountryDetailActivity" />
+        <activity android:name=".ui.OtherDetailActivity" />
+        <activity android:name=".ui.WatchBallActivity"></activity>
     </application>
 
 </manifest>

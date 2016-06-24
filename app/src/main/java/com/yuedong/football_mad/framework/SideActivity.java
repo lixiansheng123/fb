@@ -92,7 +92,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         if (loginUser == null) return;
         int userLevel = Integer.parseInt(loginUser.getUserlevel());
         DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(userLevel);
-        DisplayImageByVolleyUtils.loadImage(UrlHelper.checkUrl(loginUser.getAvatar()), ivUserHead);
+        DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(loginUser.getAvatar()), ivUserHead);
         tvUsername.setText(loginUser.getName());
         SpannableStringBuilder sp = TextUtils.addTextColor(userLevelDisplayInfo.textDesc, 0, 2, userLevelDisplayInfo.partTextColor);
         tvUserLevel.setText(sp);

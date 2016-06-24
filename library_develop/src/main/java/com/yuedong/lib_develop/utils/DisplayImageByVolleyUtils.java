@@ -9,6 +9,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.bean.SimplePicConfig;
+import com.yuedong.library_develop.R;
 
 /**
  * 图片下载工具类
@@ -45,10 +46,24 @@ public class DisplayImageByVolleyUtils {
         niv.setImageUrl(url, IMAGELOADER);
     }
 
-    public static void loadUserHead(String url, ImageView imageView) {
+    public static void loadBallDefault(String url, ImageView imageView) {
         SimplePicConfig simplePicConfig = new SimplePicConfig();
-//        simplePicConfig.setErrorPic(R.drawable.bg_picture_user_default);
-//        simplePicConfig.setLoadPic(R.drawable.bg_picture_user_default);
+        simplePicConfig.setErrorPic(R.drawable.ic_default3);
+        simplePicConfig.setLoadPic(R.drawable.ic_default3);
+        loadImage(url, imageView, simplePicConfig);
+    }
+
+    public static void loadUserPic(String url,ImageView imageView){
+        SimplePicConfig simplePicConfig = new SimplePicConfig();
+        simplePicConfig.setErrorPic(R.drawable.ic_default_head);
+        simplePicConfig.setLoadPic(R.drawable.ic_default_head);
+        loadImage(url, imageView, simplePicConfig);
+    }
+
+    public static void loadQuadratePic(String url,ImageView imageView){
+        SimplePicConfig simplePicConfig = new SimplePicConfig();
+        simplePicConfig.setErrorPic(R.drawable.ic_default2);
+        simplePicConfig.setLoadPic(R.drawable.ic_default2);
         loadImage(url, imageView, simplePicConfig);
     }
 

@@ -25,6 +25,6 @@ public class SpecialTopAdapter extends BaseAdapter<IdNameLogoBean> {
     public void convert(ViewHolder viewHolder, IdNameLogoBean bean, int position, View convertView) {
         viewHolder.setText(R.id.tv_name, bean.getName());
         ImageView logo = viewHolder.getIdByView(R.id.iv_logo);
-        DisplayImageByVolleyUtils.loadImage(UrlHelper.checkUrl(bean.getLogo()), logo);
+        DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(bean.getLogo()), logo);
     }
 }

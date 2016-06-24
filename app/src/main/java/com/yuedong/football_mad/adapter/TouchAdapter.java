@@ -2,6 +2,7 @@ package com.yuedong.football_mad.adapter;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -29,9 +30,17 @@ public class TouchAdapter extends BaseAdapter<TouchBean> {
         viewHolder.getIdByView(R.id.item_top).setVisibility(View.VISIBLE);
         if(bean == null)return;
         RoundImageView imageView = viewHolder.getIdByView(R.id.id_pic);
+        View llPic = viewHolder.getIdByView(R.id.ll_pic);
+        View line = viewHolder.getIdByView(R.id.line);
         ImageView icon = viewHolder.getIdByView(R.id.iv_icon);
         viewHolder.setText(R.id.tv_title,bean.getTitle()).setText(R.id.tv_content, bean.getDigest()).setText(R.id.tv_comment_num, bean.getComment());
-        DisplayImageByVolleyUtils.loadImage(UrlHelper.checkUrl(bean.getThumbnail()), imageView);
+        String url = UrlHelper.checkUrl(bean.getThumbnail());
+        if(TextUtils.isEmpty(url)) {
+            ViewUtils.hideLayouts(llPic,line);
+        } else{
+            ViewUtils.showLayouts(llPic,line);
+            DisplayImageByVolleyUtils.loadQuadratePic(url, imageView);
+        }
         int type = bean.getType();
         ViewUtils.showLayout(icon);
         switch (type){

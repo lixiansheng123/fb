@@ -36,6 +36,8 @@ public class InsihtAdapter extends BaseAdapter<InsightBean> {
     public void convert(ViewHolder viewHolder, InsightBean bean, int position, View convertView) {
         View topView = viewHolder.getIdByView(R.id.id_include_layout);
         ImageView topImageView = viewHolder.getIdByView(R.id.id_include_pic) ;
+        View llPic = viewHolder.getIdByView(R.id.ll_pic);
+        View line = viewHolder.getIdByView(R.id.line);
         topView.setBackgroundResource(android.R.color.white);
         if (position == 0) {
             ViewUtils.showLayout(topView);
@@ -57,8 +59,14 @@ public class InsihtAdapter extends BaseAdapter<InsightBean> {
                 .setText(R.id.tv_zan_num, bean.getGood())
                 .setText(R.id.tv_comment_num, bean.getComment())
                 .setText(R.id.tv_name, bean.getUsername())
-                .setText(R.id.tv_time, DateUtils.getDescriptionTimeFromTimestamp(bean.getCreatetime()*1000));
-        DisplayImageByVolleyUtils.loadImage(UrlHelper.checkUrl(bean.getThumbnail()), imageView);
+                .setText(R.id.tv_time, DateUtils.getDescriptionTimeFromTimestamp(bean.getCreatetime() * 1000));
+        String url = UrlHelper.checkUrl(bean.getThumbnail());
+        if(android.text.TextUtils.isEmpty(url)){
+            ViewUtils.hideLayouts(llPic,line);
+        }else {
+            ViewUtils.showLayouts(llPic,line);
+            DisplayImageByVolleyUtils.loadImage(url, imageView);
+        }
         DisplayImageByVolleyUtils.loadImage(UrlHelper.checkUrl(bean.getAvatar()),ivUserHead);
         int userLevel = bean.getUserlevel();
         DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(userLevel);
