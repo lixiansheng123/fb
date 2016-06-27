@@ -3,6 +3,15 @@ package com.yuedong.lib_develop.bean;
 public class BaseResponse {
     public long rid;
     public State state;
+    private String json;
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
 
     public long getRid() {
         return rid;

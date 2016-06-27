@@ -16,6 +16,7 @@
 
         <com.yuedong.lib_develop.view.RoundImageView
             android:layout_width="28dp"
+            android:id="@+id/iv_head"
             android:layout_height="28dp"
             android:layout_centerInParent="true"
             android:src="@drawable/haizeiwang" />
@@ -45,11 +46,11 @@
         android:layout_below="@+id/tv_level"
         android:layout_marginTop="15dp"
         android:ellipsize="end"
-        android:lines="3"
         android:text="@string/str_test"
         android:textSize="13sp" />
 
     <ImageView
+        android:id="@+id/iv_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

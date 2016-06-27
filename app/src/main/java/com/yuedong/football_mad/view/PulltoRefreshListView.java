@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yuedong.football_mad.R;
+import com.yuedong.lib_develop.utils.L;
 
 
 public class PulltoRefreshListView extends ListView implements AbsListView.OnScrollListener {
@@ -165,7 +166,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         int tmpY = (int) ev.getY();
         int space = tmpY - startY;
         int topPadding = space - headerContentHeight;
-        topPadding /= 3;
+        if(topPadding >0)
+           topPadding /= 3;
         switch (state) {
             case NONE:
                 if (space > 0) {

@@ -1,13 +1,16 @@
 package com.yuedong.football_mad.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.WheelOnlyTextAdapter;
 import com.yuedong.football_mad.model.CommonCallback;
 import com.yuedong.football_mad.model.helper.DataUtils;
+import com.yuedong.lib_develop.utils.L;
 
 import java.util.Calendar;
 import java.util.List;
@@ -50,6 +53,8 @@ public class DaySelectDialog extends ChooseDialog {
             @Override
             public void onScrollingFinished(WheelView wheel) {
                 curYear = yearsData.get(wheel.getCurrentItem());
+                View view = yearWv.getItemView(wheel.getCurrentItem());
+                view.setBackgroundResource(android.R.color.black);
             }
         });
         monthWv.addScrollingListener(new OnWheelScrollListener() {

@@ -81,7 +81,7 @@ public class RefreshProxy<T> {
     }
 
     /**
-     * 刷新  头部  静态(listview 不会发生样式变化)
+     * 刷新  头部  静态(splistview 不会发生样式变化)
      */
     public void staticRefresh() {
         if (!refresh) refresh = true;

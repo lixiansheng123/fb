@@ -45,16 +45,21 @@ public class Constant {
 
     public static String URL_SEARCH_ALL = URL + "athlete/SearchAll";
     public static String URL_GET_HOTCOUNTRY = URL + "country/getHotCountry";
-    public static String URL_GET_COUNTRYLIST = URL + "country/getHotCountry";
+    public static String URL_GET_COUNTRYLIST = URL + "country/getCountryList";
     public static String URL_GET_COUNTRY_BY_ID = URL + "country/getCountryById";
     public static String URL_GET_HOTOTHER = URL + "other/getHotOther";
     public static String URL_GET_OTHERLIST = URL + "other/getOtherList";
     public static String URL_GET_OTHE_BY_ID = URL + "other/getOtherById";
     public static String URL_GETGAMEINFO_BYID = URL + "game/getGameById";
+    public static String URL_GAMELIST = URL +"game/getGameList";
+    public static String URL_HOTGAMELIST = URL +"game/getHotGame";
+
+
 
     // 评论
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";
-
+    public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
+    public static String URL_COMMENT_ZAN = URL +"comment/goodComment";
 
     // 注入
     public static boolean AUTO_INJECT = true;

@@ -2,7 +2,6 @@ package com.yuedong.football_mad.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.InsihtAdapter;
@@ -10,7 +9,6 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.InsightBean;
 import com.yuedong.football_mad.model.bean.InsightListRespBean;
-import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
@@ -21,7 +19,6 @@ import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.view.SupportScrollConflictListView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +48,7 @@ public class InsightFragment extends BaseFragment {
     @Override
     public void ui() {
         stopView.setVisibility(View.GONE);
-        View header = LayoutInflater.from(getActivity()).inflate(R.layout.listview, listView, false);
+        View header = LayoutInflater.from(getActivity()).inflate(R.layout.splistview, listView, false);
         spListView = (SupportScrollConflictListView) header.findViewById(R.id.spListView);
         listView.addHeaderView(header, null, false);
         getHotInsignList();

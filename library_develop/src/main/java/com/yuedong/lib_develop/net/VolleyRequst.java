@@ -129,8 +129,11 @@ public class VolleyRequst {
         request.getCallback().onNetworkStart(request.getTag());
         if (!NetUtils.isConnected(App.getInstance().getAppContext())) {
             BaseResponse baseResponse = null;
-            if (request.isUseCache())
-                baseResponse = toObj(mNCache.getData(request.getTag()), request.getResponseObj());
+            if (request.isUseCache()){
+                String json = mNCache.getData(request.getTag());
+                baseResponse = toObj(json,request.getResponseObj());
+                if(baseResponse != null)baseResponse.setJson(json);
+            }
             request.getCallback().onNetworkSucceed(request.getTag(), baseResponse);
             VolleyError error = new VolleyError("网络异常,请检查网络");
             request.getCallback().onNetworkError(request.getTag(), error);
@@ -140,14 +143,6 @@ public class VolleyRequst {
         mJsonRequest = new JsonStringRequest(Method.POST, request.getUrl(), request.getJsonObject(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
-//                L.d("响应头" + response.headers);
-//                if (request.getTag().equals(SignUtils.md5(SAVE_SESSION_FLAG))) {
-//                    String sessionId = response.headers.get("Set-Cookie");
-//                    sessionId = sessionId.split("=")[1];
-//                    sessionId = sessionId.substring(sessionId.indexOf("=") + 1, sessionId.lastIndexOf(";"));
-//                    L.d("sessionId===" + sessionId);
-//                    SPUtils.put(App.getInstance().getAppContext(), "key_session_id", sessionId);
-//                }
                 String data;
                 try {
                     data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
@@ -157,6 +152,7 @@ public class VolleyRequst {
                 L.d("响应json========>>");
                 L.d(data);
                 BaseResponse baseResponse = toObj(data, request.getResponseObj());
+                if(baseResponse != null)baseResponse.setJson(data);
                 if (baseResponse != null && baseResponse.getState().getCode() == OK && request.isCacheData())
                     mNCache.cacheData(request.getTag(), data);
                 request.getCallback().onNetworkSucceed(request.getTag(), baseResponse);

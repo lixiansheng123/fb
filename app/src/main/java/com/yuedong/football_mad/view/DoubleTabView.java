@@ -73,11 +73,13 @@ public class DoubleTabView extends LinearLayout implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         clickStyle(v);
+        int position = 0;
+        if(v.getId() == R.id.item2)position = 1;
         if(iTagClickListener!=null)
-            iTagClickListener.onClick(v);
+            iTagClickListener.onClick(v,position);
     }
 
     public interface ITagClickListener{
-        void onClick(View view);
+        void onClick(View view,int position);
     }
 }

@@ -90,6 +90,7 @@
             android:paddingRight="22dp">
 
             <ImageView
+                android:id="@+id/iv_pack_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -103,6 +104,7 @@
                 android:src="@drawable/ic_title_send2" />
 
             <ImageView
+                android:id="@+id/iv_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -111,6 +113,7 @@
         </RelativeLayout>
 
         <EditText
+            android:id="@+id/et_content"
             style="@style/text_dark_black_12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

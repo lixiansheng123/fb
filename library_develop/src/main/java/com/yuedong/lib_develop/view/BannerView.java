@@ -156,6 +156,7 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
             NetworkImageView iv = new NetworkImageView(getContext());
             iv.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             iv.setScaleType(ScaleType.CENTER_CROP);
+            iv.setBackgroundResource(android.R.color.transparent);
             iv.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -79,7 +79,7 @@ public class CompetitionDetailActivity extends BaseActivity {
 
     @Override
     protected void ui() {
-        View header = LayoutInflater.from(this).inflate(R.layout.listview, null);
+        View header = LayoutInflater.from(this).inflate(R.layout.splistview, null);
         listView.addHeaderView(header, null, false);
         scoreListview = (SupportScrollConflictListView) header.findViewById(R.id.spListView);
         getCompetitionInfo();

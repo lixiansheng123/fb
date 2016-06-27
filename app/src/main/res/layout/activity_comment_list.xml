@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.yuedong.football_mad.view.DoubleTabView
+        android:id="@+id/doubleTabView"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         app:text1="热评"
