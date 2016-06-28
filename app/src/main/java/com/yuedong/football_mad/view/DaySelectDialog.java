@@ -54,7 +54,6 @@ public class DaySelectDialog extends ChooseDialog {
             public void onScrollingFinished(WheelView wheel) {
                 curYear = yearsData.get(wheel.getCurrentItem());
                 View view = yearWv.getItemView(wheel.getCurrentItem());
-                view.setBackgroundResource(android.R.color.black);
             }
         });
         monthWv.addScrollingListener(new OnWheelScrollListener() {
