@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/whiteF8F8F7"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_wheelview_year"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></kankan.wheel.widget.WheelView>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_wheelview_month"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></kankan.wheel.widget.WheelView>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_wheelview_day"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></kankan.wheel.widget.WheelView>
+            </LinearLayout>
+            <View
+                android:layout_gravity="center_vertical"
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:background="@color/green4B8D7F"
+                />
+        </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/btn_"
+            android:gravity="center"
+            android:background="@drawable/level_quan_senior"
+            android:layout_gravity="center"
+            style="@style/text_white_14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:text="最近"
+            />
+    </FrameLayout>
+</LinearLayout>

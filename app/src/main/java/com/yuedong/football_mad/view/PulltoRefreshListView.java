@@ -34,8 +34,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
     private LayoutInflater inflater;
     private View header;
     private View footer;
-    private TextView tip;
-    private ImageView car;
+    private TextView leftTip;
+    private TextView rightTip;
     private TextView more;
     private int startY;
     private int firstVisibleItem;
@@ -80,8 +80,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         measureView(footer);
         footerContentHeight = footer.getMeasuredHeight();
         header = inflater.inflate(R.layout.list_pull_head, null);
-        car = (ImageView) header.findViewById(R.id.id_car);
-        tip = (TextView) header.findViewById(R.id.tip);
+        leftTip = (TextView) header.findViewById(R.id.tv_left_tip);
+        rightTip = (TextView) header.findViewById(R.id.tv_right_tip);
         // 为listview添加头部和尾部，并进行初始化
         measureView(header);
         headerContentHeight = header.getMeasuredHeight();
@@ -215,33 +215,17 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         switch (state) {
             case NONE:
                 translateAnim(header.getPaddingTop(), -headerContentHeight);
-                tip.setText(R.string.pull_to_refresh);
-                car.clearAnimation();
-                car.setImageResource(R.drawable.action_1);
+                leftTip.setText("下拉");
                 break;
             case PULL:
-                car.setVisibility(View.VISIBLE);
-                tip.setVisibility(View.VISIBLE);
-                tip.setText(R.string.pull_to_refresh);
-                car.clearAnimation();
-                car.setImageResource(R.drawable.action_1);
+                leftTip.setText("下拉");
                 break;
             case RELEASE:
-                car.setVisibility(View.VISIBLE);
-                tip.setVisibility(View.VISIBLE);
-                tip.setText(R.string.pull_to_refresh);
-                tip.setText(R.string.release_to_refresh);
-                car.clearAnimation();
-                car.setImageResource(R.drawable.action_1);
+                leftTip.setText("松开手");
                 break;
             case REFRESHING:
                 translateAnim(header.getPaddingTop(), 0);
-                tip.setText("正在刷新");
-                car.setVisibility(View.VISIBLE);
-                car.clearAnimation();
-                car.setImageResource(R.drawable.car_anim);
-                final AnimationDrawable ad = (AnimationDrawable) car.getDrawable();
-                ad.start();
+                leftTip.setText("正在");
                 break;
         }
     }
@@ -275,29 +259,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
     public void onRefreshComplete() {
         if (isRefresh) {
             isRefresh = false;
-            // 飞出动画
-            car.clearAnimation();
-            car.setImageResource(R.drawable.action_8);
-            Animation loadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_right_out);
-            car.startAnimation(loadAnimation);
-            loadAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    car.setVisibility(View.GONE);
-                    state = NONE;
-                    refreshHeaderViewByState();
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
+            state = NONE;
+            refreshHeaderViewByState();
         }
         if (isLoading) {
             isLoading = false;

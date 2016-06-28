@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <WebView
+        android:id="@+id/webView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+        android:layout_weight="1"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="插入图片"
+            />
+        <Button
+            android:id="@+id/btn_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选中字体加粗"
+            />
+        <Button
+            android:id="@+id/btn_html"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取当前html代码"
+            />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="alert一下"
+        />
+
+</LinearLayout>
