@@ -3,6 +3,8 @@ package com.yuedong.football_mad.framework;
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     public MultiStateView mMultiStateView;
     private LoadDialog loadDialog;
     protected Activity activity;
+    protected Handler mainHandler ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     }
 
     private void init() {
+        mainHandler = new Handler(Looper.getMainLooper());
         activity = this;
         mMainLayout = new RelativeLayout(this);
         mTitleLayout = new LinearLayout(this);
@@ -241,7 +245,10 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     public void onNetworkSucceed(String tag, BaseResponse data) {
         if (autoLoadView)
             showLoadView(false);
-        if (data == null) return;
+        if (data == null) {
+            L.d("baseResponse 是空的");
+            return;
+        }
         L.d("状态码" + data.getState().getCode());
         if (data.getState().getCode() != Constant.OK) {
             showLoadView(false);

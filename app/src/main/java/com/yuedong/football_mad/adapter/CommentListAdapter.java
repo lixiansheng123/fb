@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -24,11 +25,14 @@ import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DateUtils;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
 import com.yuedong.lib_develop.utils.ViewUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
+import com.yuedong.lib_develop.view.SupportScrollConflictListView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,12 +41,15 @@ import java.util.Map;
  * @author 俊鹏 on 2016/6/17
  */
 public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
-    private CommonInteractPop pop;
+
     private static final int PACK_UP = 1;
     private static final int UNFOLD = 2;
+    private View.OnClickListener commmentClickListener;
+    public void setOnCommentClickListener(View.OnClickListener listener){
+        this.commmentClickListener = listener;
+    }
     public CommentListAdapter(Context con, List<List<CommentBean>> data) {
         super(con, data, R.layout.item_comment_list);
-        pop = new CommonInteractPop(con);
     }
 
     @Override
@@ -50,7 +57,31 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         convertView.setVisibility(View.INVISIBLE);
         if(list == null || list.isEmpty()) return;
         convertView.setClickable(false);
-        CommentBean bean = list.get(0);
+        CommentBean bean = list.get(list.size() - 1);
+        SupportScrollConflictListView spListView = viewHolder.getIdByView(R.id.spListView);
+//        ListView spListView = viewHolder.getIdByView(R.id.listview);
+        ViewUtils.hideLayout(spListView);
+        // 二级评论
+        if(list.size()>1){
+            SecondCommentListAdapter adapter = new SecondCommentListAdapter(mCon);
+            spListView.setAdapter(adapter);
+            ViewUtils.showLayout(spListView);
+            List<CommentBean> sencondCommentList = new ArrayList<>(list);
+            int lastIndex = list.size() - 1;
+            sencondCommentList.remove(lastIndex);
+            if(sencondCommentList.size() > 5){
+                List<CommentBean> partData = new ArrayList<>();
+                partData.add(sencondCommentList.get(0));
+                partData.add(sencondCommentList.get(1));
+                partData.add(sencondCommentList.get(sencondCommentList.size()-1));
+                adapter.setFullData(sencondCommentList);
+                adapter.setData(partData);
+                adapter.notifyDataSetChanged();
+            }else{
+                adapter.setData(sencondCommentList);
+                adapter.notifyDataSetChanged();
+            }
+        }
         View rlHead = viewHolder.getIdByView(R.id.rl_head);
         final ImageView ivMore = viewHolder.getIdByView(R.id.iv_more);
         RoundImageView roundImageView = viewHolder.getIdByView(R.id.iv_head);
@@ -72,12 +103,14 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         ivMore.setTag(R.drawable.ic_blue_more_text);
         ivMore.setOnClickListener(null);
         tvContent.setMaxLines(Integer.MAX_VALUE);
+        tvContent.setTag(R.string.str_key_id, bean.getId());// 设置id-tag
+        tvContent.setTag(R.string.str_key_position,position);
         // 内容click事件
         tvContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 获取activity根视图
-                pop.showPopupWindow(((Activity)mCon).getWindow().getDecorView().findViewById(android.R.id.content));
+                if(commmentClickListener!=null)
+                    commmentClickListener.onClick(v);
             }
         });
         // 赞
@@ -140,7 +173,6 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
                 convertView.setVisibility(View.VISIBLE);
             }
         });
-        // 二级评论
 
     }
 }

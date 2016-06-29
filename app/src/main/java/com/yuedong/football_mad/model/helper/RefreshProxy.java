@@ -53,12 +53,12 @@ public class RefreshProxy<T> {
             public void onRefresh() {
                 if (!refresh) refresh = true;
                 max = 0;
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
                         executeNetworkTask(1, proxyRefreshListener);
-                    }
-                }, 500);
+//                    }
+//                }, 500);
                 if (one) {
                     one = false;
                     refresh = false;

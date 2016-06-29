@@ -97,7 +97,6 @@ public class CommonInteractPop extends PopupWindow implements View.OnClickListen
 //
 //                @Override
 //                public void onAnimationEnd(Animation animation) {
-//                    dismiss();
 //                }
 //
 //                @Override
@@ -105,6 +104,7 @@ public class CommonInteractPop extends PopupWindow implements View.OnClickListen
 //
 //                }
 //            });
+            this.dismiss();
         }
     }
 

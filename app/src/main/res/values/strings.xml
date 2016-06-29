@@ -14,4 +14,6 @@
     <string name="str_test_short">测试内容</string>
     <string name="str_dataku_detail_price">转会市场身价：%s</string>
     <string name="str_dataku_detail_fifa_rank">国家队FIFA排名：%s</string>
+    <string name="str_key_position">pos</string>
+    <string name="str_key_id">id</string>
 </resources>

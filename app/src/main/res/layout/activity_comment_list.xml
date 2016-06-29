@@ -13,5 +13,15 @@
         />
     <View
        style="@style/line_grey_1px"/>
-    <include layout="@layout/layout_common_list"/>
+
+    <include layout="@layout/layout_common_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <include layout="@layout/layout_write_comment"
+        android:id="@+id/ll_comment"
+        android:visibility="gone"
+        />
+
 </LinearLayout>

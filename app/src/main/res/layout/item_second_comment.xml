@@ -14,6 +14,7 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:id="@+id/tv_number"
             android:layout_gravity="bottom"
             android:layout_marginRight="15dp"
             android:layout_width="wrap_content"
@@ -24,12 +25,14 @@
             />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="100dp"
             android:singleLine="true"
             android:text="@string/str_test"
             style="@style/text_blue_12sp"
             />
         <TextView
+            android:id="@+id/tv_time"
             android:layout_gravity="bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +42,7 @@
             />
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_content"
         android:layout_marginTop="6dp"
         android:layout_marginLeft="20dp"
         style="@style/text_black5D5D5D_14sp"
@@ -46,6 +50,7 @@
         android:text="@string/str_test"
         />
     <ImageView
+        android:id="@+id/iv_more"
         android:layout_marginTop="3dp"
         android:layout_marginRight="13dp"
         android:layout_gravity="right"
