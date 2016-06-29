@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/whiteFAFAFA"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_green_reply"
+            />
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="208dp"
+            android:layout_height="208dp"
+            android:background="@drawable/bg_ball"
+            >
+                <ImageView
+                    android:id="@+id/iv_collect"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sel_green_collect"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_copy"
+                    android:layout_marginRight="10dp"
+                    android:layout_above="@+id/iv_collect"
+                    android:layout_toLeftOf="@+id/iv_collect"
+                    android:src="@drawable/ic_green_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                />
+
+            <ImageView
+                android:id="@+id/iv_reports"
+                android:layout_marginLeft="10dp"
+                android:layout_above="@+id/iv_collect"
+                android:layout_toRightOf="@+id/iv_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_green_report"
+                />
+            <ImageView
+                android:id="@+id/iv_weixin"
+                android:layout_alignTop="@+id/iv_collect"
+                android:layout_marginTop="23dp"
+                android:layout_toLeftOf="@+id/iv_collect"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_green_weixin"
+                />
+            <ImageView
+                android:id="@+id/iv_weibo"
+                android:layout_marginTop="23dp"
+                android:layout_toRightOf="@+id/iv_collect"
+                android:layout_alignTop="@+id/iv_collect"
+                android:layout_marginLeft="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_green_weibo"
+                />
+            <ImageView
+                android:id="@+id/iv_friend"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_green_friendquan"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

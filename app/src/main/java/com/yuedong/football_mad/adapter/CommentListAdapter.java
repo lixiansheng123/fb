@@ -18,7 +18,8 @@ import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
-import com.yuedong.football_mad.ui.LoginActivity;
+import com.yuedong.football_mad.ui.activity.LoginActivity;
+import com.yuedong.football_mad.view.CommonInteractPop;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DateUtils;
@@ -36,16 +37,18 @@ import java.util.Map;
  * @author 俊鹏 on 2016/6/17
  */
 public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
+    private CommonInteractPop pop;
     private static final int PACK_UP = 1;
     private static final int UNFOLD = 2;
     public CommentListAdapter(Context con, List<List<CommentBean>> data) {
         super(con, data, R.layout.item_comment_list);
+        pop = new CommonInteractPop(con);
     }
 
     @Override
     public void convert(ViewHolder viewHolder, List<CommentBean> list, final int position, final View convertView) {
         convertView.setVisibility(View.INVISIBLE);
-        if(list == null || list.isEmpty())return;
+        if(list == null || list.isEmpty()) return;
         convertView.setClickable(false);
         CommentBean bean = list.get(0);
         View rlHead = viewHolder.getIdByView(R.id.rl_head);
@@ -69,6 +72,14 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         ivMore.setTag(R.drawable.ic_blue_more_text);
         ivMore.setOnClickListener(null);
         tvContent.setMaxLines(Integer.MAX_VALUE);
+        // 内容click事件
+        tvContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 获取activity根视图
+                pop.showPopupWindow(((Activity)mCon).getWindow().getDecorView().findViewById(android.R.id.content));
+            }
+        });
         // 赞
         ivZan.setTag(position);
         ivZan.setOnClickListener(new View.OnClickListener() {
@@ -129,5 +140,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
                 convertView.setVisibility(View.VISIBLE);
             }
         });
+        // 二级评论
+
     }
 }

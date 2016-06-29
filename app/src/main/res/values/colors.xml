@@ -29,6 +29,7 @@
     <color name="blue566892">#566892</color>
     <color name="blue31D4FF">#31D4FF</color>
     <color name="blue8895B2">#8895B2</color>
+    <color name="blue87789A4">#7789A4</color>
 
     <color name="black474443">#474443</color>
     <color name="black5F5D5D">#5F5D5D</color><!--黑色-->
@@ -43,6 +44,7 @@
     <color name="orangeFF6600">#FF6600</color>
 
     <color name="whiteFDFDFD">#FDFDFD</color>
+    <color name="whiteFAFAFA">#FAFAFA</color>
 
     <color name="pinkFE6D76">#FE6D76</color>
     <color name="purple6F65A4">#6F65A4</color>

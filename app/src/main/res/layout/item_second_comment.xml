@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingTop="8dp"
+    android:background="@color/greenE5EEEC"
+    android:paddingBottom="11dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_gravity="bottom"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="@color/grey666666"
+            android:text="1"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:singleLine="true"
+            android:text="@string/str_test"
+            style="@style/text_blue_12sp"
+            />
+        <TextView
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="@color/grey666666"
+            android:text="@string/str_time"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="20dp"
+        style="@style/text_black5D5D5D_14sp"
+        android:textSize="13sp"
+        android:text="@string/str_test"
+        />
+    <ImageView
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="13dp"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_blue_more_text"
+        />
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/ll_open_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_blue_drop"
+            />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="展开楼层"
+            android:textSize="13sp"
+            android:textColor="@color/blue87789A4"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
