@@ -14,7 +14,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.CommentBean;
-import com.yuedong.football_mad.model.bean.CommentGoods;
+import com.yuedong.football_mad.model.bean.LikeRecord;
 import com.yuedong.football_mad.model.bean.CommentRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
@@ -33,7 +33,6 @@ import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DbUtils;
 import com.yuedong.lib_develop.utils.KeyBoardUtils;
-import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.T;
 import com.yuedong.lib_develop.utils.ViewUtils;
 
@@ -171,8 +170,8 @@ public class NewsCommentListActivity extends BaseActivity {
                         commentBean = item.get(item.size() - 1);
                         if (commentBean == null) return;
                         Map<String, String> post = new HashMap<>();
-                        post.put("id", commentBean.getId());
-                        post.put("authorid", commentBean.getAuthor());
+                        post.put("commentid", commentBean.getId());
+//                        post.put("authorid", commentBean.getAuthor());
                         if (isGoods) {
                             //  取消点赞
                             cancelZanTask = RequestHelper.post(Constant.URL_COMMENT_UNZAN, post, BaseResponse.class, false, false, NewsCommentListActivity.this);
@@ -202,12 +201,12 @@ public class NewsCommentListActivity extends BaseActivity {
 
             @Override
             public void networkSucceed(ListResponse<List<CommentBean>> list) {
-                if (pullMode == 1) {
-                    if (mIsNeedSel) {
-                        L.d("需要去到的位置" + listNeedSelPos);
-                        listView.setSelection(listNeedSelPos);
-                    }
-                }
+//                if (pullMode == 1) {
+//                    if (mIsNeedSel) {
+//                        L.d("需要去到的位置" + listNeedSelPos);
+//                        listView.setSelection(listNeedSelPos);
+//                    }
+//                }
             }
 
             @Override
@@ -281,11 +280,11 @@ public class NewsCommentListActivity extends BaseActivity {
             else T.showShort(activity,"评论成功");
         }else if(tag.equals(zanTask)){
             if(commentBean == null)return;
-            CommentGoods commentGoods = new CommentGoods();
-            commentGoods.setComment_id(Integer.parseInt(commentBean.getId()));
-            commentGoods.setIs_goods(1);
+            LikeRecord likeRecord = new LikeRecord();
+            likeRecord.setComment_id(Integer.parseInt(commentBean.getId()));
+            likeRecord.setIs_goods(1);
             try {
-                dbUtils.save(commentGoods);
+                dbUtils.save(likeRecord);
             } catch (DbException e) {
                 e.printStackTrace();
             }
@@ -293,10 +292,10 @@ public class NewsCommentListActivity extends BaseActivity {
         }else if(tag.equals(cancelZanTask)){
             if(commentBean == null)return;
             try {
-                CommentGoods commentGoods = dbUtils.findFirst(Selector.from(CommentGoods.class).where("comment_id","=",Integer.parseInt(commentBean.getId())));
-                if(commentGoods!=null){
-                    commentGoods.setIs_goods(2);
-                    dbUtils.update(commentGoods);
+                LikeRecord likeRecord = dbUtils.findFirst(Selector.from(LikeRecord.class).where("comment_id","=",Integer.parseInt(commentBean.getId())));
+                if(likeRecord !=null){
+                    likeRecord.setIs_goods(2);
+                    dbUtils.update(likeRecord);
                 }
             } catch (DbException e) {
                 e.printStackTrace();
@@ -331,7 +330,7 @@ public class NewsCommentListActivity extends BaseActivity {
             if(goodsNumInt!=-1){
                 goodsNumInt--;
                 tvZanNum.setText(goodsNumInt+"");
-                bean.setGood(goodsNumInt+"");
+                bean.setGood(goodsNumInt + "");
             }
         }
     }

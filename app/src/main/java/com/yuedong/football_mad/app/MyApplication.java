@@ -2,6 +2,7 @@ package com.yuedong.football_mad.app;
 
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.lib_develop.app.App;
+import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.WindowUtils;
 
 public class MyApplication extends App {
@@ -36,6 +37,7 @@ public class MyApplication extends App {
     public void onCreate() {
         super.onCreate();
         phoneWh = WindowUtils.getPhoneWH(this);
+        L.d("手机屏幕:"+phoneWh[0]+"x"+phoneWh[1]);
         instance = this;
     }
 }

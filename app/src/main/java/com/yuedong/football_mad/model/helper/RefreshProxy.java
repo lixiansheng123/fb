@@ -129,6 +129,7 @@ public class RefreshProxy<T> {
                     list = (ListResponse) data;
                 L.d("executeTask- onFinish");
                 listView.onRefreshComplete();
+                proxyRefreshListener.networkSucceed(list);
                 if (list != null && !list.getDataList().isEmpty()) {
                     max = list.getData().getMax();
                     updateData(list.getDataList(), mode);
@@ -138,8 +139,6 @@ public class RefreshProxy<T> {
                         proxyRefreshListener.contentIsEmpty();
                     }
                 }
-                // 放在这里是因为评论列表的listview的setSelection()要在这里面调用
-                proxyRefreshListener.networkSucceed(list);
             }
 
             @Override

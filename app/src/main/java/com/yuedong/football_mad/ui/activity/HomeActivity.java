@@ -10,6 +10,8 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.SideActivity;
+import com.yuedong.football_mad.model.bean.User;
+import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.ui.fragment.InsightFragment;
 import com.yuedong.football_mad.ui.fragment.SixSixSixFragment;
 import com.yuedong.football_mad.ui.fragment.SpecialFragment;
@@ -97,7 +99,6 @@ public class HomeActivity extends SideActivity {
     public void tabClick(View view) {
         if (view == curTabView) return;
         resetTabStatus(view);
-        curTabView = view;
         switch (view.getId()) {
             case R.id.btn_touch:
                 switchContent(mDisplayContext, touchFragment, R.id.fragment_container);
@@ -112,6 +113,11 @@ public class HomeActivity extends SideActivity {
                 break;
 
             case R.id.btn_say:
+                User user = CommonHelper.checkLogin(activity);
+                if(user == null){
+                    resetTabStatus(curTabView);
+                    return;
+                }
                 switchContent(mDisplayContext, starSayFragment, R.id.fragment_container);
                 break;
 
@@ -119,6 +125,7 @@ public class HomeActivity extends SideActivity {
                 switchContent(mDisplayContext, specialFragment, R.id.fragment_container);
                 break;
         }
+        curTabView = view;
     }
 
     @OnClick({R.id.title_btn_left, R.id.title_btn_right})
@@ -147,6 +154,7 @@ public class HomeActivity extends SideActivity {
      * @param clickView
      */
     private void resetTabStatus(View clickView) {
+        if(clickView == null)clickView = tabs[0];
         ImageView clickIv = null;
         if (clickView instanceof ImageView)
             clickIv = (ImageView) clickView;

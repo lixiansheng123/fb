@@ -1,46 +1,31 @@
 package com.yuedong.football_mad.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
-import com.yuedong.football_mad.app.Constant;
-import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
 import com.yuedong.football_mad.model.bean.CommentBean;
-import com.yuedong.football_mad.model.bean.CommentGoods;
+import com.yuedong.football_mad.model.bean.LikeRecord;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
-import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
-import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
-import com.yuedong.football_mad.ui.activity.LoginActivity;
-import com.yuedong.football_mad.view.CommonInteractPop;
-import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.db.sqlite.Selector;
 import com.yuedong.lib_develop.exception.DbException;
-import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DateUtils;
 import com.yuedong.lib_develop.utils.DbUtils;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
-import com.yuedong.lib_develop.utils.L;
-import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
 import com.yuedong.lib_develop.utils.ViewUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
 import com.yuedong.lib_develop.view.SupportScrollConflictListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 俊鹏 on 2016/6/17
@@ -53,7 +38,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
     private View.OnClickListener commmentClickListener;
     private View.OnClickListener zanClickLisenter;
     private DbUtils db;
-    private List<CommentGoods> commentGoods;
+    private List<LikeRecord> commentGoods;
     public void setOnZnClickListener(View.OnClickListener zanClickLisenter){
         this. zanClickLisenter = zanClickLisenter;
     }
@@ -74,7 +59,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
      */
     public void updateCommentGoods(){
         try {
-            commentGoods = db.findAll(Selector.from(CommentGoods.class).where("is_goods","=",1));
+            commentGoods = db.findAll(Selector.from(LikeRecord.class).where("is_goods","=",1).and("like_type","=",1));
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -88,8 +73,8 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         if(commentGoods!=null && !commentGoods.isEmpty()){
             int commentId = Integer.parseInt(id);
             for(int i = 0;i < commentGoods.size(); i++){
-                CommentGoods commentGoods = this.commentGoods.get(i);
-                if(commentId == commentGoods.getComment_id())
+                LikeRecord likeRecord = this.commentGoods.get(i);
+                if(commentId == likeRecord.getComment_id())
                     return true;
             }
         }

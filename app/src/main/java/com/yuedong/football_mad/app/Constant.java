@@ -27,6 +27,14 @@ public class Constant {
     public static String URL_WORLD_NEWS = URL + "news/getWorldNews";// 世界新闻
     public static String URL_HOME_NEWS = URL + "news/getHomeNews";// 国内新闻
     public static String URL_GET_CONTEST_NEWS = URL + "news/getContestNews";// 赛事新闻列表
+    public static String URL_START_SAY_LIST = URL +"news/getStarNews";
+    public static String URL_NEWS_BY_ID = URL +"news/getNewsById";
+    public static String URL_INTEREST_STAR = URL + "news/InterestStar";// 关注球星说作者
+    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
+    public static String URL_NEWS_NOGOODS = URL +"news/poorWrite";
+    public static String URL_NEWS_AD_MORE = URL +"news/rubishAdv";
+    public static String URL_NEWS_PLAGIARIZE = URL +"news/badCopy";
+//    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
 
     // 见地
     public static String URL_HOT_INSIGNLIST = URL + "news/getHotInsign";
@@ -53,7 +61,6 @@ public class Constant {
     public static String URL_GETGAMEINFO_BYID = URL + "game/getGameById";
     public static String URL_GAMELIST = URL +"game/getGameList";
     public static String URL_HOTGAMELIST = URL +"game/getHotGame";
-
 
 
     // 评论

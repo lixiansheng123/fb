@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginRight="11dp"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_greyeeeeef_round11dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/item1"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sel_criticism"
+            />
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/text_green_14sp"
+            android:text="写得不好"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/item2"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sel_criticism"
+            />
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/text_green_14sp"
+            android:text="垃圾广告"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/item3"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/iv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sel_criticism"
+            />
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/text_green_14sp"
+            android:text="恶意抄袭"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/id_select_cancle"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_green_cancel" />
+
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/id_select_confirm"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_green_confirm" />
+    </RelativeLayout>
+</LinearLayout>
+</LinearLayout>

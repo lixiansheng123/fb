@@ -17,4 +17,6 @@
     <string name="str_key_position">pos</string>
     <string name="str_key_id">id</string>
     <string name="str_key_view">key-view</string>
+    <string name="str_go_login">去登录</string>
+    <string name="str_cancel">取消</string>
 </resources>

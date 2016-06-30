@@ -27,8 +27,9 @@
                 <com.yuedong.lib_develop.view.RoundImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
+                    android:id="@+id/iv_user_head"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/haizeiwang" />
+               />
             </RelativeLayout>
 
             <LinearLayout
@@ -41,12 +42,13 @@
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:id="@+id/tv_name"
                     style="@style/text_bold_blue_12sp"
                     android:singleLine="true"
                     android:text="@string/str_test" />
 
                 <TextView
+                    android:id="@+id/tv_level"
                     style="@style/text_blue_9sp"
                     android:layout_marginTop="2dp"
                     android:text="资深评论员" />
@@ -99,6 +101,7 @@
             android:src="@drawable/ic_white_write_comment" />
 
         <LinearLayout
+            android:id="@+id/ll_zan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -106,14 +109,16 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iv_zan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sel_green_zan" />
 
             <TextView
+                android:id="@+id/tv_zan_num"
                 style="@style/text_green_12sp"
                 android:layout_marginTop="2dp"
-                android:text="2016" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,6 +141,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_cai"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -143,14 +149,16 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iv_cai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sel_green_cai" />
 
             <TextView
+                android:id="@+id/tv_cai_num"
                 style="@style/text_green_12sp"
                 android:layout_marginTop="2dp"
-                android:text="2016" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout

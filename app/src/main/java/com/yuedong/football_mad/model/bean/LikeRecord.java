@@ -7,14 +7,24 @@ import com.yuedong.lib_develop.db.annotation.Table;
 /**
  * @author 俊鹏 on 2016/6/30
  */
-@Table(name = "comment_goods",execAfterTableCreated = "CREATE INDEX index_comment_id ON comment_goods(comment_id)")
-public class CommentGoods {
+@Table(name = "like_record",execAfterTableCreated = "CREATE INDEX index_like_record_id ON like_record(comment_id,like_type)")
+public class LikeRecord {
     @Id
     private int id;
     @Column(column = "comment_id")
     private int comment_id;
+    @Column(column = "like_type")
+    private int like_type = 1;// 类型 1 评论 2 新闻
     @Column(column = "is_goods")
-    private int is_goods; // 1为点赞 2为取消点赞
+    private int is_goods; // 1为点赞 2为取消点赞 3踩
+
+    public int getLike_type() {
+        return like_type;
+    }
+
+    public void setLike_type(int like_type) {
+        this.like_type = like_type;
+    }
 
     public int getId() {
         return id;
@@ -38,5 +48,15 @@ public class CommentGoods {
 
     public void setIs_goods(int is_goods) {
         this.is_goods = is_goods;
+    }
+
+    @Override
+    public String toString() {
+        return "LikeRecord{" +
+                "id=" + id +
+                ", comment_id=" + comment_id +
+                ", like_type=" + like_type +
+                ", is_goods=" + is_goods +
+                '}';
     }
 }

@@ -17,16 +17,18 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/level_quan_senior">
+            android:background="@drawable/ic_level_mingxing">
 
             <com.yuedong.lib_develop.view.RoundImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:id="@+id/iv_head"
                 android:layout_centerInParent="true"
-                android:src="@drawable/haizeiwang" />
+                />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_name"
             style="@style/text_bold_blue_11sp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
@@ -59,6 +61,7 @@
                 android:src="@drawable/ic_small_blue_say" />
 
             <TextView
+                android:id="@+id/tv_comment_num"
                 style="@style/text_blue_9sp"
                 android:text="99" />
         </LinearLayout>
@@ -81,8 +84,9 @@
 
             <com.android.volley.toolbox.NetworkImageView
                 android:layout_width="266dp"
+                android:id="@+id/iv_pic"
                 android:layout_height="wrap_content"
-                android:background="@drawable/haizeiwang" />
+        />
 
             <View
                 style="@style/line_black_2px"
@@ -90,6 +94,7 @@
                 android:layout_marginTop="5dp" />
 
             <TextView
+                android:id="@+id/tv_content"
                 style="@style/text_black_15sp"
                 android:text="@string/str_test" />
         </LinearLayout>
@@ -104,9 +109,11 @@
             <com.android.volley.toolbox.NetworkImageView
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@drawable/haizeiwang" />
+                android:id="@+id/iv_pic2"
+               />
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_marginTop="5dp"
                 style="@style/text_blue_9sp"
                 android:text="@string/str_time" />

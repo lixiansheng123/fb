@@ -8,6 +8,6 @@ public class CommonCallback {
     }
 
     public void callbackYMR(String year, String month, String day){
-
     }
+
 }

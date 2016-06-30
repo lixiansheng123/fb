@@ -1,7 +1,9 @@
 package com.yuedong.football_mad.model.helper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,6 @@ import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.ui.activity.LoginActivity;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
-import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 
 import java.util.HashMap;
@@ -29,6 +30,8 @@ import java.util.Map;
  * @author 俊鹏 on 2016/6/8
  */
 public class CommonHelper {
+    private static AlertDialog.Builder goLoginBuild;
+    private static AlertDialog goLoginDialog;
 
     /**
      * 获取用户等级显示信息
@@ -108,9 +111,30 @@ public class CommonHelper {
     /**
      * 检查登录
      */
-    public static User checkLogin(Activity context){
+    public static User checkLogin(final Activity context){
         User loginUser = MyApplication.getInstance().getLoginUser();
-        if(loginUser == null) LaunchWithExitUtils.startActivity(context, LoginActivity.class);
+        if(loginUser == null) {
+            if(goLoginBuild == null){
+                goLoginBuild = new AlertDialog.Builder(context);
+                goLoginDialog =   goLoginBuild.setMessage("该功能需要登录,现在去登录?")
+                        .setTitle("提示")
+                        .setPositiveButton(R.string.str_go_login, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                goLoginDialog.dismiss();
+                                LaunchWithExitUtils.startActivity(context, LoginActivity.class);
+                            }
+                        })
+                        .setNegativeButton(R.string.str_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                goLoginDialog.dismiss();
+                            }
+                        }).create();
+            }
+            if(!goLoginDialog.isShowing())
+                goLoginDialog.show();
+        }
         return loginUser;
     }
 
@@ -146,9 +170,10 @@ public class CommonHelper {
     public static String newsComment(String userId,String newsId,String content,VolleyNetWorkCallback callback){
         Map<String,String> post = new HashMap<>();
         post.put("author",userId);
-        post.put("news",newsId);
+        post.put("news", newsId);
         post.put("parent","0");
         post.put("content", content);
         return RequestHelper.post(Constant.URL_ADD_COMMENT,post,BaseResponse.class,false,false,callback);
     }
+
 }
