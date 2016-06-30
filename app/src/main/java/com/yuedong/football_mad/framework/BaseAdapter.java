@@ -48,6 +48,10 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
         }
     }
 
+    public List<T> getData(){
+        return mDatas;
+    }
+
     /**
      * 把适配器设置空
      */

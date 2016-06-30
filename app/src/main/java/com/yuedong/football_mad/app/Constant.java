@@ -60,6 +60,7 @@ public class Constant {
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";
     public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
     public static String URL_COMMENT_ZAN = URL +"comment/goodComment";
+    public static String URL_COMMENT_UNZAN = URL +"comment/ungoodComment";
 
     // 注入
     public static boolean AUTO_INJECT = true;

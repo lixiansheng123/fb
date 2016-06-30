@@ -16,4 +16,5 @@
     <string name="str_dataku_detail_fifa_rank">国家队FIFA排名：%s</string>
     <string name="str_key_position">pos</string>
     <string name="str_key_id">id</string>
+    <string name="str_key_view">key-view</string>
 </resources>

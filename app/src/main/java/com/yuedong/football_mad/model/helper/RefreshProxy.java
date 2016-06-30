@@ -25,6 +25,7 @@ public class RefreshProxy<T> {
     }
 
     public boolean refresh = false;
+    public boolean autoRefreshAnim = true;
     private boolean one = true;
     private int max;
 
@@ -56,7 +57,7 @@ public class RefreshProxy<T> {
 //                handler.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
-                        executeNetworkTask(1, proxyRefreshListener);
+                executeNetworkTask(1, proxyRefreshListener);
 //                    }
 //                }, 500);
                 if (one) {
@@ -76,8 +77,12 @@ public class RefreshProxy<T> {
                 }, 500);
             }
         });
-        // 进入自动刷新
-        listView.autoRefresh();
+        if(autoRefreshAnim){
+            // 进入自动刷新
+            listView.autoRefresh();
+        }else{
+            listView.onRefresh();
+        }
     }
 
     /**
@@ -124,16 +129,17 @@ public class RefreshProxy<T> {
                     list = (ListResponse) data;
                 L.d("executeTask- onFinish");
                 listView.onRefreshComplete();
-                proxyRefreshListener.networkSucceed(list);
                 if (list != null && !list.getDataList().isEmpty()) {
                     max = list.getData().getMax();
                     updateData(list.getDataList(), mode);
                 } else {
                     listView.setLoadFull();
-                    if (!refresh) {
+                    if (mode == 1) {
                         proxyRefreshListener.contentIsEmpty();
                     }
                 }
+                // 放在这里是因为评论列表的listview的setSelection()要在这里面调用
+                proxyRefreshListener.networkSucceed(list);
             }
 
             @Override

@@ -14,6 +14,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.model.bean.User;
+import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.view.NewsStyleDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
@@ -112,15 +113,9 @@ public class NewsDetailActivity extends BaseActivity {
                     T.showShort(activity,"请输入评论内容");
                     return;
                 }
-                Map<String,String> post = new HashMap<>();
-                post.put("author",loginUser.getId());
-                post.put("news",id);
-                post.put("parent","0");
-                post.put("content",content);
-                commentTask = RequestHelper.post(Constant.URL_ADD_COMMENT,post,BaseResponse.class,false,false,NewsDetailActivity.this);
+               commentTask =  CommonHelper.newsComment(loginUser.getId(),id,content,NewsDetailActivity.this);
                 llComment.startAnimation(outAnim);
                 ViewUtils.hideLayout(llComment);
-                post = null;
                 break;
 
         }

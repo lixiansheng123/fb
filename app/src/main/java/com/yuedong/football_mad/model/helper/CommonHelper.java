@@ -15,6 +15,7 @@ import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.ui.activity.LoginActivity;
+import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
@@ -137,5 +138,17 @@ public class CommonHelper {
          //获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
+    }
+
+    /**
+     * 新闻评论
+     */
+    public static String newsComment(String userId,String newsId,String content,VolleyNetWorkCallback callback){
+        Map<String,String> post = new HashMap<>();
+        post.put("author",userId);
+        post.put("news",newsId);
+        post.put("parent","0");
+        post.put("content", content);
+        return RequestHelper.post(Constant.URL_ADD_COMMENT,post,BaseResponse.class,false,false,callback);
     }
 }
