@@ -2,4 +2,5 @@
 <resources>
     <item name="id_title" type="id"/>
     <item name="id_content" type="id"/>
+    <item name="ll_points" type="id"/>
 </resources>
