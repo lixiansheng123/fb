@@ -8,7 +8,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
-import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.L;

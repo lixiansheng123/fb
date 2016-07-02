@@ -7,6 +7,9 @@
         style="@style/line_grey_1px"
         android:layout_height="1dp"
         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
@@ -15,5 +18,14 @@
         style="@style/text_green_14sp"
         android:text="焦点"
         />
+        <View
+            android:visibility="gone"
+            android:id="@+id/sel"
+            android:layout_centerVertical="true"
+            android:layout_width="3dp"
+            android:layout_height="28dp"
+            android:background="@color/green4B8D7F"
+            />
+    </RelativeLayout>
 
 </LinearLayout>

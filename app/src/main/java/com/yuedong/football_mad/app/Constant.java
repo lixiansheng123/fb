@@ -62,6 +62,9 @@ public class Constant {
     public static String URL_GAMELIST = URL +"game/getGameList";
     public static String URL_HOTGAMELIST = URL +"game/getHotGame";
 
+    // 比赛
+    public static String URL_HOT_GAME_LIST = URL +"contest/getHotContest";
+
 
     // 评论
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";

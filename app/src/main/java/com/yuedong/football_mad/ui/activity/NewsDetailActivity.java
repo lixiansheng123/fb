@@ -15,7 +15,7 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
-import com.yuedong.football_mad.model.bean.LikeRecord;
+import com.yuedong.football_mad.model.bean.DbLikeRecord;
 import com.yuedong.football_mad.model.bean.NewsDetailBean;
 import com.yuedong.football_mad.model.bean.NewsDetailRespBean;
 import com.yuedong.football_mad.model.bean.User;
@@ -117,15 +117,15 @@ public class NewsDetailActivity extends BaseActivity {
     private void goodsAndTrampleControl() {
         int[] ints = new int[]{1,3};
         try {
-            List<LikeRecord> datas = db.findAll(Selector.from(LikeRecord.class).where("like_type","=",2).and("is_goods","IN",ints));
+            List<DbLikeRecord> datas = db.findAll(Selector.from(DbLikeRecord.class).where("like_type","=",2).and("is_goods","IN",ints));
             if(datas!=null){
 //                L.d(datas.toString());
-                for(LikeRecord likeRecord : datas) {
-                    if (likeRecord.getComment_id() == Integer.parseInt(id)) {
-                        if (likeRecord.getIs_goods() == 1) {
+                for(DbLikeRecord dbLikeRecord : datas) {
+                    if (dbLikeRecord.getComment_id() == Integer.parseInt(id)) {
+                        if (dbLikeRecord.getIs_goods() == 1) {
                             canZan = false;
                             ivZan.setSelected(true);
-                        } else if (likeRecord.getIs_goods() == 3) {
+                        } else if (dbLikeRecord.getIs_goods() == 3) {
                             canCai = false;
                             ivCai.setSelected(true);
 
@@ -158,12 +158,12 @@ public class NewsDetailActivity extends BaseActivity {
             tvZanNum.setText(zanNum+"");
             canZan = false;
             ivZan.setSelected(true);
-            LikeRecord likeRecord = new LikeRecord();
-            likeRecord.setLike_type(2);
-            likeRecord.setIs_goods(1);
-            likeRecord.setComment_id(Integer.parseInt(id));
+            DbLikeRecord dbLikeRecord = new DbLikeRecord();
+            dbLikeRecord.setLike_type(2);
+            dbLikeRecord.setIs_goods(1);
+            dbLikeRecord.setComment_id(Integer.parseInt(id));
             try {
-                db.save(likeRecord);
+                db.save(dbLikeRecord);
             } catch (DbException e) {
                 e.printStackTrace();
             }
@@ -174,12 +174,12 @@ public class NewsDetailActivity extends BaseActivity {
             tvCaiNum.setText(caiNum+"");
             canCai = false;
             ivCai.setSelected(true);
-            LikeRecord likeRecord = new LikeRecord();
-            likeRecord.setLike_type(2);
-            likeRecord.setIs_goods(3);
-            likeRecord.setComment_id(Integer.parseInt(id));
+            DbLikeRecord dbLikeRecord = new DbLikeRecord();
+            dbLikeRecord.setLike_type(2);
+            dbLikeRecord.setIs_goods(3);
+            dbLikeRecord.setComment_id(Integer.parseInt(id));
             try {
-                db.save(likeRecord);
+                db.save(dbLikeRecord);
             } catch (DbException e) {
                 e.printStackTrace();
             }

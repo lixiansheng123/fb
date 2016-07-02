@@ -1,2 +1,2 @@
-include ':app', ':library_develop', ':library-slidingmenu'
+include ':app', ':library-slidingmenu'
 include ':library_wheel'

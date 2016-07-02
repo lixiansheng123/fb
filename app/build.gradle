@@ -11,20 +11,92 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    //签名
+    signingConfigs {
+        debug {
+//            storeFile file("E:/Work/debug.keystore")
+            storeFile file("E:/android/studioworkspace/apk.keystore")
+            storePassword "123456"
+            keyAlias "leo"
+            keyPassword "123456"
+        }
+        relealse {
+            //这样写就得把demo.jk文件放在项目目录
+//            storeFile file("E:/Work/apk.keystore")
+            storeFile file("E:/android/studioworkspace/apk.keystore")
+            storePassword "123456"
+            keyAlias "leo"
+            keyPassword "123456"
         }
     }
+
+
+    buildTypes {
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            versionNameSuffix "-debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // 不显示Log
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.relealse
+
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+//                        def fileName = "youbutie_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+        }
+    }
+
+
+//    // 友盟多渠道打包
+//    productFlavors {
+//
+//        BaiDu {}
+//        _360 {}
+//        XiaoMi {}
+//        WanDouJia {}
+//        YingYongBao {}
+//        _91 {}
+//        // 魅族
+//        MeiZu {}
+////        // 华为
+//        HuaWei{}
+//        Andrord{}
+//    }
+//
+//    productFlavors.all { flavor ->
+//        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    //    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile files('libs/volley.jar')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile files('libs/org.apache.http.legacy.jar')
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.android.support:design:23.0.1'
+    compile 'com.google.code.gson:gson:2.6.2'
     compile project(':library-slidingmenu')
-    compile project(':library_develop')
-    compile 'com.android.support:design:23.1.1'
     compile project(':library_wheel')
 }

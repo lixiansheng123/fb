@@ -12,7 +12,6 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.bean.DataKuListRespBean;
-import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.ui.activity.CompetitionDetailActivity;

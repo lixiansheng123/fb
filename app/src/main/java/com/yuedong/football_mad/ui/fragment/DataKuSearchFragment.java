@@ -16,7 +16,7 @@ import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.bean.FinalSearchAllBean;
 import com.yuedong.football_mad.model.bean.SearchAllBean;
 import com.yuedong.football_mad.model.bean.SearchAllRespBean;
-import com.yuedong.football_mad.model.bean.SearchRecord;
+import com.yuedong.football_mad.model.bean.DbSearchRecord;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.ui.activity.CompetitionDetailActivity;
 import com.yuedong.football_mad.ui.activity.CountryDetailActivity;
@@ -53,7 +53,7 @@ public class DataKuSearchFragment extends BaseFragment {
     private DataKuSearchAdapter adapter;
     private String searchTask;
     private SearchAllAdapter searchAllAdapter;
-    private List<SearchRecord> recordData;
+    private List<DbSearchRecord> recordData;
     @Override
     protected View getTitleView() {
         return null;
@@ -78,7 +78,7 @@ public class DataKuSearchFragment extends BaseFragment {
 
     private void updateRecordList() {
         try {
-            recordData = dbUtils.findAll(Selector.from(SearchRecord.class).where("type", "=", 1).orderBy("time",true).limit(3));
+            recordData = dbUtils.findAll(Selector.from(DbSearchRecord.class).where("type", "=", 1).orderBy("time",true).limit(3));
             if (recordData != null && !recordData.isEmpty()) {
                 adapter.setData(recordData);
                 adapter.notifyDataSetChanged();
@@ -173,18 +173,18 @@ public class DataKuSearchFragment extends BaseFragment {
      * @param searchContent
      */
     private void insertSearchKeyToLocal(String searchContent){
-        SearchRecord searchRecord = null;
+        DbSearchRecord dbSearchRecord = null;
         try {
-            searchRecord = dbUtils.findFirst(Selector.from(SearchRecord.class).where("content", "=", searchContent));
-        if(searchRecord == null){
-                searchRecord = new SearchRecord();
-                searchRecord.setContent(searchContent);
-                searchRecord.setTime(System.currentTimeMillis());
-                searchRecord.setType(1);
-                dbUtils.save(searchRecord);
+            dbSearchRecord = dbUtils.findFirst(Selector.from(DbSearchRecord.class).where("content", "=", searchContent));
+        if(dbSearchRecord == null){
+                dbSearchRecord = new DbSearchRecord();
+                dbSearchRecord.setContent(searchContent);
+                dbSearchRecord.setTime(System.currentTimeMillis());
+                dbSearchRecord.setType(1);
+                dbUtils.save(dbSearchRecord);
             }else{
-                searchRecord.setTime(System.currentTimeMillis());
-                dbUtils.update(searchRecord);
+                dbSearchRecord.setTime(System.currentTimeMillis());
+                dbUtils.update(dbSearchRecord);
             }
             updateRecordList();
         } catch (DbException e) {

@@ -1,9 +1,7 @@
 package com.yuedong.football_mad.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.MyAttentionAdapter;

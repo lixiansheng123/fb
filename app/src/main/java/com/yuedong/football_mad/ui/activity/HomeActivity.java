@@ -113,11 +113,11 @@ public class HomeActivity extends SideActivity {
                 break;
 
             case R.id.btn_say:
-                User user = CommonHelper.checkLogin(activity);
-                if(user == null){
-                    resetTabStatus(curTabView);
-                    return;
-                }
+//                User user = CommonHelper.checkLogin(activity);
+//                if(user == null){
+//                    resetTabStatus(curTabView);
+//                    return;
+//                }
                 switchContent(mDisplayContext, starSayFragment, R.id.fragment_container);
                 break;
 

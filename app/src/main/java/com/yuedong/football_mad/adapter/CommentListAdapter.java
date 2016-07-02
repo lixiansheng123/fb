@@ -10,7 +10,7 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
 import com.yuedong.football_mad.model.bean.CommentBean;
-import com.yuedong.football_mad.model.bean.LikeRecord;
+import com.yuedong.football_mad.model.bean.DbLikeRecord;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
@@ -38,7 +38,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
     private View.OnClickListener commmentClickListener;
     private View.OnClickListener zanClickLisenter;
     private DbUtils db;
-    private List<LikeRecord> commentGoods;
+    private List<DbLikeRecord> commentGoods;
     public void setOnZnClickListener(View.OnClickListener zanClickLisenter){
         this. zanClickLisenter = zanClickLisenter;
     }
@@ -59,7 +59,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
      */
     public void updateCommentGoods(){
         try {
-            commentGoods = db.findAll(Selector.from(LikeRecord.class).where("is_goods","=",1).and("like_type","=",1));
+            commentGoods = db.findAll(Selector.from(DbLikeRecord.class).where("is_goods","=",1).and("like_type","=",1));
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -73,8 +73,8 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         if(commentGoods!=null && !commentGoods.isEmpty()){
             int commentId = Integer.parseInt(id);
             for(int i = 0;i < commentGoods.size(); i++){
-                LikeRecord likeRecord = this.commentGoods.get(i);
-                if(commentId == likeRecord.getComment_id())
+                DbLikeRecord dbLikeRecord = this.commentGoods.get(i);
+                if(commentId == dbLikeRecord.getComment_id())
                     return true;
             }
         }

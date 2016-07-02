@@ -57,7 +57,9 @@ public class StarSayFragment extends BaseFragment {
                 boolean useCache = false;
                 if(type == 1)useCache = true;
                 Map<String,String> post = new HashMap<String, String>();
-                post.put("userid",loginUser.getId());
+                String userId = "0";
+                if(loginUser != null) userId = loginUser.getId();
+                post.put("userid",userId);
                 post.put("count",count+"");
                 post.put("pageindex",page+"");
                 post.put("max",max+"");

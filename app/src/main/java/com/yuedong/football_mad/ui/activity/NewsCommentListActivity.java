@@ -14,7 +14,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.CommentBean;
-import com.yuedong.football_mad.model.bean.LikeRecord;
+import com.yuedong.football_mad.model.bean.DbLikeRecord;
 import com.yuedong.football_mad.model.bean.CommentRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
@@ -26,7 +26,6 @@ import com.yuedong.football_mad.view.DoubleTabView;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
-import com.yuedong.lib_develop.db.sqlite.Selector;
 import com.yuedong.lib_develop.exception.DbException;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
@@ -172,10 +171,7 @@ public class NewsCommentListActivity extends BaseActivity {
                         Map<String, String> post = new HashMap<>();
                         post.put("commentid", commentBean.getId());
 //                        post.put("authorid", commentBean.getAuthor());
-                        if (isGoods) {
-                            //  取消点赞
-                            cancelZanTask = RequestHelper.post(Constant.URL_COMMENT_UNZAN, post, BaseResponse.class, false, false, NewsCommentListActivity.this);
-                        } else {
+                        if (!isGoods) {
                             // 点赞
                             zanTask = RequestHelper.post(Constant.URL_COMMENT_ZAN, post, BaseResponse.class, false, false, NewsCommentListActivity.this);
                         }
@@ -280,19 +276,19 @@ public class NewsCommentListActivity extends BaseActivity {
             else T.showShort(activity,"评论成功");
         }else if(tag.equals(zanTask)){
             if(commentBean == null)return;
-            LikeRecord likeRecord = new LikeRecord();
-            likeRecord.setComment_id(Integer.parseInt(commentBean.getId()));
-            likeRecord.setIs_goods(1);
+            DbLikeRecord dbLikeRecord = new DbLikeRecord();
+            dbLikeRecord.setComment_id(Integer.parseInt(commentBean.getId()));
+            dbLikeRecord.setIs_goods(1);
             try {
-                dbUtils.save(likeRecord);
+                dbUtils.save(dbLikeRecord);
             } catch (DbException e) {
                 e.printStackTrace();
             }
             zanStyleControl(true);
-        }else if(tag.equals(cancelZanTask)){
+        }/*else if(tag.equals(cancelZanTask)){
             if(commentBean == null)return;
             try {
-                LikeRecord likeRecord = dbUtils.findFirst(Selector.from(LikeRecord.class).where("comment_id","=",Integer.parseInt(commentBean.getId())));
+                DbLikeRecord likeRecord = dbUtils.findFirst(Selector.from(DbLikeRecord.class).where("comment_id","=",Integer.parseInt(commentBean.getId())));
                 if(likeRecord !=null){
                     likeRecord.setIs_goods(2);
                     dbUtils.update(likeRecord);
@@ -301,7 +297,7 @@ public class NewsCommentListActivity extends BaseActivity {
                 e.printStackTrace();
             }
             zanStyleControl(false);
-        }
+        }*/
     }
 
 

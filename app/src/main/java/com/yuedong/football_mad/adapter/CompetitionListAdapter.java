@@ -6,8 +6,6 @@ import android.view.View;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
-import com.yuedong.football_mad.model.bean.DataKuBean;
-import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.yuedong.football_mad.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,18 +10,15 @@ import android.widget.ListView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.CompetitionListAdapter;
 import com.yuedong.football_mad.adapter.GameListAdapter;
-import com.yuedong.football_mad.app.Config;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.CommonCallback;
 import com.yuedong.football_mad.model.bean.DataKuListRespBean;
-import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.bean.GameListBean;
 import com.yuedong.football_mad.model.bean.GameListRespBean;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
-import com.yuedong.football_mad.ui.fragment.HotGameListFragment;
 import com.yuedong.football_mad.view.DaySelectPop;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
