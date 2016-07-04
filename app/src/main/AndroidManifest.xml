@@ -48,7 +48,8 @@
         <activity android:name=".ui.activity.CountryDetailActivity" />
         <activity android:name=".ui.activity.OtherDetailActivity" />
         <activity android:name=".ui.activity.WatchBallActivity" />
-        <activity android:name=".ui.activity.SendPostActivity"></activity>
+        <activity android:name=".ui.activity.SendPostActivity" />
+        <activity android:name=".ui.activity.GameDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
 package com.yuedong.football_mad.model.bean;
 
 /**
- * @author 俊鹏 on 2016/6/22
+ * @author 俊鹏 on 2016/7/4
  */
-public class DataKuBean {
+public class IdAbbrnameLogoBean {
     private String id;
-    private String name;
+    private String abbrname;
     private String logo;
 
     public String getId() {
@@ -16,12 +16,12 @@ public class DataKuBean {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAbbrname() {
+        return abbrname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAbbrname(String abbrname) {
+        this.abbrname = abbrname;
     }
 
     public String getLogo() {

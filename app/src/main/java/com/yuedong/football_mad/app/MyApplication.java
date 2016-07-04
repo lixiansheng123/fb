@@ -10,6 +10,8 @@ public class MyApplication extends App {
     private static MyApplication instance;
     // 用户信息变更
     public boolean userInfoChange = false;
+    // 关注比赛变更
+    public boolean attentionGameChange = false;
     private Integer[] phoneWh;
 
     public Integer[] getPhoneWh() {

@@ -1,6 +1,8 @@
 package com.yuedong.football_mad.model.helper;
 
 
+import android.text.TextUtils;
+
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.RequestParamsJson;
@@ -40,15 +42,23 @@ public class RequestHelper {
             JSONObject clientObj = new JSONObject();
             clientObj.put("caller", Constant.CALLER);
             allObj.put("rid", Math.round(System.currentTimeMillis() / 1000));
-//            allObj.put("rid", System.currentTimeMillis());
             allObj.put("client", clientObj);
 //            allObj.put("encrypt", "md5");
 //            allObj.put("format", "json");
 //            allObj.put("v", "1.0");
-            if(data!=null){
-                // 详情页的话缓存tag要做特别处理
-                if(data.containsKey("id")){
-                    String tag = SignUtils.md5(url +"="+ data.get("id"));
+            if (data != null) {
+                // 一些有id的url数据的缓存tag要做特别处理
+                Iterator<String> iterator = data.keySet().iterator();
+                String key = "";
+                while (iterator.hasNext()) {
+                    String next = iterator.next();
+                    if (next.indexOf("id") != -1) {
+                        key = next;
+                        break;
+                    }
+                }
+                if (!TextUtils.isEmpty(key)) {
+                    String tag = SignUtils.md5(url + "=" + data.get(key));
                     baseRequest.setTag(tag);
                 }
             }

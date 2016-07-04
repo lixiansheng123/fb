@@ -31,7 +31,6 @@
             android:orientation="vertical">
 
             <com.android.volley.toolbox.NetworkImageView
-                android:background="@drawable/haizeiwang"
                 android:id="@+id/iv_home_logo"
                 android:layout_width="45dp"
                 android:layout_height="45dp" />
@@ -85,6 +84,8 @@
                     />
             </FrameLayout>
             <TextView
+                android:gravity="center"
+                android:id="@+id/tv_channel"
                 style="@style/text_black5D5D5D_14sp"
                 android:textSize="10sp"
                 android:layout_marginLeft="5dp"
@@ -112,7 +113,6 @@
                 android:orientation="vertical">
 
                 <com.android.volley.toolbox.NetworkImageView
-                    android:background="@drawable/haizeiwang"
                     android:id="@+id/iv_guest_logo"
                     android:layout_width="45dp"
                     android:layout_height="45dp" />

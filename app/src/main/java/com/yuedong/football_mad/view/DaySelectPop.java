@@ -41,19 +41,21 @@ public class DaySelectPop extends PopupWindow implements View.OnClickListener {
     private CommonCallback callback;
     private View root;
     private int popHeight;
-    public void setCallback(CommonCallback callback){
+
+    public void setCallback(CommonCallback callback) {
         this.callback = callback;
     }
-    private Handler handler ;
+
+    private Handler handler;
 
     public DaySelectPop(Context context) {
         super(context);
-        View contentView =LayoutInflater.from(context).inflate(R.layout.dialog_day_select2,null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_day_select2, null);
         this.mContext = context;
         this.mContentView = contentView;
         setContentView(contentView);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        popHeight = DimenUtils.dip2px(context,120);
+        popHeight = DimenUtils.dip2px(context, 120);
         setHeight(popHeight);
         // 点back键和其他地方使其消失,设置了这个才能触发OnDismisslistener ，设置其他控件变化等操作
         setBackgroundDrawable(new BitmapDrawable());
@@ -138,7 +140,7 @@ public class DaySelectPop extends PopupWindow implements View.OnClickListener {
         adapter.setData(yearsData);
         adapter2.setData(monthData);
         adapter3.setData(daysData);
-        yearWv.setCurrentItem(yearsData.size()-1);
+        yearWv.setCurrentItem(yearsData.size() - 1);
         monthWv.setCurrentItem(month); //month 是从0开始的
         dayWv.setCurrentItem(day - 1);
         curYear = yearsData.get(yearWv.getCurrentItem());
@@ -152,11 +154,11 @@ public class DaySelectPop extends PopupWindow implements View.OnClickListener {
         wheelView.setWheelForeground(R.color.green488B7D);
     }
 
-    public void showPop(View view){
-        if(!this.isShowing()){
+    public void showPop(View view) {
+        if (!this.isShowing()) {
             this.showAsDropDown(view);
 //            anim(0,popHeight,root,false);
-        } else{
+        } else {
 //            anim(popHeight, 0, root, true);
             dismiss();
         }
@@ -203,44 +205,49 @@ public class DaySelectPop extends PopupWindow implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_ately:
                 int[] ints = curtimePositionByData();
-                yearWv.setCurrentItem(yearsData.size()-1,true);
-                monthWv.setCurrentItem(ints[0],true);
-                dayWv.setCurrentItem(ints[1],true);
+                yearWv.setCurrentItem(yearsData.size() - 1, true);
+                monthWv.setCurrentItem(ints[0], true);
+                dayWv.setCurrentItem(ints[1], true);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         showPop(null);
-                       if(callback!=null)callback.callbackYMR(curYear,curMonth,daysData.get(dayWv.getCurrentItem()));
+                        if (callback != null)
+                            callback.callbackYMR(curYear, curMonth, daysData.get(dayWv.getCurrentItem()));
                     }
-                },400);
-            break;
+                }, 400);
+                break;
         }
     }
 
     public String getSelYear() {
         return curYear;
     }
-    public String getSelMonth(){
+
+    public String getSelMonth() {
         return curMonth;
     }
-    public String getSelDay(){
+
+    public String getSelDay() {
         return daysData.get(dayWv.getCurrentItem());
     }
 
-    private int[] curtimePositionByData(){
+    private int[] curtimePositionByData() {
         Calendar calendar = Calendar.getInstance();
         int monthd = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String dayStr = day + "";
+        if (day < 10) dayStr = "0" + day;
         int dayPos = 0;
-        for(int i = 0; i < daysData.size(); i++){
-            if((day+"").equals(daysData.get(i))){
+        for (int i = 0; i < daysData.size(); i++) {
+            if (dayStr.equals(daysData.get(i))) {
                 dayPos = i;
                 break;
             }
         }
-        return new int[]{monthd,dayPos};
+        return new int[]{monthd, dayPos};
     }
 }

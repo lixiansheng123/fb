@@ -77,30 +77,30 @@ public class RefreshProxy<T> {
                 }, 500);
             }
         });
-        if(autoRefreshAnim){
+        if (autoRefreshAnim) {
             // 进入自动刷新
             listView.autoRefresh();
-        }else{
+        } else {
             listView.onRefresh();
         }
     }
 
-    /**
-     * 刷新  头部  静态(splistview 不会发生样式变化)
-     */
-    public void staticRefresh() {
-        if (!refresh) refresh = true;
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                executeNetworkTask(1, mProxyRefreshListener);
-            }
-        }, 500);
-        if (one) {
-            one = false;
-            refresh = false;
-        }
-    }
+//    /**
+//     * 刷新  头部  静态(splistview 不会发生样式变化)
+//     */
+//    public void staticRefresh() {
+//        if (!refresh) refresh = true;
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                executeNetworkTask(1, mProxyRefreshListener);
+//            }
+//        }, 500);
+//        if (one) {
+//            one = false;
+//            refresh = false;
+//        }
+//    }
 
     /**
      * @param mode                 1正常的刷新和下拉刷新 2上拉更多
@@ -171,14 +171,14 @@ public class RefreshProxy<T> {
     }
 
     public void setEmptyUi() {
-        L.d("setEmptyUi---------------->");
+//        L.d("setEmptyUi---------------->");
         if (adapter == null) return;
         datas.clear();
         adapter.notifyDataSetChanged();
     }
 
     public void setEmpty() {
-        L.d("setEmpty---------------->");
+//        L.d("setEmpty---------------->");
         adapter = null;
         listView = null;
     }

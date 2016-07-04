@@ -20,7 +20,6 @@
             android:textStyle="bold" />
 
         <View
-            android:visibility="gone"
             android:id="@+id/_sel"
             android:layout_centerVertical="true"
             android:layout_width="3dp"

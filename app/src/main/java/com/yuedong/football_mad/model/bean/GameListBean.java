@@ -15,6 +15,17 @@ public class GameListBean {
     private String hometeamlogo;
     private String guestteam;
     private String guestteamlogo;
+    private String make;
+    public boolean attention;// 是否关注了
+
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
 
     public String getId() {
         return id;

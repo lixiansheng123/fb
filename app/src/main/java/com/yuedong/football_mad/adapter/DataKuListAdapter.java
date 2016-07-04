@@ -8,6 +8,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
+import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.L;
@@ -27,7 +28,7 @@ public class DataKuListAdapter extends BaseAdapter<FinalCompetitionBean> {
     public void convert(ViewHolder viewHolder, FinalCompetitionBean finalCompetitionBean, int position, View convertView) {
         NetworkImageView imageView = viewHolder.getIdByView(R.id.iv_pic);
         View llLabel = viewHolder.getIdByView(R.id.ll_label);
-        viewHolder.setText(R.id.tv_content, finalCompetitionBean.getAbbrname());
+        viewHolder.setText(R.id.tv_content, finalCompetitionBean.getName());
         TextView label = viewHolder.getIdByView(R.id.tv_label);
         DisplayImageByVolleyUtils.loadImage(imageView, UrlHelper.checkUrl(finalCompetitionBean.getLogo()));
         boolean hot = finalCompetitionBean.isHot();

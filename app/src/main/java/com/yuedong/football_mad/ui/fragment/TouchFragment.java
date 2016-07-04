@@ -156,7 +156,6 @@ public class TouchFragment extends BaseFragment {
             url = Constant.URL_BANNEL_CHINA;
         }
         bannerTask = RequestHelper.post(url, null, TouchBannerListBean.class, true, true, this);
-//        L.d("bannerRequest===>" + bannerTask);
     }
 
     private void listRequest(int type) {
@@ -182,8 +181,7 @@ public class TouchFragment extends BaseFragment {
                 post.put("pageindex", page + "");
                 post.put("max", max + "");
                 boolean useCache = false;
-                if (type == 1)
-                    useCache = true;
+                if (type == 1)useCache = true;
                 RequestHelper.post(finalUrl, post, TouchListRespBean.class, true, useCache, listener);
             }
 

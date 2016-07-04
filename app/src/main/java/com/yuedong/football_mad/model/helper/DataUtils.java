@@ -1,11 +1,24 @@
 package com.yuedong.football_mad.model.helper;
 
 
+import com.yuedong.football_mad.app.MyApplication;
+import com.yuedong.football_mad.model.bean.DbAttention;
+import com.yuedong.lib_develop.db.sqlite.Selector;
+import com.yuedong.lib_develop.db.sqlite.WhereBuilder;
+import com.yuedong.lib_develop.exception.DbException;
+import com.yuedong.lib_develop.utils.DbUtils;
+import com.yuedong.lib_develop.utils.T;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class DataUtils {
+    private static DbUtils db;
+
+    static {
+        db = DbUtils.create(MyApplication.getInstance().getAppContext());
+    }
 
     /**
      * 获取24小时
@@ -44,7 +57,7 @@ public class DataUtils {
      */
     public static List<String> getYears(int minYear) {
         List<String> years = new ArrayList<String>();
-        for(int i = 1940; i< minYear; i++){
+        for (int i = 1940; i <= minYear; i++) {
             years.add("" + i);
         }
         return years;
@@ -83,4 +96,50 @@ public class DataUtils {
         }
         return days;
     }
+
+    /**
+     * 获取我关注的比赛
+     */
+    public static List<DbAttention> getMyAttentionGameList() {
+        try {
+            List<DbAttention> datas = db.findAll(Selector.from(DbAttention.class).where("type", "=", 1));
+            return datas;
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 关注比赛
+     * @return
+     */
+    public static boolean attentionGame(String id){
+        DbAttention dbAttention = new DbAttention();
+        dbAttention.setId(id);
+        dbAttention.setType(1);
+        dbAttention.setAttentionTime(System.currentTimeMillis());
+        try {
+            db.save(dbAttention);
+            return true;
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return  false;
+    }
+
+    /**
+     * 取消关注比赛
+     * @param id
+     * @return
+     */
+    public static boolean cancelAttentionGame(String id){
+        try {
+            db.delete(DbAttention.class,WhereBuilder.b("id","=",id).and("type","=",1));
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

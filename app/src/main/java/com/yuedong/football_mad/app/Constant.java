@@ -61,9 +61,13 @@ public class Constant {
     public static String URL_GETGAMEINFO_BYID = URL + "game/getGameById";
     public static String URL_GAMELIST = URL +"game/getGameList";
     public static String URL_HOTGAMELIST = URL +"game/getHotGame";
+    public static String URL_ORDER_GAME_LIST = URL +"game/getOrderGameList";
 
     // 比赛
     public static String URL_HOT_GAME_LIST = URL +"contest/getHotContest";
+    public static String URL_GET_CONTEST_LIST = URL +"contest/getContestList";// 比赛列表
+    public static String URL_GET_INTEREST_CONTEST = URL +"contest/getInterestContest";// 关注比赛列表
+    public static String URL_GET_GAME_INFO_BYID = URL +"contest/getContestById";// 关注比赛列表
 
 
     // 评论

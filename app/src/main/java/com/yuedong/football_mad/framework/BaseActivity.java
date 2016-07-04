@@ -100,6 +100,13 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        L.d("onDestroy");
+        RequestHelper.cancleAll();
+    }
+
     long lastClickTime;
 
     @Override

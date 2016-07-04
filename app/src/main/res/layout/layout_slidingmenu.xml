@@ -97,7 +97,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"
@@ -125,7 +125,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"
@@ -153,7 +153,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"
@@ -197,7 +197,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"
@@ -225,7 +225,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"
@@ -253,7 +253,7 @@
 
                     <TextView
                         style="@style/text_grey666666_14sp"
-                        android:text="13" />
+                        android:text="0" />
 
                     <View
                         android:layout_width="27dp"

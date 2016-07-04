@@ -23,7 +23,7 @@ public class TeamHeaderAdapter extends BaseAdapter<DataKuBean> {
 
     @Override
     public void convert(ViewHolder viewHolder, DataKuBean dataKuBean, int position, View convertView) {
-        viewHolder.setText(R.id.tv_name,dataKuBean.getAbbrname());
+        viewHolder.setText(R.id.tv_name,dataKuBean.getName());
         NetworkImageView imageView = viewHolder.getIdByView(R.id.iv_pic);
         DisplayImageByVolleyUtils.loadBallDefault(UrlHelper.checkUrl(dataKuBean.getLogo()),imageView);
     }

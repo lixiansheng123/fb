@@ -161,6 +161,7 @@ public class VolleyRequst {
                 request.getCallback().onNetworkError(request.getTag(), volleyError);
             }
         });
+        mJsonRequest.setTag(request.getTag());
         startRequest(mJsonRequest);
     }
 

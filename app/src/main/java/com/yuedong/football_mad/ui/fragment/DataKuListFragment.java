@@ -12,6 +12,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.bean.DataKuListRespBean;
+import com.yuedong.football_mad.model.bean.FinalCompetitionBean;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.ui.activity.CompetitionDetailActivity;
@@ -60,6 +61,7 @@ public class DataKuListFragment extends BaseFragment {
 
     @Override
     public void ui() {
+        autoLoadView = false;
         action = getArguments().getInt(Constant.KEY_ACTION, ACTION_COMPETITION);
         getHotList();
     }
@@ -70,7 +72,7 @@ public class DataKuListFragment extends BaseFragment {
         if (bean == null) return;
         Bundle bundle = new Bundle();
         bundle.putString(Constant.KEY_ID, bean.getId());
-        bundle.putString(Constant.KEY_STR, bean.getAbbrname());
+        bundle.putString(Constant.KEY_STR, bean.getName());
         Class<? extends Activity> cls = null;
         switch (action) {
             case ACTION_COMPETITION:

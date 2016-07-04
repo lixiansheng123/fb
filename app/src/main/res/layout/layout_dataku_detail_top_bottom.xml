@@ -126,15 +126,29 @@
                 android:gravity="center"
                 android:text="射手王"
                 />
-            <TextView
-                android:id="@+id/tv_grey4"
-                android:gravity="center"
-                android:layout_marginLeft="14dp"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                style="@style/text_black5D5D5D_14sp"
-                />
-
+                android:layout_marginLeft="14dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/tv_grey4"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    style="@style/text_black5D5D5D_14sp"
+                    />
+                <RatingBar
+                    android:visibility="gone"
+                    android:id="@+id/rb_star"
+                    android:isIndicator="true"
+                    android:rating="3"
+                    android:numStars="5"
+                    android:layout_gravity="center"
+                    style="@style/gameRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 

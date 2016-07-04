@@ -6,7 +6,7 @@ package com.yuedong.football_mad.model.bean;
 public class IdNameLogoBean {
     private String id;
     private String name;
-
+    private String logo;
     public String getLogo() {
         return logo;
     }
@@ -31,5 +31,4 @@ public class IdNameLogoBean {
         this.name = name;
     }
 
-    private String logo;
 }
