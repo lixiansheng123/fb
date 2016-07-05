@@ -9,4 +9,6 @@ import com.yuedong.lib_develop.utils.DimenUtils;
 public class Config {
     public static int PAGER_SIZE = 10;
     public static final int TITLE_HEIGHT = DimenUtils.dip2px(App.getInstance().getAppContext(),50);
+    // 手机号正则
+    public static String MOBILE_RULE = "^1\\d{10}$";
 }

@@ -33,7 +33,10 @@
                 android:background="@drawable/dashline_vertical_greenpic"
                 />
             <EditText
-                android:id="@+id/et_username"
+                android:minEms="11"
+                android:maxEms="11"
+                android:inputType="number"
+                android:id="@+id/et_mobile"
                 style="@style/text_black_14sp"
                 android:layout_weight="1"
                 android:paddingLeft="8dp"
@@ -47,6 +50,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_verify"
             android:layout_marginLeft="5dp"
             android:background="@drawable/sel_get_code"
             android:layout_width="70dp"
@@ -88,10 +92,11 @@
                 />
 
            <TextView
+               android:id="@+id/tv_second"
                android:layout_width="48dp"
                android:textColor="@color/green7FACA0"
                android:textSize="14sp"
-               android:text="60s"
+               android:text="90s"
                android:layout_height="match_parent"
                android:gravity="center"/>
 
@@ -103,6 +108,7 @@
                 />
 
             <EditText
+                android:id="@+id/et_code"
                 style="@style/text_black_14sp"
                 android:layout_weight="1"
                 android:paddingLeft="8dp"

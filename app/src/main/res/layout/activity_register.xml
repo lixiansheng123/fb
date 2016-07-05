@@ -39,6 +39,7 @@
             android:background="@drawable/dashline_vertical_greenpic"
             />
         <EditText
+            android:maxLength="10"
             android:id="@+id/et_username"
             style="@style/text_black_14sp"
             android:layout_weight="1"

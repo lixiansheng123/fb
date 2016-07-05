@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.model.helper.RequestHelper;
+import com.yuedong.lib_develop.utils.L;
 
 /**
  * @author 俊鹏 on 2016/6/16
@@ -38,6 +39,7 @@ public class LoadDialog extends Dialog {
         setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                L.d("onDismiss loaddialog");
                 RequestHelper.cancleAll();
             }
         });

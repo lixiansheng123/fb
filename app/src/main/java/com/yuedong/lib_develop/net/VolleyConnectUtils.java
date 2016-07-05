@@ -82,7 +82,7 @@ public class VolleyConnectUtils {
      * 取消任务
      */
     public void cancleTask() {
-        if (mTasks != null && mTasks.isEmpty()) {
+        if (mTasks != null && !mTasks.isEmpty()) {
             L.d("取消任务成功");
             for (String str : mTasks) {
                 App.getRequestQueue().cancelAll(str);

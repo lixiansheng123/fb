@@ -12,6 +12,7 @@
     <color name="green589588">#589588</color>
     <color name="greenBED965">#BED965</color>
     <color name="greenA5C4BB">#A5C4BB</color>
+    <color name="greenE4EEEC">#E4EEEC</color>
 
     <color name="whiteF8F8F7">#F8F8F7</color>
 
@@ -52,5 +53,6 @@
     <color name="pinkFE6D76">#FE6D76</color>
     <color name="purple6F65A4">#6F65A4</color>
     <color name="blackb2000000">#b2000000</color>
+    <color name="blackE1E1E1">#E1E1E1</color>
 
 </resources>

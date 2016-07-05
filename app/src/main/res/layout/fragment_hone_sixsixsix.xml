@@ -10,4 +10,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_six_hengfu" />
 
+    <include layout="@layout/layout_common_list"/>
+
 </LinearLayout>

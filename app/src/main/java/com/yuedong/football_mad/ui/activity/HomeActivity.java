@@ -136,14 +136,6 @@ public class HomeActivity extends SideActivity {
                 break;
 
             case R.id.title_btn_right:
-                // 暂时退出登录操作
-                MyApplication.getInstance().setLoginuser(null);
-                String cacheFile = FileUtils.getDiskCacheDir(App.getInstance().getAppContext()) + "userinfo.c";
-                boolean flag = FileUtils.deleteFile(new File(cacheFile));
-                Intent it = new Intent(HomeActivity.this, LoginActivity.class);
-                it.putExtra(Constant.KEY_BOOL, true);
-                LaunchWithExitUtils.startActivity(HomeActivity.this, it);
-                back();
                 break;
         }
     }

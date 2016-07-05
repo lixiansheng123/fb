@@ -25,6 +25,7 @@ import com.yuedong.lib_develop.ioc.ViewUtils;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Config;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.lib_develop.utils.ActivityTaskUtils;
 import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
@@ -48,6 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityTaskUtils.getInstance().addActivity(this);
         init();
     }
 
@@ -104,6 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     protected void onDestroy() {
         super.onDestroy();
         L.d("onDestroy");
+        ActivityTaskUtils.getInstance().delActivity(this);
         RequestHelper.cancleAll();
     }
 

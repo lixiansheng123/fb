@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.framework;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
@@ -25,10 +26,14 @@ import com.yuedong.football_mad.ui.activity.MyHonorActivity;
 import com.yuedong.football_mad.ui.activity.MyMsgActivity;
 import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.football_mad.ui.activity.WatchBallActivity;
+import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.FileUtils;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
+
+import java.io.File;
 
 
 /**
@@ -86,6 +91,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_msg).setOnClickListener(this);
         menu.findViewById(R.id.ll_dataku).setOnClickListener(this);
         menu.findViewById(R.id.ll_watch_ball).setOnClickListener(this);
+        menu.findViewById(R.id.ll_exit_logo).setOnClickListener(this);
         changeUi();
     }
 
@@ -156,6 +162,16 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
 
             case R.id.ll_watch_ball:
                 LaunchWithExitUtils.startActivity(activity, WatchBallActivity.class);
+                break;
+
+            case R.id.ll_exit_logo:
+                MyApplication.getInstance().setLoginuser(null);
+                String cacheFile = FileUtils.getDiskCacheDir(App.getInstance().getAppContext()) + "userinfo.c";
+                boolean flag = FileUtils.deleteFile(new File(cacheFile));
+                Intent it = new Intent(activity, LoginActivity.class);
+                it.putExtra(Constant.KEY_BOOL, true);
+                LaunchWithExitUtils.startActivity(activity, it);
+                back();
                 break;
         }
     }

@@ -33,12 +33,14 @@ public class RegisterActivity extends BaseActivity {
     private EditText etConfirmPassword;
     private String registerTask;
     private String userInfoTask;
+    private String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         buildUi(new TitleViewHelper(this).getTitle1NoRight(R.drawable.ic_round_return, R.drawable.ic_title_bar_logo, null),
                 R.layout.activity_register);
+        mobile=   getIntent().getExtras().getString(Constant.KEY_STR);
         autoLoadView = false;
     }
 
@@ -73,6 +75,10 @@ public class RegisterActivity extends BaseActivity {
                     T.showShort(activity, "用户名不可为空");
                     return;
                 }
+                if(userName.length() < 4){
+                    T.showShort(activity,"用户名不得少于4个字符");
+                    return;
+                }
                 if (TextUtils.isEmpty(password)) {
                     T.showShort(activity, "密码不可为空");
                     return;
@@ -88,6 +94,7 @@ public class RegisterActivity extends BaseActivity {
                 showLoadView(true);
                 Map<String, String> post = new HashMap<>();
                 post.put("name", userName);
+                post.put("phone",mobile);
                 post.put("password", SignUtils.md5(password));
                 registerTask = RequestHelper.post(Constant.URL_REGISTER, post, LoginResBean.class, false,false, this);
                 break;

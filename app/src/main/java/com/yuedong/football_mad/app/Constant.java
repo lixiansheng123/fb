@@ -15,6 +15,10 @@ public class Constant {
     public static String URL_MODIFY_ADD_DETAIL = URL + "user/addDetail";
     public static String URL_REGISTER = URL + "user/userRegister";
     public static String URL_GET_USER_BY_SID = URL + "user/getUserBySid";
+    public static String URL_USER_CODE_BY_NEW = URL + "user/getCodeByNewUser";
+    public static String URL_USER_CODE_BY_OLD = URL + "user/getCodeByOldUser";
+    public static String URL_USER_CHECK_CODE = URL + "user/checkCode";
+    public static String URL_USER_CHANGEPASSWORD_BYPHONE = URL + "user/changePasswordByPhone";
     // banner
     public static String URL_BANNEL_WORLD = URL + "banner/getWorldBanner";
     public static String URL_BANNEL_CHINA = URL + "banner/getChinaBanner";
@@ -34,6 +38,7 @@ public class Constant {
     public static String URL_NEWS_NOGOODS = URL +"news/poorWrite";
     public static String URL_NEWS_AD_MORE = URL +"news/rubishAdv";
     public static String URL_NEWS_PLAGIARIZE = URL +"news/badCopy";
+    public static String URL_NEWS_666_LIST = URL +"news/getExcellentNews";
 //    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
 
     // 见地
