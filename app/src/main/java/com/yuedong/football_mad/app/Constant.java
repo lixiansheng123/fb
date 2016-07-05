@@ -34,11 +34,14 @@ public class Constant {
     public static String URL_START_SAY_LIST = URL +"news/getStarNews";
     public static String URL_NEWS_BY_ID = URL +"news/getNewsById";
     public static String URL_INTEREST_STAR = URL + "news/InterestStar";// 关注球星说作者
+    public static String URL_UNINTEREST_STAR = URL + "news/UnInterestStar";// 取消关注球星说作者
     public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
     public static String URL_NEWS_NOGOODS = URL +"news/poorWrite";
     public static String URL_NEWS_AD_MORE = URL +"news/rubishAdv";
     public static String URL_NEWS_PLAGIARIZE = URL +"news/badCopy";
     public static String URL_NEWS_666_LIST = URL +"news/getExcellentNews";
+    public static String URL_NEWS_HOT_STAR = URL +"news/getHotInterestStar";
+    public static String URL_USER_ATTENTION_STAR = URL +"news/getUserInterestStar";// 用户关注的球星
 //    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
 
     // 见地
@@ -80,6 +83,9 @@ public class Constant {
     public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
     public static String URL_COMMENT_ZAN = URL +"comment/goodComment";
     public static String URL_COMMENT_UNZAN = URL +"comment/ungoodComment";
+
+    public static String URL_ATTENTION_DATA = URL +"athlete/InterestData";
+    public static String URL_UNATTENTION_DATA = URL +"athlete/UnInterestData";
 
     // 注入
     public static boolean AUTO_INJECT = true;

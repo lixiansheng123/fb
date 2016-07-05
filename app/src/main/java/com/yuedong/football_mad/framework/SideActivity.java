@@ -14,6 +14,7 @@ import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.football_mad.ui.activity.AppSettingActivity;
 import com.yuedong.football_mad.ui.activity.AttestationActivity;
 import com.yuedong.football_mad.ui.activity.DataKuActivity;
 import com.yuedong.football_mad.ui.activity.LoginActivity;
@@ -92,6 +93,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_dataku).setOnClickListener(this);
         menu.findViewById(R.id.ll_watch_ball).setOnClickListener(this);
         menu.findViewById(R.id.ll_exit_logo).setOnClickListener(this);
+        menu.findViewById(R.id.ll_setting).setOnClickListener(this);
         changeUi();
     }
 
@@ -130,6 +132,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 }
                 break;
             case R.id.ll_my_attention:
+                if(CommonHelper.checkLogin(activity) == null)return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyAttentionActivity.class);
                 break;
 
@@ -172,6 +175,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 it.putExtra(Constant.KEY_BOOL, true);
                 LaunchWithExitUtils.startActivity(activity, it);
                 back();
+                break;
+
+            case R.id.ll_setting:
+                LaunchWithExitUtils.startActivity(activity, AppSettingActivity.class);
                 break;
         }
     }

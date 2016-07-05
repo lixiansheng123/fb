@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+
+    <RelativeLayout
+        android:background="@color/green7EA89E"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+        <TextView
+            android:id="@+id/tv_flag"
+            android:layout_marginLeft="132dp"
+            android:text="足球疯"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            style="@style/text_bold_greyEEEEEE_15sp"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/tv_flag"
+            style="@style/text_greyEEEEEE_12sp"
+            android:textStyle="bold"
+            android:text="你的足球自媒体"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_side_logo"
+        android:layout_marginLeft="83dp"
+        />
+
+
+</FrameLayout>

@@ -1,6 +1,7 @@
 package com.yuedong.football_mad.framework;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
     public MultiStateView mMultiStateView;
     private LoadDialog loadDialog;
     protected Activity activity;
-    protected Handler mainHandler ;
+    protected Handler mainHandler;
+    private boolean cancelAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,12 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
         mMainLayout.setBackgroundResource(android.R.color.white);
         setContentView(mMainLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         loadDialog = new LoadDialog(this);
+        loadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (cancelAll) RequestHelper.cancleAll();
+            }
+        });
     }
 
     protected void showLoadView(boolean isShow) {
@@ -80,13 +89,17 @@ public abstract class BaseActivity extends AppCompatActivity implements VolleyNe
         if (isShow) {
             if (loadDialog != null && !loadDialog.isShowing()) {
                 animationDrawable.start();
-                if (!isFinishing())
+                if (!isFinishing()) {
                     loadDialog.show();
+                    cancelAll = true;
+
+                }
             }
         } else {
             if (loadDialog != null && loadDialog.isShowing()) {
                 animationDrawable.stop();
                 loadDialog.dismiss();
+                cancelAll = false;// 自动让dialog消失的不取消任务
             }
         }
     }

@@ -11,6 +11,7 @@ import com.yuedong.football_mad.model.bean.StarSayBean;
 import com.yuedong.football_mad.model.bean.StarSayRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.framework.BaseFragment;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
@@ -59,11 +60,7 @@ public class StarSayFragment extends BaseFragment {
                 Map<String,String> post = new HashMap<String, String>();
                 String userId = "0";
                 if(loginUser != null) userId = loginUser.getId();
-                post.put("userid",userId);
-                post.put("count",count+"");
-                post.put("pageindex",page+"");
-                post.put("max",max+"");
-                RequestHelper.post(Constant.URL_START_SAY_LIST,post, StarSayRespBean.class,true,useCache,listener);
+                RequestHelper.post(Constant.URL_START_SAY_LIST,DataUtils.getListPostMapHasUserId(page+"",count+"",max+"",userId), StarSayRespBean.class,true,useCache,listener);
             }
 
             @Override

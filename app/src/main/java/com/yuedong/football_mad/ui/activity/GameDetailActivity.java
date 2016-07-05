@@ -131,6 +131,22 @@ public class GameDetailActivity extends BaseActivity {
             ivAttention.setImageResource(R.drawable.ic_game_unattention);
 //            llAttention.setClickable(true);
         }
+        ivAttention.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(isAttention){
+                    DataUtils.cancelAttentionGame(id);
+                    T.showShort(activity, "取消关注成功");
+                    ivAttention.setImageResource(R.drawable.ic_game_unattention);
+                }else{
+                    if (DataUtils.attentionGame(id)) {
+                        T.showShort(activity, "关注成功");
+                        ivAttention.setImageResource(R.drawable.ic_game_attention);
+                    }
+                }
+            }
+        });
         ViewUtils.hideLayout(tvGrey4);
         ViewUtils.showLayout(ratingBar);
         tvIcon1.setText("主场");

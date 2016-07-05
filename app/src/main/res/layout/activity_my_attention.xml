@@ -6,10 +6,16 @@
     android:layout_height="match_parent">
 
    <com.yuedong.football_mad.view.DoubleTabView
+       android:id="@+id/tab"
        android:layout_width="match_parent"
        android:layout_height="41dp"
        app:text1="球星说"
        app:text2="数据酷"
        />
-    <include layout="@layout/layout_common_list"/>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 </LinearLayout>

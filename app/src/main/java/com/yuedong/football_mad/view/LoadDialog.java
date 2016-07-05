@@ -36,12 +36,5 @@ public class LoadDialog extends Dialog {
         ViewGroup.LayoutParams picLayouParams = mLoaderPic.getLayoutParams();
         picLayouParams.width = picLayouParams.height = windowW1_3 * 5 / 12;
         setContentView(view);
-        setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                L.d("onDismiss loaddialog");
-                RequestHelper.cancleAll();
-            }
-        });
     }
 }

@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.framework;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -16,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Config;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.view.LoadDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.ViewUtils;
@@ -33,6 +35,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
     public MultiStateView mMultiStateView;
     private boolean one = true;
     private LoadDialog loadDialog;
+    private boolean cancelAll;
 
     @Nullable
     @Override
@@ -43,6 +46,12 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
 
     private void init() {
         loadDialog = new LoadDialog(getActivity());
+        loadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (cancelAll) RequestHelper.cancleAll();
+            }
+        });
         mMainLayout = new RelativeLayout(getActivity());
         mTitleLayout = new LinearLayout(getActivity());
         mMultiStateView = new MultiStateView(getActivity());
@@ -120,13 +129,17 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
         if (isShow) {
             if (loadDialog != null && !loadDialog.isShowing()) {
                 animationDrawable.start();
-                if (!getActivity().isFinishing())
+                if (!getActivity().isFinishing()) {
                     loadDialog.show();
+                    cancelAll = true;
+
+                }
             }
         } else {
             if (loadDialog != null && loadDialog.isShowing()) {
                 animationDrawable.stop();
                 loadDialog.dismiss();
+                cancelAll = false;// 自动让dialog消失的不取消任务
             }
         }
     }
@@ -149,7 +162,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
         if (autoLoadView)
             showLoadView(false);
         if (data == null) return;
-        L.d(tag+"状态码" + data.getState().getCode());
+        L.d(tag + "状态码" + data.getState().getCode());
         if (data.getState().getCode() != Constant.OK) {
             showLoadView(false);
             T.showShort(getActivity(), data.getState().getMsg());
