@@ -22,7 +22,6 @@ import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class AttentionStarFragment extends BaseFragment {
 
     private void getHotList() {
         User loginUser = MyApplication.getInstance().getLoginUser();
-        hotListTask = RequestHelper.post(Constant.URL_NEWS_HOT_STAR, DataUtils.getUserIdPostMap(loginUser.getId()), AttentionStarRespBean.class, false, false, this);
+        hotListTask = RequestHelper.post(Constant.URL_NEWS_HOT_STAR, DataUtils.getSidPostMap(loginUser.getSid()), AttentionStarRespBean.class, false, false, this);
     }
 
 
@@ -75,8 +74,7 @@ public class AttentionStarFragment extends BaseFragment {
                 public void executeTask(int page, int count, int max, final VolleyNetWorkCallback listener, int type) {
                     if (type == 1) one = true;
                     Map<String, String> post = DataUtils.getListPostMapHasSId(page + "", count + "", "", loginUser.getSid());
-                    RequestHelper.post(Constant.URL_USER_ATTENTION_STAR, post, AttentionStarRespBean.class, false, false, new VolleyNetWorkCallback() {
-                        @Override
+                    RequestHelper.post(Constant.URL_USER_ATTENTION_STAR, post, AttentionStarRespBean.class, false, false, new VolleyNetWorkCallback() {                        @Override
                         public void onNetworkStart(String tag) {
                             listener.onNetworkStart(tag);
                         }

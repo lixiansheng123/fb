@@ -6,6 +6,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_top"
         android:background="@color/whiteF8F8F7"
         android:layout_width="match_parent"
         android:layout_height="31dp">
@@ -16,6 +17,7 @@
             android:src="@drawable/ic_greey_label"
             />
         <TextView
+            android:id="@+id/tv_label"
             style="@style/text_greyEEEEEE_12sp"
             android:text="专题"
             android:layout_centerInParent="true"
@@ -33,11 +35,13 @@
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/rl_head"
             android:layout_width="33dp"
             android:background="@drawable/level_quan_common"
             android:layout_height="33dp">
             <com.yuedong.lib_develop.view.RoundImageView
                 android:layout_width="28dp"
+                android:id="@+id/iv_user_head"
                 android:layout_centerInParent="true"
                 android:layout_height="28dp"
                 android:src="@drawable/haizeiwang"
@@ -45,6 +49,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_marginLeft="14dp"
             android:singleLine="true"
             android:layout_width="55dp"
@@ -53,6 +58,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_content"
             android:text="@string/str_test"
             style="@style/text_bold_blue_14sp"
             android:singleLine="true"

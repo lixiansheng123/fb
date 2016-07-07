@@ -20,9 +20,7 @@ import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 俊鹏 on 2016/6/7
@@ -57,10 +55,9 @@ public class StarSayFragment extends BaseFragment {
             public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
                 boolean useCache = false;
                 if(type == 1)useCache = true;
-                Map<String,String> post = new HashMap<String, String>();
-                String userId = "0";
-                if(loginUser != null) userId = loginUser.getId();
-                RequestHelper.post(Constant.URL_START_SAY_LIST,DataUtils.getListPostMapHasUserId(page+"",count+"",max+"",userId), StarSayRespBean.class,true,useCache,listener);
+                String sid = "0";
+                if(loginUser != null) sid = loginUser.getId();
+                RequestHelper.post(Constant.URL_START_SAY_LIST,DataUtils.getListPostMapHasSId(page + "", count + "", max + "", sid), StarSayRespBean.class,true,useCache,listener);
             }
 
             @Override

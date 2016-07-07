@@ -11,12 +11,16 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.TeamHeaderAdapter;
 import com.yuedong.football_mad.adapter.TouchAdapter;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.TeamDetailBean;
 import com.yuedong.football_mad.model.bean.TeamDetailRespBean;
 import com.yuedong.football_mad.model.bean.TouchBean;
 import com.yuedong.football_mad.model.bean.TouchListRespBean;
+import com.yuedong.football_mad.model.bean.User;
+import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
@@ -76,6 +80,7 @@ public class TeamDetailActivity extends BaseActivity {
     private TextView tvIcon3;
     @ViewInject(R.id.tv_icon4)
     private TextView tvIcon4;
+    private TitleViewHelper titleViewHelper;
 
     // gv...
     private SupportScrollConflictGridView gvQianfeng, gvZhongchang, gvHouwei, gvMenjiang;
@@ -85,7 +90,8 @@ public class TeamDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         String name = getIntent().getExtras().getString(Constant.KEY_STR);
         id = getIntent().getExtras().getString(Constant.KEY_ID);
-        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
+        titleViewHelper = new TitleViewHelper(this);
+        buildUi(titleViewHelper.getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -135,7 +141,10 @@ public class TeamDetailActivity extends BaseActivity {
     }
 
     private void getDetailById() {
-        Map<String, String> post = new HashMap<>();
+        User loginUser = MyApplication.getInstance().getLoginUser();
+        String sid = "0";
+        if (loginUser != null) sid = loginUser.getSid();
+        Map<String, String> post = DataUtils.getSidPostMap(sid);
         post.put("id", id);
         detailTask = RequestHelper.post(Constant.URL_GET_TEAM_BY_ID, post, TeamDetailRespBean.class, true, true, this);
     }
@@ -185,5 +194,6 @@ public class TeamDetailActivity extends BaseActivity {
         gvHouwei.setAdapter(adapter3);
         TeamHeaderAdapter adapter4 = new TeamHeaderAdapter(this, list.getPos4());
         gvMenjiang.setAdapter(adapter4);
+        CommonHelper.dataDetailAttentionControl(this, titleViewHelper.getTitle1Right(), list.getInterest(), 3, id);
     }
 }

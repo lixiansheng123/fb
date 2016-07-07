@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
@@ -19,7 +21,9 @@ import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.ui.activity.LoginActivity;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
+import com.yuedong.lib_develop.utils.T;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +44,7 @@ public class CommonHelper {
      * @return
      */
     public static DisplayUserLevelBean getUserLevelDisplayInfo(int userLevel) {
-        DisplayUserLevelBean bean = new DisplayUserLevelBean() ;
+        DisplayUserLevelBean bean = new DisplayUserLevelBean();
         switch (userLevel) {
 
             case 1:
@@ -67,56 +71,73 @@ public class CommonHelper {
 
     /**
      * 获取性别
+     *
      * @param sex
      * @return
      */
-    public static String getTextBySex(int sex){
+    public static String getTextBySex(int sex) {
         String text = null;
-        switch(sex){
-            case 1:text="男";break;
-            case 2:text="女";break;
-            default:text="保密";break;
+        switch (sex) {
+            case 1:
+                text = "男";
+                break;
+            case 2:
+                text = "女";
+                break;
+            default:
+                text = "保密";
+                break;
         }
         return text;
     }
 
     /**
      * 获取上场位置
+     *
      * @param ballpos
      * @return
      */
-    public static String getTextByBallPos(int ballpos){
+    public static String getTextByBallPos(int ballpos) {
         String text = null;
-        switch(ballpos){
-            case 1:text="前锋";break;
-            case 2:text="中场";break;
-            case 3:text="后卫";break;
-            case 4:text="门将";break;
+        switch (ballpos) {
+            case 1:
+                text = "前锋";
+                break;
+            case 2:
+                text = "中场";
+                break;
+            case 3:
+                text = "后卫";
+                break;
+            case 4:
+                text = "门将";
+                break;
         }
         return text;
     }
 
     /**
      * 获取用户信息根据sid
+     *
      * @param sid
      * @param callback
      * @return
      */
-    public static String getUserInfo(String sid,VolleyNetWorkCallback callback){
+    public static String getUserInfo(String sid, VolleyNetWorkCallback callback) {
         Map<String, String> post = new HashMap<String, String>();
         post.put("sid", sid);
-        return RequestHelper.post(Constant.URL_GET_USER_BY_SID, post, GetUserInfoByIdResBean.class, false,false, callback);
+        return RequestHelper.post(Constant.URL_GET_USER_BY_SID, post, GetUserInfoByIdResBean.class, false, false, callback);
     }
 
     /**
      * 检查登录
      */
-    public static User checkLogin(final Activity context){
+    public static User checkLogin(final Activity context) {
         User loginUser = MyApplication.getInstance().getLoginUser();
-        if(loginUser == null) {
-            if(goLoginBuild == null){
+        if (loginUser == null) {
+            if (goLoginBuild == null) {
                 goLoginBuild = new AlertDialog.Builder(context);
-                goLoginDialog =   goLoginBuild.setMessage("该功能需要登录,现在去登录?")
+                goLoginDialog = goLoginBuild.setMessage("该功能需要登录,现在去登录?")
                         .setTitle("提示")
                         .setPositiveButton(R.string.str_go_login, new DialogInterface.OnClickListener() {
                             @Override
@@ -132,7 +153,7 @@ public class CommonHelper {
                             }
                         }).create();
             }
-            if(!goLoginDialog.isShowing())
+            if (!goLoginDialog.isShowing())
                 goLoginDialog.show();
         }
         return loginUser;
@@ -140,6 +161,7 @@ public class CommonHelper {
 
     /**
      * 设置listview根据item设置高度
+     *
      * @param listView
      */
     public static void setListViewHeightBasedOnChildren(ListView listView) {
@@ -158,8 +180,8 @@ public class CommonHelper {
 //        params.height = totalHeight;
         params.height = totalHeight
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-         listView.getDividerHeight();
-         //获取子项间分隔符占用的高度
+        listView.getDividerHeight();
+        //获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
     }
@@ -167,13 +189,75 @@ public class CommonHelper {
     /**
      * 新闻评论
      */
-    public static String newsComment(String userId,String newsId,String content,VolleyNetWorkCallback callback){
-        Map<String,String> post = new HashMap<>();
-        post.put("author",userId);
+    public static String newsComment(String sid, String newsId, String content, VolleyNetWorkCallback callback) {
+        Map<String, String> post = new HashMap<>();
+        post.put("author", sid);
         post.put("news", newsId);
-        post.put("parent","0");
+        post.put("parent", "0");
         post.put("content", content);
-        return RequestHelper.post(Constant.URL_ADD_COMMENT,post,BaseResponse.class,false,false,callback);
+        return RequestHelper.post(Constant.URL_ADD_COMMENT, post, BaseResponse.class, false, false, callback);
     }
+
+    /**
+     * 数据库内页关注按钮控制
+     *
+     * @param interest interest=1表示已被关注，interest=0表示未被关注
+     * @param type     1：国家2：赛事 3：球队 4：球员 5：其他
+     * @param dataid   数据项id
+     */
+    public static void dataDetailAttentionControl(final Context context, final ImageView img, final int interest, final int type, final String dataid) {
+        if (img == null) return;
+        if (interest == 0) {
+            img.setSelected(false);
+        } else {
+            img.setSelected(true);
+        }
+        img.setTag(interest);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                User loginUser = CommonHelper.checkLogin((Activity) context);
+                if (loginUser == null) return;
+                int attention = (int) v.getTag();
+                boolean isAttention = true;
+                if (attention == 1) {
+                    isAttention = false;
+                }
+                DataUtils.attentionData(loginUser.getSid(), type, dataid, new VolleyNetWorkCallback() {
+                    @Override
+                    public void onNetworkStart(String tag) {
+
+                    }
+
+                    @Override
+                    public void onNetworkSucceed(String tag, BaseResponse data) {
+                        if(data == null)return;
+                        if(data.getState().getCode() == Constant.OK){
+                            if ((int) (img.getTag()) == 0) {
+                                T.showShort(context, "关注成功");
+                                img.setTag(1);
+                                img.setSelected(true);
+                            } else {
+                                T.showShort(context, "取消关注成功");
+                                img.setTag(0);
+                                img.setSelected(false);
+                            }
+                        }else{
+                            // TODO 后面加入登录异常的判断
+                        }
+                    }
+
+                    @Override
+                    public void onNetworkError(String tag, VolleyError error) {
+                        if (error != null) {
+                            T.showShort(context, error.getMessage());
+                        }
+                    }
+                }, isAttention);
+            }
+        });
+    }
+
+
 
 }

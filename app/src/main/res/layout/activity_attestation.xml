@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +27,14 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rl_head"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:background="@drawable/bg_round_black666">
 
                 <com.yuedong.lib_develop.view.RoundImageView
                     android:layout_width="81dp"
+                    android:id="@+id/iv_user_head"
                     android:layout_height="81dp"
                     android:src="@drawable/bg_white"
                     android:layout_centerInParent="true" />
@@ -60,6 +71,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rl_other"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:background="@drawable/bg_round_aircle_black666666">
@@ -67,6 +79,7 @@
                 <com.yuedong.lib_develop.view.RoundImageView
                     android:layout_width="81dp"
                     android:layout_height="81dp"
+                    android:id="@+id/iv_other"
                     android:layout_centerInParent="true"
                     app:borderRadius="11dp"
                     android:src="@drawable/bg_white"
@@ -89,7 +102,7 @@
 
             <TextView
                 style="@style/text_green_12sp"
-                android:text="发表权威观点" />
+                android:text="上传相关证件照片" />
         </LinearLayout>
     </LinearLayout>
 
@@ -107,16 +120,18 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/cb1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/cb_football" />
+                android:src="@drawable/cb_football" />
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/cb2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:button="@drawable/cb_football_jizhe" />
+                android:src="@drawable/cb_football_jizhe" />
         </LinearLayout>
 
 
@@ -132,16 +147,18 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/cb3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/cb_football_jiaolian" />
+                android:src="@drawable/cb_football_jiaolian" />
 
-            <CheckBox
+            <ImageView
+                android:id="@+id/cb4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:button="@drawable/cb_football_qita" />
+                android:src="@drawable/cb_football_qita" />
         </LinearLayout>
     </LinearLayout>
 
@@ -152,6 +169,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_say"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -189,6 +207,9 @@
                 android:text="认证姓名" />
 
             <EditText
+                android:textSize="14sp"
+                android:gravity="center"
+                android:id="@+id/et_realname"
                 android:layout_width="95dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="12dp"
@@ -212,6 +233,9 @@
                 android:text="从业城市" />
 
             <EditText
+                android:textSize="14sp"
+                android:gravity="center"
+                android:id="@+id/et_city"
                 android:layout_width="95dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="12dp"
@@ -234,6 +258,9 @@
             android:text="所属机构" />
 
         <EditText
+            android:textSize="14sp"
+            android:gravity="center"
+            android:id="@+id/et_jigou"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginLeft="12dp"
@@ -256,12 +283,28 @@
             android:text="联系方式" />
 
         <EditText
+            android:textSize="14sp"
+            android:gravity="center"
+            android:inputType="number"
+            android:id="@+id/et_contact"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_green_border1dp" />
     </LinearLayout>
+    </LinearLayout>
+        <View
+            android:visibility="gone"
+            android:clickable="true"
+            android:id="@+id/view_gap"
+            android:layout_alignTop="@+id/ll_main"
+            android:layout_alignBottom="@+id/ll_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </RelativeLayout>
+
     <include layout="@layout/item_home_touch"
         android:layout_height="0dp"
         android:layout_weight="1"

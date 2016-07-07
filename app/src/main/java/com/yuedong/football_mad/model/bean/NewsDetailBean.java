@@ -33,6 +33,15 @@ public class NewsDetailBean {
     private int poorwrite;
     private int rubishadv;
     private int badcopy;
+    private int interest;
+
+    public int getInterest() {
+        return interest;
+    }
+
+    public void setInterest(int interest) {
+        this.interest = interest;
+    }
 
     public int getPoorwrite() {
         return poorwrite;

@@ -26,6 +26,15 @@ public class CompetitionDetailBean {
     private String country;
     private String topathlete;
     private String topteam;
+    private int interest;
+
+    public int getInterest() {
+        return interest;
+    }
+
+    public void setInterest(int interest) {
+        this.interest = interest;
+    }
 
     public long getCreatetime() {
         return createtime;

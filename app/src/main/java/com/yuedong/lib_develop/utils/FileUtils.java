@@ -306,6 +306,16 @@ public class FileUtils {
     /**
      * 获取文件的字�?
      *
+     * @param path
+     * @return [参数说明]
+     */
+    public static byte[] getFileContent(String path){
+        return getFileContent(new File(path));
+    }
+
+    /**
+     * 获取文件的字�?
+     *
      * @param file
      * @return [参数说明]
      */

@@ -237,7 +237,7 @@ public class NewsCommentListActivity extends BaseActivity {
                         replyTask=  RequestHelper.post(Constant.URL_ADD_COMMENT,post,BaseResponse.class,false,false,NewsCommentListActivity.this);
                     }
                 }else{
-                    commentTask = CommonHelper.newsComment(loginUser.getId(),id,content,NewsCommentListActivity.this);
+                    commentTask = CommonHelper.newsComment(loginUser.getSid(),id,content,NewsCommentListActivity.this);
                 }
                 ViewUtils.hideLayout(llComment);
                 KeyBoardUtils.closeKeybord(etContent,activity);

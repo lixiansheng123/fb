@@ -28,6 +28,15 @@ public class TeamDetailBean {
     private List<DataKuBean> pos2;
     private List<DataKuBean> pos3;
     private List<DataKuBean> pos4;
+    private int interest;
+
+    public int getInterest() {
+        return interest;
+    }
+
+    public void setInterest(int interest) {
+        this.interest = interest;
+    }
 
     public String getId() {
         return id;

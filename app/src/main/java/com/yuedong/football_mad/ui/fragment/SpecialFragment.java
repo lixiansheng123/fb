@@ -1,7 +1,9 @@
 package com.yuedong.football_mad.ui.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.yuedong.football_mad.R;
@@ -16,11 +18,14 @@ import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.model.bean.SpecialListBean;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
+import com.yuedong.football_mad.ui.activity.SpecialDetailActivity;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
+import com.yuedong.lib_develop.ioc.annotation.event.OnItemClick;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,5 +112,12 @@ public class SpecialFragment extends BaseFragment {
             topDatas.addAll(listBean.getData().getList());
             specialTopAdapter.notifyDataSetChanged();
         }
+    }
+    @OnItemClick(value = R.id.listview)
+    protected  void itemClickEvent(AdapterView<?> parent, View view, int position, long id){
+        SpecialBean bean = (SpecialBean) parent.getAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.KEY_ID,bean.getId());
+        LaunchWithExitUtils.startActivity(getActivity(), SpecialDetailActivity.class,bundle);
     }
 }

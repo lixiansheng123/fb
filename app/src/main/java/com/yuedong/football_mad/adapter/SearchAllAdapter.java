@@ -24,6 +24,12 @@ public class SearchAllAdapter extends BaseAdapter<FinalSearchAllBean> {
         super(con, R.layout.item_dataku_competition);
     }
 
+    public void setEmptyData(List<FinalSearchAllBean> data){
+        if(data != null){
+            this.mDatas = data;
+        }
+    }
+
     @Override
     public void convert(ViewHolder viewHolder, FinalSearchAllBean finalSearchAllBean, int position, View convertView) {
         View llLable = viewHolder.getIdByView(R.id.ll_label);

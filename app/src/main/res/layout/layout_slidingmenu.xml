@@ -96,6 +96,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_jiandi"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -124,6 +125,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_post"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -152,6 +154,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_comment"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -196,6 +199,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_gentie"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -224,6 +228,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_zan_article"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -252,6 +257,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num_zan_comment"
                         style="@style/text_grey666666_14sp"
                         android:text="0" />
 
@@ -460,13 +466,13 @@
                 android:background="@color/orangeD6BC53" />
 
             <LinearLayout
+                android:id="@+id/ll_my_honor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ll_my_honor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -873,6 +879,7 @@
                     android:background="@color/green4B8D7F">
 
                     <TextView
+                        android:id="@+id/tv_a_status"
                         style="@style/text_grey666666_12sp"
                         android:textSize="7sp"
                         android:text="未认证"

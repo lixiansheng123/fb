@@ -9,12 +9,16 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.TouchAdapter;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.CountryDetailBean;
 import com.yuedong.football_mad.model.bean.CountryDetailRespBean;
 import com.yuedong.football_mad.model.bean.TouchBean;
 import com.yuedong.football_mad.model.bean.TouchListRespBean;
+import com.yuedong.football_mad.model.bean.User;
+import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
@@ -71,12 +75,14 @@ public class CountryDetailActivity extends BaseActivity {
     private TextView tvIcon3;
     @ViewInject(R.id.tv_icon4)
     private TextView tvIcon4;
+    private   TitleViewHelper titleViewHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String name = getIntent().getExtras().getString(Constant.KEY_STR);
         id = getIntent().getExtras().getString(Constant.KEY_ID);
-        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
+        titleViewHelper    = new TitleViewHelper(this);
+        buildUi(titleViewHelper.getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -120,7 +126,10 @@ public class CountryDetailActivity extends BaseActivity {
     }
 
     private void getDetailById() {
-        Map<String, String> post = new HashMap<>();
+        User loginUser = MyApplication.getInstance().getLoginUser();
+        String sid = "0";
+        if (loginUser != null) sid = loginUser.getSid();
+        Map<String, String> post = DataUtils.getSidPostMap(sid);
         post.put("id", id);
         detailTask = RequestHelper.post(Constant.URL_GET_COUNTRY_BY_ID, post, CountryDetailRespBean.class, true, true, this);
     }
@@ -160,7 +169,8 @@ public class CountryDetailActivity extends BaseActivity {
         tvWhite3.setText(list.getTopathlete());
         tvGrey1.setText(list.getCapital());
         tvGrey2.setText(list.getLan());
-        tvGrey3.setText(DateUtils.formatDate(new Date(list.getCreatetime()*1000),DateUtils.DATE_TIME_yyyy_MM_dd));
+        tvGrey3.setText(DateUtils.formatDate(new Date(list.getCreatetime() * 1000), DateUtils.DATE_TIME_yyyy_MM_dd));
         tvGrey4.setText(list.getNickname());
+        CommonHelper.dataDetailAttentionControl(this, titleViewHelper.getTitle1Right(), list.getInterest(), 1, id);
     }
 }

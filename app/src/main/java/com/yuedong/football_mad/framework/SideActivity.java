@@ -47,8 +47,9 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
     private View menu;
     private RoundImageView ivUserHead;
     private View rlUserHead;
-    private TextView tvUsername, tvUserLevel;
+    private TextView tvUsername, tvUserLevel,tvNumJiandi,tvNumPost,tvNumComment,tvNumGenTie,tvZanArticle,tvZanComment,tvAStatus;
     private User loginUser;
+    private int qualifystate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,13 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         tvUsername = (TextView) menu.findViewById(R.id.tv_username);
         tvUserLevel = (TextView) menu.findViewById(R.id.tv_level);
         rlUserHead = menu.findViewById(R.id.rl_head);
+        tvNumJiandi = (TextView) menu.findViewById(R.id.tv_num_jiandi);
+        tvNumPost = (TextView) menu.findViewById(R.id.tv_num_post);
+        tvNumComment = (TextView) menu.findViewById(R.id.tv_num_comment);
+        tvNumGenTie = (TextView) menu.findViewById(R.id.tv_num_gentie);
+        tvZanArticle = (TextView) menu.findViewById(R.id.tv_num_zan_article);
+        tvZanComment = (TextView) menu.findViewById(R.id.tv_num_zan_comment);
+        tvAStatus = (TextView) menu.findViewById(R.id.tv_a_status);
         menu.findViewById(R.id.ll_my_attention).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_comment).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_ball_friend).setOnClickListener(this);
@@ -107,6 +115,34 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         SpannableStringBuilder sp = TextUtils.addTextColor(userLevelDisplayInfo.textDesc, 0, 2, userLevelDisplayInfo.partTextColor);
         tvUserLevel.setText(sp);
         rlUserHead.setBackgroundResource(userLevelDisplayInfo.headBg);
+        tvNumJiandi.setText(loginUser.getNewscount());
+        tvNumPost.setText(loginUser.getPostcount());
+        tvNumComment.setText(loginUser.getCommentcount());
+        tvNumGenTie.setText(loginUser.getTotalcomment());
+        tvZanArticle.setText(loginUser.getNewsgood());
+        tvZanComment.setText(loginUser.getCommentgood());
+        // 荣誉
+
+        // 认证
+        qualifystate = loginUser.getQualifystate();
+        String msg = "未认证";
+        switch (qualifystate){
+            case  0:
+                break;
+
+            case  1:
+                msg = "认证中";
+                break;
+
+            case  2:
+                msg = "认证不通过";
+                break;
+
+            case  3:
+                msg = "认证通过";
+                break;
+        }
+        tvAStatus.setText(msg);
     }
 
 
@@ -120,16 +156,19 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_attest:
-                LaunchWithExitUtils.startActivity(SideActivity.this, AttestationActivity.class);
+                if(CommonHelper.checkLogin(activity) == null)return;
+                // 认证通过不进入认证页面
+                if(qualifystate != 3) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constant.KEY_INT, qualifystate);
+                    LaunchWithExitUtils.startActivity(SideActivity.this, AttestationActivity.class, bundle);
+                }
                 break;
             case R.id.rl_user_info:
-                if (loginUser == null)
-                    LaunchWithExitUtils.startActivity(SideActivity.this, LoginActivity.class);
-                else{
+                if(CommonHelper.checkLogin(activity) == null)return;
                     Bundle data = new Bundle();
                     data.putString(Constant.KEY_STR,loginUser.getSid());
                     LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class,data);
-                }
                 break;
             case R.id.ll_my_attention:
                 if(CommonHelper.checkLogin(activity) == null)return;
@@ -148,6 +187,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.ll_my_collect:
+                if(CommonHelper.checkLogin(activity) == null)return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyCollectActivity.class);
                 break;
 

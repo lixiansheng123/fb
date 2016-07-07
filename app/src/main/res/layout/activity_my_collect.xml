@@ -7,7 +7,12 @@
     <com.yuedong.football_mad.view.DoubleTabView
         android:layout_width="match_parent"
         android:layout_height="41dp"
+        android:id="@+id/tab"
         app:text1="专题/文章"
         app:text2="评论/跟帖"/>
-    <include layout="@layout/layout_common_list"/>
+ <FrameLayout
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="1"
+     android:id="@+id/fragment_container"/>
 </LinearLayout>

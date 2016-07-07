@@ -6,27 +6,42 @@ import com.yuedong.lib_develop.utils.FileUtils;
 import java.io.Serializable;
 
 public class User implements Serializable{
+
     private String id;
+    private String sid;
     private String name;
-    private String password;
     private String avatar;
+    private String phone;
+    private String gender;
     private String usertype;
+    private String userlevel;
     private String birthday;
+    private String city;
+    private String workcity;
+    private int worktype;
+    private String realphoto;
+    private String realname;
+    private int qualifystate;
+    private String organization;
+    private String remark;
+    private String hot;
+    private String pos;
     private String favoritecountryid;
     private String favoriteteamid;
     private String favoritegameid;
-    private String gender;
-    private String city;
-    private String phone;
-    private String pos;
-    private String favoritenews;
-    private String favoritedata;
+    private String commentgood;
+    private String newsgood;
+    private String commentcount;
+    private String newscount;
+    private String postcount;
+    private String Partnewsgood;
+    private String totalcomment;
+    private String friendcount;
+    private String fanscount;
+    private String collectcount;
+    private String interestcount;
+    private String honor;
     private String createtime;
-    private String userlevel;
-    private String sid;
-    private String favoriteteam;
-    private String favoritecountry;
-    private String favoritegame;
 
     public String getId() {
         return id;
@@ -34,6 +49,14 @@ public class User implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public String getName() {
@@ -44,20 +67,28 @@ public class User implements Serializable{
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getAvatar() {
         return avatar;
     }
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getUsertype() {
@@ -68,12 +99,100 @@ public class User implements Serializable{
         this.usertype = usertype;
     }
 
+    public String getUserlevel() {
+        return userlevel;
+    }
+
+    public void setUserlevel(String userlevel) {
+        this.userlevel = userlevel;
+    }
+
     public String getBirthday() {
         return birthday;
     }
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getWorkcity() {
+        return workcity;
+    }
+
+    public void setWorkcity(String workcity) {
+        this.workcity = workcity;
+    }
+
+    public int getWorktype() {
+        return worktype;
+    }
+
+    public void setWorktype(int worktype) {
+        this.worktype = worktype;
+    }
+
+    public String getRealphoto() {
+        return realphoto;
+    }
+
+    public void setRealphoto(String realphoto) {
+        this.realphoto = realphoto;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public int getQualifystate() {
+        return qualifystate;
+    }
+
+    public void setQualifystate(int qualifystate) {
+        this.qualifystate = qualifystate;
+    }
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getHot() {
+        return hot;
+    }
+
+    public void setHot(String hot) {
+        this.hot = hot;
+    }
+
+    public String getPos() {
+        return pos;
+    }
+
+    public void setPos(String pos) {
+        this.pos = pos;
     }
 
     public String getFavoritecountryid() {
@@ -100,52 +219,100 @@ public class User implements Serializable{
         this.favoritegameid = favoritegameid;
     }
 
-    public String getGender() {
-        return gender;
+    public String getCommentgood() {
+        return commentgood;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setCommentgood(String commentgood) {
+        this.commentgood = commentgood;
     }
 
-    public String getCity() {
-        return city;
+    public String getNewsgood() {
+        return newsgood;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setNewsgood(String newsgood) {
+        this.newsgood = newsgood;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getCommentcount() {
+        return commentcount;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setCommentcount(String commentcount) {
+        this.commentcount = commentcount;
     }
 
-    public String getPos() {
-        return pos;
+    public String getNewscount() {
+        return newscount;
     }
 
-    public void setPos(String pos) {
-        this.pos = pos;
+    public void setNewscount(String newscount) {
+        this.newscount = newscount;
     }
 
-    public String getFavoritenews() {
-        return favoritenews;
+    public String getPostcount() {
+        return postcount;
     }
 
-    public void setFavoritenews(String favoritenews) {
-        this.favoritenews = favoritenews;
+    public void setPostcount(String postcount) {
+        this.postcount = postcount;
     }
 
-    public String getFavoritedata() {
-        return favoritedata;
+    public String getPartnewsgood() {
+        return Partnewsgood;
     }
 
-    public void setFavoritedata(String favoritedata) {
-        this.favoritedata = favoritedata;
+    public void setPartnewsgood(String partnewsgood) {
+        Partnewsgood = partnewsgood;
+    }
+
+    public String getTotalcomment() {
+        return totalcomment;
+    }
+
+    public void setTotalcomment(String totalcomment) {
+        this.totalcomment = totalcomment;
+    }
+
+    public String getFriendcount() {
+        return friendcount;
+    }
+
+    public void setFriendcount(String friendcount) {
+        this.friendcount = friendcount;
+    }
+
+    public String getFanscount() {
+        return fanscount;
+    }
+
+    public void setFanscount(String fanscount) {
+        this.fanscount = fanscount;
+    }
+
+    public String getCollectcount() {
+        return collectcount;
+    }
+
+    public void setCollectcount(String collectcount) {
+        this.collectcount = collectcount;
+    }
+
+    public String getInterestcount() {
+        return interestcount;
+    }
+
+    public void setInterestcount(String interestcount) {
+        this.interestcount = interestcount;
+    }
+
+    public String getHonor() {
+        return honor;
+    }
+
+    public void setHonor(String honor) {
+        this.honor = honor;
     }
 
     public String getCreatetime() {
@@ -154,46 +321,6 @@ public class User implements Serializable{
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
-    }
-
-    public String getUserlevel() {
-        return userlevel;
-    }
-
-    public void setUserlevel(String userlevel) {
-        this.userlevel = userlevel;
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    public String getFavoriteteam() {
-        return favoriteteam;
-    }
-
-    public void setFavoriteteam(String favoriteteam) {
-        this.favoriteteam = favoriteteam;
-    }
-
-    public String getFavoritecountry() {
-        return favoritecountry;
-    }
-
-    public void setFavoritecountry(String favoritecountry) {
-        this.favoritecountry = favoritecountry;
-    }
-
-    public String getFavoritegame() {
-        return favoritegame;
-    }
-
-    public void setFavoritegame(String favoritegame) {
-        this.favoritegame = favoritegame;
     }
 
     /**

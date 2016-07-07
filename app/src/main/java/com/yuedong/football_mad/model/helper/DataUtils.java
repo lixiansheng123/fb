@@ -1,6 +1,7 @@
 package com.yuedong.football_mad.model.helper;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -9,6 +10,7 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.model.bean.DbAttention;
+import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.db.sqlite.Selector;
 import com.yuedong.lib_develop.db.sqlite.WhereBuilder;
@@ -157,9 +159,8 @@ public class DataUtils {
     /**
      * 数据库内页关注和取消关注
      */
-    public static String attentionData(String userId, int type, String dataid, VolleyNetWorkCallback callback, boolean attention) {
-        Map<String, String> post = new HashMap<>();
-        post.put("userid", userId);
+    public static String attentionData(String sid, int type, String dataid, VolleyNetWorkCallback callback, boolean attention) {
+        Map<String, String> post = getSidPostMap(sid);
         post.put("datatype", type + "");
         post.put("dataid", dataid);
         String url = Constant.URL_ATTENTION_DATA;
@@ -183,12 +184,14 @@ public class DataUtils {
 
             @Override
             public void onNetworkSucceed(String tag, BaseResponse data) {
-                if (data != null && data.getState().getCode() == Constant.OK) {
+                if(data == null)return;
+                if ( data.getState().getCode() == Constant.OK) {
                     String msg = "关注成功";
-                    if(!isAttention) msg = "取消关注成功";
-                    T.showShort(con,msg);
+                    if (!isAttention) msg = "取消关注成功";
+                    T.showShort(con, msg);
                     listener.onNetworkSucceed(tag, data);
-
+                }else{
+                    // TODO 后面加入登录异常的判断
                 }
             }
 
@@ -199,6 +202,26 @@ public class DataUtils {
             }
         });
         post = null;
+    }
+
+
+    /**
+     * 关注/取消关注 新闻/专题
+     *
+     * @param type 1：新闻2：专题
+     * @param interestid
+     * @param callback
+     * @param isAttention
+     */
+    public static String attentionNews(final Activity context, int type, String interestid, VolleyNetWorkCallback callback, boolean isAttention) {
+        User user = CommonHelper.checkLogin(context);
+        if (user == null) return null;
+        Map<String, String> post = getSidPostMap(user.getSid());
+        post.put("type",type+"");
+        post.put("interestid", interestid);
+        String url = Constant.URL_NEWS_INTEREST ;
+        if(!isAttention)url = Constant.URL_NEWS_UNINTEREST;
+       return RequestHelper.post(url, post, BaseResponse.class, false, false, callback);
     }
 
 

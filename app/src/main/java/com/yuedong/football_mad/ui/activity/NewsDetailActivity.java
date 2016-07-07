@@ -20,6 +20,7 @@ import com.yuedong.football_mad.model.bean.NewsDetailBean;
 import com.yuedong.football_mad.model.bean.NewsDetailRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.view.CriticismPop;
 import com.yuedong.football_mad.view.NewsStyleDialog;
@@ -64,14 +65,19 @@ public class NewsDetailActivity extends BaseActivity {
     private ImageView ivZan;
     @ViewInject(R.id.iv_cai)
     private ImageView ivCai;
+    @ViewInject(R.id.iv_collect)
+    private ImageView ivCollect;
+    @ViewInject(R.id.ll_attention)
+    private View llAttention;
     private String commentTask,detailTask,newsGoodsTask,caiTask;
     private NewsStyleDialog newsStyleDialog;
     private String id;
     private Animation outAnim, inAnim;
-//    private NewsDetailBean newsDetailBean;
     private CriticismPop criticismPop;
     private DbUtils db;
+    private String attentionTask;
     private boolean canZan = true,canCai = true;
+    private int interest; //1已经收藏 2未收藏
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +146,10 @@ public class NewsDetailActivity extends BaseActivity {
     }
 
     private void getDetailInfo() {
-        Map<String,String> post = new HashMap<>();
+        User loginUser = MyApplication.getInstance().getLoginUser();
+        String sid = "";
+        if (loginUser != null) sid = loginUser.getSid();
+        Map<String, String> post = DataUtils.getSidPostMap(sid);
         post.put("id", id);
         detailTask = RequestHelper.post(Constant.URL_NEWS_BY_ID,post, NewsDetailRespBean.class,true,true,this);
     }
@@ -148,7 +157,7 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
         if(tag.equals(commentTask)){
-            T.showShort(activity,"评论成功");
+            T.showShort(activity, "评论成功");
         }else if(tag.equals(detailTask)){
             NewsDetailRespBean bean = (NewsDetailRespBean) data;
             renderUi(bean.getData().getList());
@@ -169,7 +178,7 @@ public class NewsDetailActivity extends BaseActivity {
             }
 
         }else if(tag.equals(caiTask)){
-        int caiNum =    Integer.parseInt(tvCaiNum.getText().toString()) ;
+        int caiNum = Integer.parseInt(tvCaiNum.getText().toString()) ;
             caiNum++;
             tvCaiNum.setText(caiNum+"");
             canCai = false;
@@ -183,6 +192,16 @@ public class NewsDetailActivity extends BaseActivity {
             } catch (DbException e) {
                 e.printStackTrace();
             }
+        }else if(tag.equals(attentionTask)){
+            if(interest == 1){
+                T.showShort(activity,"取消收藏成功");
+                interest = 0;
+                ivCollect.setSelected(false);
+            }else {
+                T.showShort(activity,"收藏成功");
+                interest = 1;
+                ivCollect.setSelected(true);
+            }
         }
     }
 
@@ -191,7 +210,22 @@ public class NewsDetailActivity extends BaseActivity {
         tvZanNum.setText(list.getGood());
         tvCommentNum.setText(list.getComment());
         tvCaiNum.setText(caiNum + "");
-        L.d("视频路径"+list.getVedios());
+        L.d("视频路径" + list.getVedios());
+        interest = list.getInterest();
+
+        if(interest == 1){
+            ivCollect.setSelected(true);
+        }
+        llAttention.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isAttention = true;
+                if(interest == 1)
+                  isAttention = false;
+                attentionTask =  DataUtils.attentionNews(activity,1,id,NewsDetailActivity.this,isAttention);
+            }
+        });
+
     }
 
     @OnClick({R.id.iv_icon, R.id.iv_icon2, R.id.iv_icon3, R.id.title_btn_left, R.id.title_btn_right, R.id.btn_comment,R.id.ll_font,R.id.iv_pack_up,R.id.iv_send,R.id.ll_zan,R.id.ll_cai})
@@ -238,7 +272,7 @@ public class NewsDetailActivity extends BaseActivity {
                     T.showShort(activity,"请输入评论内容");
                     return;
                 }
-               commentTask =  CommonHelper.newsComment(loginUser.getId(),id,content,NewsDetailActivity.this);
+               commentTask =  CommonHelper.newsComment(loginUser.getSid(),id,content,NewsDetailActivity.this);
                 llComment.startAnimation(outAnim);
                 ViewUtils.hideLayout(llComment);
                 break;

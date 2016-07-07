@@ -19,6 +19,8 @@ public class Constant {
     public static String URL_USER_CODE_BY_OLD = URL + "user/getCodeByOldUser";
     public static String URL_USER_CHECK_CODE = URL + "user/checkCode";
     public static String URL_USER_CHANGEPASSWORD_BYPHONE = URL + "user/changePasswordByPhone";
+    public static String URL_USER_UPLOAD_HEAD = URL +"user/changeAvatar";
+    public static String URL_USER_UPLOAD_REAL = URL +"user/changeRealPhoto";
     // banner
     public static String URL_BANNEL_WORLD = URL + "banner/getWorldBanner";
     public static String URL_BANNEL_CHINA = URL + "banner/getChinaBanner";
@@ -26,22 +28,28 @@ public class Constant {
     // 专题
     public static String URL_HOT_SPECIAL = URL + "special/getHotSpecial";
     public static String URL_SPECIAL_LIST = URL + "special/getSpecialList";
+    public static String URL_SPECIAL_BY_ID = URL + "special/getSpecialById";
 
     // news
     public static String URL_WORLD_NEWS = URL + "news/getWorldNews";// 世界新闻
     public static String URL_HOME_NEWS = URL + "news/getHomeNews";// 国内新闻
     public static String URL_GET_CONTEST_NEWS = URL + "news/getContestNews";// 赛事新闻列表
-    public static String URL_START_SAY_LIST = URL +"news/getStarNews";
-    public static String URL_NEWS_BY_ID = URL +"news/getNewsById";
+    public static String URL_START_SAY_LIST = URL + "news/getStarNews";
+    public static String URL_NEWS_BY_ID = URL + "news/getNewsById";
     public static String URL_INTEREST_STAR = URL + "news/InterestStar";// 关注球星说作者
     public static String URL_UNINTEREST_STAR = URL + "news/UnInterestStar";// 取消关注球星说作者
     public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
-    public static String URL_NEWS_NOGOODS = URL +"news/poorWrite";
-    public static String URL_NEWS_AD_MORE = URL +"news/rubishAdv";
-    public static String URL_NEWS_PLAGIARIZE = URL +"news/badCopy";
-    public static String URL_NEWS_666_LIST = URL +"news/getExcellentNews";
-    public static String URL_NEWS_HOT_STAR = URL +"news/getHotInterestStar";
-    public static String URL_USER_ATTENTION_STAR = URL +"news/getUserInterestStar";// 用户关注的球星
+    public static String URL_NEWS_NOGOODS = URL + "news/poorWrite";
+    public static String URL_NEWS_AD_MORE = URL + "news/rubishAdv";
+    public static String URL_NEWS_PLAGIARIZE = URL + "news/badCopy";
+    public static String URL_NEWS_666_LIST = URL + "news/getExcellentNews";
+    public static String URL_NEWS_HOT_STAR = URL + "news/getHotInterestStar";
+    public static String URL_USER_ATTENTION_STAR = URL + "news/getUserInterestStar";// 用户关注的球星
+    public static String URL_NEWS_INTEREST = URL + "news/InterestNews";// 关注新闻/专题
+    public static String URL_NEWS_UNINTEREST = URL + "news/UnInterestNews";// 取消关注新闻/专题
+    public static String URL_COLLECT_NEWS_LIST = URL + "news/getUserInterestNews";
+
+
 //    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
 
     // 见地
@@ -67,34 +75,39 @@ public class Constant {
     public static String URL_GET_OTHERLIST = URL + "other/getOtherList";
     public static String URL_GET_OTHE_BY_ID = URL + "other/getOtherById";
     public static String URL_GETGAMEINFO_BYID = URL + "game/getGameById";
-    public static String URL_GAMELIST = URL +"game/getGameList";
-    public static String URL_HOTGAMELIST = URL +"game/getHotGame";
-    public static String URL_ORDER_GAME_LIST = URL +"game/getOrderGameList";
+    public static String URL_GAMELIST = URL + "game/getGameList";
+    public static String URL_HOTGAMELIST = URL + "game/getHotGame";
+    public static String URL_ORDER_GAME_LIST = URL + "game/getOrderGameList";
 
     // 比赛
-    public static String URL_HOT_GAME_LIST = URL +"contest/getHotContest";
-    public static String URL_GET_CONTEST_LIST = URL +"contest/getContestList";// 比赛列表
-    public static String URL_GET_INTEREST_CONTEST = URL +"contest/getInterestContest";// 关注比赛列表
-    public static String URL_GET_GAME_INFO_BYID = URL +"contest/getContestById";// 关注比赛列表
+    public static String URL_HOT_GAME_LIST = URL + "contest/getHotContest";
+    public static String URL_GET_CONTEST_LIST = URL + "contest/getContestList";// 比赛列表
+    public static String URL_GET_INTEREST_CONTEST = URL + "contest/getInterestContest";// 关注比赛列表
+    public static String URL_GET_GAME_INFO_BYID = URL + "contest/getContestById";// 关注比赛列表
 
 
     // 评论
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";
     public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
-    public static String URL_COMMENT_ZAN = URL +"comment/goodComment";
-    public static String URL_COMMENT_UNZAN = URL +"comment/ungoodComment";
+    public static String URL_COMMENT_ZAN = URL + "comment/goodComment";
+    public static String URL_COMMENT_UNZAN = URL + "comment/ungoodComment";
 
-    public static String URL_ATTENTION_DATA = URL +"athlete/InterestData";
-    public static String URL_UNATTENTION_DATA = URL +"athlete/UnInterestData";
+    public static String URL_ATTENTION_DATA = URL + "athlete/InterestData";
+    public static String URL_UNATTENTION_DATA = URL + "athlete/UnInterestData";
+    public static String URL_USER_INTEREST_DATA = URL + "athlete/getUserInterestData";
 
     // 注入
     public static boolean AUTO_INJECT = true;
     // 状态是正常的
     public static int OK = 2000000;
+    // 无登录状态异常
+    public static int ERROR_LOGON_STATE = 5000054;
 
     public static String KEY_BOOL = "key-bool";
     public static String KEY_OBJ = "key-obj";
     public static String KEY_STR = "key-str";
     public static String KEY_ACTION = "key-action";
     public static String KEY_ID = "key-id";
+    public static String KEY_INT = "key-int";
+
 }

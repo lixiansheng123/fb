@@ -94,6 +94,10 @@ public class TitleViewHelper {
         return titile1;
     }
 
+    public ImageView getTitle1Right(){
+        return  title1Right;
+    }
+
     public View getTitle1NonentityCenter(@DrawableRes int leftIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
         initTitle1View();
         title1Left.setImageResource(leftIcon);

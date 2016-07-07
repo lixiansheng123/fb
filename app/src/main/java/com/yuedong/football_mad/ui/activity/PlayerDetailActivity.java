@@ -9,13 +9,16 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.TouchAdapter;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.PlayerDetailBean;
 import com.yuedong.football_mad.model.bean.PlayerDetailRespBean;
 import com.yuedong.football_mad.model.bean.TouchBean;
 import com.yuedong.football_mad.model.bean.TouchListRespBean;
+import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
@@ -72,17 +75,20 @@ public class PlayerDetailActivity extends BaseActivity {
     private TextView tvIcon3;
     @ViewInject(R.id.tv_icon4)
     private TextView tvIcon4;
+    private   TitleViewHelper titleViewHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String name = getIntent().getExtras().getString(Constant.KEY_STR);
         id = getIntent().getExtras().getString(Constant.KEY_ID);
-        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
+        titleViewHelper    = new TitleViewHelper(this);
+        buildUi(titleViewHelper.getTitle1NomarlCenterTitle(R.drawable.ic_round_return, name, R.drawable.sel_attention_star, null, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         }), R.layout.activity_player_detail);
+
     }
 
     @Override
@@ -121,9 +127,12 @@ public class PlayerDetailActivity extends BaseActivity {
     }
 
     private void getDetailById() {
-        Map<String,String> post = new HashMap<>();
+        User loginUser = MyApplication.getInstance().getLoginUser();
+        String sid = "";
+        if (loginUser != null) sid = loginUser.getSid();
+        Map<String, String> post = DataUtils.getSidPostMap(sid);
         post.put("id", id);
-      detailTask =  RequestHelper.post(Constant.URL_GET_ATHLETE_BY_ID,post, PlayerDetailRespBean.class,true,true,this);
+        detailTask = RequestHelper.post(Constant.URL_GET_ATHLETE_BY_ID, post, PlayerDetailRespBean.class, true, true, this);
 
     }
 
@@ -148,7 +157,7 @@ public class PlayerDetailActivity extends BaseActivity {
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-        if(tag.equals(detailTask)){
+        if (tag.equals(detailTask)) {
             PlayerDetailRespBean bean = (PlayerDetailRespBean) data;
             renderUi(bean.getData().getList());
         }
@@ -164,5 +173,6 @@ public class PlayerDetailActivity extends BaseActivity {
         tvGrey2.setText(CommonHelper.getTextByBallPos(list.getPos()));
         tvGrey3.setText(list.getBirthday());
         tvGrey4.setText(list.getNickname());
+        CommonHelper.dataDetailAttentionControl(this, titleViewHelper.getTitle1Right(), list.getInterest(),4,id);
     }
 }

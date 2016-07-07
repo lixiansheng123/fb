@@ -41,5 +41,6 @@ public class MyApplication extends App {
         phoneWh = WindowUtils.getPhoneWH(this);
         L.d("手机屏幕:"+phoneWh[0]+"x"+phoneWh[1]);
         instance = this;
+        L.isDebug = true;
     }
 }

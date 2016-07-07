@@ -19,7 +19,15 @@ public class OtherDetailBean {
     private long updatetime;
     private String logo;
     private String hot;
+    private int interest;
 
+    public int getInterest() {
+        return interest;
+    }
+
+    public void setInterest(int interest) {
+        this.interest = interest;
+    }
     public String getId() {
         return id;
     }

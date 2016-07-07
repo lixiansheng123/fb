@@ -1,14 +1,20 @@
 package com.yuedong.football_mad.model.bean;
 
 import com.yuedong.lib_develop.bean.BaseResponse;
+import com.yuedong.lib_develop.bean.ListResponse;
 
 import java.util.List;
 
 /**
  * @author 俊鹏 on 2016/6/23
  */
-public class SearchAllRespBean extends BaseResponse {
+public class SearchAllRespBean extends ListResponse<SearchAllBean> {
     private Data data;
+
+    @Override
+    public java.util.List<SearchAllBean> getDataList() {
+        return null;
+    }
 
     public Data getData() {
         return data;
@@ -18,7 +24,7 @@ public class SearchAllRespBean extends BaseResponse {
         this.data = data;
     }
 
-    public class Data{
+    public class Data extends ListResponse.Data{
         private List list;
 
         public List getList() {
