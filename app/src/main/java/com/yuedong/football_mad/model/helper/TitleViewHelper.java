@@ -204,4 +204,5 @@ public class TitleViewHelper {
         titleCenter = (RelativeLayout) titile1.findViewById(R.id.title_center);
         titleTvTitle = (TextView) titile1.findViewById(R.id.tv_title);
     }
+
 }
