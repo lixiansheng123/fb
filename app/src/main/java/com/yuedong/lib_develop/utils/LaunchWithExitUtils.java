@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.yuedong.football_mad.R;
+
 /**
  * Created by Administrator on 2015/11/28.
  */
@@ -19,10 +21,12 @@ public class LaunchWithExitUtils {
 
     public static void startActivity(Activity context, Intent intent) {
         context.startActivity(intent);
+        enterAnim(context);
     }
 
     public static void startActivity(Activity context, Class<? extends Activity> cls) {
         startActivity(context, cls, null);
+        enterAnim(context);
 
     }
 
@@ -31,26 +35,30 @@ public class LaunchWithExitUtils {
         if (data != null)
             intent.putExtras(data);
         context.startActivity(intent);
-
+        enterAnim(context);
     }
 
     public static void startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
         fragment.startActivityForResult(intent, requestCode);
+        enterAnim(fragment.getActivity());
     }
 
 
     public static void startActivityForResult(Fragment fragment, Class<? extends Activity> cls, int requestCode) {
         Intent intent = new Intent(fragment.getActivity(), cls);
         fragment.startActivityForResult(intent, requestCode);
+        enterAnim(fragment.getActivity());
     }
 
     public static void startActivityForResult(Activity activity, Class<? extends Activity> cls, int requestCode) {
         startActivityForResult(activity, cls, requestCode, null);
+        enterAnim(activity);
     }
 
 
     public static void startActivityForResult(Activity activity, Intent intent, int requestCode) {
         activity.startActivityForResult(intent, requestCode);
+        enterAnim(activity);
     }
 
 
@@ -61,6 +69,7 @@ public class LaunchWithExitUtils {
             context.startActivityForResult(intent, requestCode, data);
         else
             context.startActivityForResult(intent, requestCode);
+        enterAnim(context);
     }
 
     public static void back(FragmentActivity act) {
@@ -69,7 +78,16 @@ public class LaunchWithExitUtils {
         } else {
             act.getSupportFragmentManager().popBackStack();
         }
+        exitAnim(act);
     }
 
+    private static void enterAnim(Activity act){
+        act.overridePendingTransition(R.anim.slide_left_in,
+                R.anim.slide_left_out);
+    }
 
+    private static void exitAnim(Activity act){
+        act.overridePendingTransition(R.anim.slide_right_in,
+                R.anim.slide_right_out);
+    }
 }

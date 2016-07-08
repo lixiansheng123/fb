@@ -11,6 +11,7 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
+import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
@@ -28,8 +29,10 @@ import com.yuedong.football_mad.ui.activity.MyMsgActivity;
 import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.football_mad.ui.activity.WatchBallActivity;
 import com.yuedong.lib_develop.app.App;
+import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.FileUtils;
+import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
@@ -47,8 +50,9 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
     private View menu;
     private RoundImageView ivUserHead;
     private View rlUserHead;
-    private TextView tvUsername, tvUserLevel,tvNumJiandi,tvNumPost,tvNumComment,tvNumGenTie,tvZanArticle,tvZanComment,tvAStatus;
+    private TextView tvUsername, tvUserLevel, tvNumJiandi, tvNumPost, tvNumComment, tvNumGenTie, tvZanArticle, tvZanComment, tvAStatus;
     private User loginUser;
+    private String infoTask;
     private int qualifystate;
 
     @Override
@@ -102,15 +106,33 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_watch_ball).setOnClickListener(this);
         menu.findViewById(R.id.ll_exit_logo).setOnClickListener(this);
         menu.findViewById(R.id.ll_setting).setOnClickListener(this);
-        changeUi();
+//        changeUi();
+//        getUserInfo();
     }
+
+//    @Override
+//    public void networdSucceed(String tag, BaseResponse data) {
+//        if(tag.equals(infoTask)){
+//            GetUserInfoByIdResBean bean = (GetUserInfoByIdResBean) data;
+//        }
+//    }
+
+//    private void getUserInfo() {
+//        User user = MyApplication.getInstance().getLoginUser();
+//        if(user == null)return;
+//        infoTask=  CommonHelper.getUserInfo(user.getSid(),SideActivity.this);
+//
+//    }
 
     private void changeUi() {
         loginUser = MyApplication.getInstance().getLoginUser();
+//
         if (loginUser == null) return;
-        int userLevel = Integer.parseInt(loginUser.getUserlevel());
+        int userLevel = loginUser.getUserlevel();
         DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(userLevel);
-        DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(loginUser.getAvatar()), ivUserHead);
+        String head = UrlHelper.checkUrl(loginUser.getAvatar());
+        L.d("头像:" + head);
+        DisplayImageByVolleyUtils.loadUserPic(head, ivUserHead);
         tvUsername.setText(loginUser.getName());
         SpannableStringBuilder sp = TextUtils.addTextColor(userLevelDisplayInfo.textDesc, 0, 2, userLevelDisplayInfo.partTextColor);
         tvUserLevel.setText(sp);
@@ -126,19 +148,19 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         // 认证
         qualifystate = loginUser.getQualifystate();
         String msg = "未认证";
-        switch (qualifystate){
-            case  0:
+        switch (qualifystate) {
+            case 0:
                 break;
 
-            case  1:
+            case 1:
                 msg = "认证中";
                 break;
 
-            case  2:
+            case 2:
                 msg = "认证不通过";
                 break;
 
-            case  3:
+            case 3:
                 msg = "认证通过";
                 break;
         }
@@ -156,22 +178,22 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_attest:
-                if(CommonHelper.checkLogin(activity) == null)return;
+                if (CommonHelper.checkLogin(activity) == null) return;
                 // 认证通过不进入认证页面
-                if(qualifystate != 3) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(Constant.KEY_INT, qualifystate);
-                    LaunchWithExitUtils.startActivity(SideActivity.this, AttestationActivity.class, bundle);
+                if (qualifystate != 3) {
+                    Intent it = new Intent(activity, AttestationActivity.class);
+                    it.putExtra(Constant.KEY_INT, qualifystate);
+                    LaunchWithExitUtils.startActivity(activity, it);
                 }
                 break;
             case R.id.rl_user_info:
-                if(CommonHelper.checkLogin(activity) == null)return;
-                    Bundle data = new Bundle();
-                    data.putString(Constant.KEY_STR,loginUser.getSid());
-                    LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class,data);
+                if (CommonHelper.checkLogin(activity) == null) return;
+                Bundle data = new Bundle();
+                data.putString(Constant.KEY_STR, loginUser.getSid());
+                LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class, data);
                 break;
             case R.id.ll_my_attention:
-                if(CommonHelper.checkLogin(activity) == null)return;
+                if (CommonHelper.checkLogin(activity) == null) return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyAttentionActivity.class);
                 break;
 
@@ -187,7 +209,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.ll_my_collect:
-                if(CommonHelper.checkLogin(activity) == null)return;
+                if (CommonHelper.checkLogin(activity) == null) return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyCollectActivity.class);
                 break;
 

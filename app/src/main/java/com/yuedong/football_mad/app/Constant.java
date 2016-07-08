@@ -9,6 +9,20 @@ public class Constant {
     public static String URL = "http://www.zqfeng.com/crazyfootball/";
     public static String URL_PIC = "http://www.zqfeng.com/";
     // 用户
+
+    public static String URL_GET_GAMELIST = URL + "game/getGameList";
+    public static String URL_GET_HOTTEAM = URL + "team/getHotTeam";
+    public static String URL_GET_TEAM_LIST = URL + "team/getTeamList";
+    public static String URL_GET_TEAM_BY_ID = URL + "team/getTeamById";
+    public static String URL_GET_HOTATHLETE = URL + "athlete/getHotAthlete";
+    public static String URL_GET_ATHLETELIST = URL + "athlete/getAthleteList";
+    public static String URL_GET_ATHLETE_BY_ID = URL + "athlete/getAthleteById";
+
+    public static String URL_SEARCH_ALL = URL + "athlete/SearchAll";
+    public static String URL_GET_HOTCOUNTRY = URL + "country/getHotCountry";
+    public static String URL_GET_COUNTRYLIST = URL + "country/getCountryList";
+    public static String URL_GET_COUNTRY_BY_ID = URL + "country/getCountryById";
+    public static String URL_GET_HOTOTHER = URL + "other/getHotOther";
     public static String URL_LONGIN = URL + "user/userlogin";
     public static String URL_MODIFY_PASSWORD = URL + "user/changePassword";
     public static String URL_ADD_DETAIL = URL + "user/addDetail";
@@ -48,53 +62,33 @@ public class Constant {
     public static String URL_NEWS_INTEREST = URL + "news/InterestNews";// 关注新闻/专题
     public static String URL_NEWS_UNINTEREST = URL + "news/UnInterestNews";// 取消关注新闻/专题
     public static String URL_COLLECT_NEWS_LIST = URL + "news/getUserInterestNews";
-
-
 //    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
-
     // 见地
     public static String URL_HOT_INSIGNLIST = URL + "news/getHotInsign";
     public static String URL_INSIGNLIST = URL + "news/getInsignList";
-
     //数据酷
     public static String URL_NEWS_GETDATASNEWS = URL + "news/getDataNews";
     public static String URL_GET_HOTGAME = URL + "game/getHotGame";
-    public static String URL_GET_GAMELIST = URL + "game/getGameList";
-    public static String URL_GET_HOTTEAM = URL + "team/getHotTeam";
-    public static String URL_GET_TEAM_LIST = URL + "team/getTeamList";
-    public static String URL_GET_TEAM_BY_ID = URL + "team/getTeamById";
-    public static String URL_GET_HOTATHLETE = URL + "athlete/getHotAthlete";
-    public static String URL_GET_ATHLETELIST = URL + "athlete/getAthleteList";
-    public static String URL_GET_ATHLETE_BY_ID = URL + "athlete/getAthleteById";
-
-    public static String URL_SEARCH_ALL = URL + "athlete/SearchAll";
-    public static String URL_GET_HOTCOUNTRY = URL + "country/getHotCountry";
-    public static String URL_GET_COUNTRYLIST = URL + "country/getCountryList";
-    public static String URL_GET_COUNTRY_BY_ID = URL + "country/getCountryById";
-    public static String URL_GET_HOTOTHER = URL + "other/getHotOther";
     public static String URL_GET_OTHERLIST = URL + "other/getOtherList";
     public static String URL_GET_OTHE_BY_ID = URL + "other/getOtherById";
     public static String URL_GETGAMEINFO_BYID = URL + "game/getGameById";
     public static String URL_GAMELIST = URL + "game/getGameList";
     public static String URL_HOTGAMELIST = URL + "game/getHotGame";
     public static String URL_ORDER_GAME_LIST = URL + "game/getOrderGameList";
-
     // 比赛
     public static String URL_HOT_GAME_LIST = URL + "contest/getHotContest";
     public static String URL_GET_CONTEST_LIST = URL + "contest/getContestList";// 比赛列表
     public static String URL_GET_INTEREST_CONTEST = URL + "contest/getInterestContest";// 关注比赛列表
     public static String URL_GET_GAME_INFO_BYID = URL + "contest/getContestById";// 关注比赛列表
-
-
     // 评论
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";
     public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
     public static String URL_COMMENT_ZAN = URL + "comment/goodComment";
     public static String URL_COMMENT_UNZAN = URL + "comment/ungoodComment";
-
     public static String URL_ATTENTION_DATA = URL + "athlete/InterestData";
     public static String URL_UNATTENTION_DATA = URL + "athlete/UnInterestData";
     public static String URL_USER_INTEREST_DATA = URL + "athlete/getUserInterestData";
+    public static String URL_SEARCH_COUNTRY_TEAM = URL +"country/SearchCountryTeam";
 
     // 注入
     public static boolean AUTO_INJECT = true;

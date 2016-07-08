@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.MyApplication"
@@ -52,7 +52,12 @@
         <activity android:name=".ui.activity.SendPostActivity" />
         <activity android:name=".ui.activity.GameDetailActivity" />
         <activity android:name=".ui.activity.AppSettingActivity" />
-        <activity android:name=".ui.activity.SpecialDetailActivity"></activity>
+        <activity android:name=".ui.activity.SpecialDetailActivity" />
+        <activity android:name=".ui.activity.ChooseDataKuListActivity" />
+        <activity
+            android:name=".ui.activity.VideoActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ui.activity.VideoListActivity"></activity>
     </application>
 
 </manifest>

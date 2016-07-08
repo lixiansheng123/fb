@@ -14,7 +14,7 @@ public class User implements Serializable{
     private String phone;
     private String gender;
     private String usertype;
-    private String userlevel;
+    private int userlevel;
     private String birthday;
     private String city;
     private String workcity;
@@ -25,7 +25,7 @@ public class User implements Serializable{
     private String organization;
     private String remark;
     private String hot;
-    private String pos;
+    private int pos;
     private String favoritecountryid;
     private String favoriteteamid;
     private String favoritegameid;
@@ -42,6 +42,42 @@ public class User implements Serializable{
     private String interestcount;
     private String honor;
     private String createtime;
+    private String favoritecountry;
+    private String favoriteteam;
+    private String countrylogo;
+    private String teamlogo;
+
+    public String getCountrylogo() {
+        return countrylogo;
+    }
+
+    public void setCountrylogo(String countrylogo) {
+        this.countrylogo = countrylogo;
+    }
+
+    public String getTeamlogo() {
+        return teamlogo;
+    }
+
+    public void setTeamlogo(String teamlogo) {
+        this.teamlogo = teamlogo;
+    }
+
+    public String getFavoritecountry() {
+        return favoritecountry;
+    }
+
+    public void setFavoritecountry(String favoritecountry) {
+        this.favoritecountry = favoritecountry;
+    }
+
+    public String getFavoriteteam() {
+        return favoriteteam;
+    }
+
+    public void setFavoriteteam(String favoriteteam) {
+        this.favoriteteam = favoriteteam;
+    }
 
     public String getId() {
         return id;
@@ -99,11 +135,11 @@ public class User implements Serializable{
         this.usertype = usertype;
     }
 
-    public String getUserlevel() {
+    public int getUserlevel() {
         return userlevel;
     }
 
-    public void setUserlevel(String userlevel) {
+    public void setUserlevel(int userlevel) {
         this.userlevel = userlevel;
     }
 
@@ -187,11 +223,11 @@ public class User implements Serializable{
         this.hot = hot;
     }
 
-    public String getPos() {
+    public int getPos() {
         return pos;
     }
 
-    public void setPos(String pos) {
+    public void setPos(int pos) {
         this.pos = pos;
     }
 

@@ -117,6 +117,35 @@ public class CommonHelper {
     }
 
     /**
+     * 获取职业类型
+     * @param workType
+     * @return
+     */
+    public static String getWorkType(int workType) {
+        String text = "";
+        switch (workType) {
+            case 0:
+            default:
+                text = "保密";
+                break;
+            case 1:
+                text = "足球运动员";
+                break;
+            case 2:
+                text = "足球记者/评论员";
+                break;
+            case 3:
+                text = "足球教练员";
+                break;
+            case 4:
+                text = "足球相关工作者";
+                break;
+        }
+        return text;
+
+    }
+
+    /**
      * 获取用户信息根据sid
      *
      * @param sid
@@ -231,8 +260,8 @@ public class CommonHelper {
 
                     @Override
                     public void onNetworkSucceed(String tag, BaseResponse data) {
-                        if(data == null)return;
-                        if(data.getState().getCode() == Constant.OK){
+                        if (data == null) return;
+                        if (data.getState().getCode() == Constant.OK) {
                             if ((int) (img.getTag()) == 0) {
                                 T.showShort(context, "关注成功");
                                 img.setTag(1);
@@ -242,7 +271,7 @@ public class CommonHelper {
                                 img.setTag(0);
                                 img.setSelected(false);
                             }
-                        }else{
+                        } else {
                             // TODO 后面加入登录异常的判断
                         }
                     }
@@ -257,7 +286,6 @@ public class CommonHelper {
             }
         });
     }
-
 
 
 }

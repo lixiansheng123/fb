@@ -136,6 +136,7 @@ public class HomeActivity extends SideActivity {
                 break;
 
             case R.id.title_btn_right:
+                LaunchWithExitUtils.startActivity(activity,VideoActivity.class);
                 break;
         }
     }

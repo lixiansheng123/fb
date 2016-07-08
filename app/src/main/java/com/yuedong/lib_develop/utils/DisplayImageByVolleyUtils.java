@@ -77,6 +77,7 @@ public class DisplayImageByVolleyUtils {
     }
 
 
+
     static final class BitmapCache implements ImageLoader.ImageCache {
         private LruCache<String, Bitmap> mCache;
 

@@ -77,8 +77,8 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
     private String realPic;// 真实头像
     private String otherPic;// 相关照片
     private int worktype = 1;// 工作类型
-    private String uploadHeadTask,uploadRealTask,userInfoTask,submitTask;
-    private Map<String,String> picPost;
+    private String uploadHeadTask, uploadRealTask, userInfoTask, submitTask;
+    private Map<String, String> picPost;
     private String sayStr;
     private String realNameStr;
     private String cityStr;
@@ -87,10 +87,15 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
     private String realPicNet;// 线上上传的真是头像地址
     private String otherPicNet;// 线上上传的认证图片地址
     private TitleViewHelper titleViewHelper;
+    private int cur_action;
+    public static final int ACTION_SLIDEINFO = 0x001;// 从侧边栏进来
+    public static final int ACTION_USERINFO = 0x002;// 从用户信息进来
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cur_action = getIntent().getIntExtra(Constant.KEY_ACTION, ACTION_SLIDEINFO);
         titleViewHelper = new TitleViewHelper(this);
         buildUi(titleViewHelper.getTitle1NomarlCenterIcon(R.drawable.ic_round_return, R.drawable.ic_renzheng_logo, R.drawable.ic_round_renzheng, null, new View.OnClickListener() {
             @Override
@@ -98,7 +103,7 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
                 upload();
             }
         }), R.layout.activity_attestation);
-        dp81 = DimenUtils.dip2px(activity,81);
+        dp81 = DimenUtils.dip2px(activity, 81);
         loginUser = MyApplication.getInstance().getLoginUser();
         selectPhotoDialog = new SelectPhotoDialog(activity);
         autoLoadView = false;
@@ -108,18 +113,19 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
      * 上传认证信息
      */
     private void upload() {
-        if(!check())return;
+        if (!check()) return;
         showLoadView(true);
         picPost = DataUtils.getSidPostMap(loginUser.getSid());
         picPost.put("encode", "jpg");
-        if(realPic!=null){
+        if (realPic != null) {
             uploadHead();
-        }else{
+        } else {
             uploadReal();
         }
     }
+
     /* 上传头像 */
-    private void uploadHead(){
+    private void uploadHead() {
         String s = ImageZoomUtils.compressImageToFile(realPic, Config.DIR_PHOTO_UPLOAD, 150);
         L.d("头像上传图片路径" + s);
         String realPicBase64 = Base64.encode(FileUtils.getFileContent(s));
@@ -128,55 +134,56 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
     }
 
     /* 上传认证 */
-    private void uploadReal(){
+    private void uploadReal() {
         String s2 = ImageZoomUtils.compressImageToFile(otherPic, Config.DIR_PHOTO_UPLOAD, 250);
         L.d("证件上传图片路径" + s2);
         String otherPicBase64 = Base64.encode(FileUtils.getFileContent(s2));
         picPost.remove("avatar");
         picPost.put("realphoto", otherPicBase64);
-        uploadRealTask= RequestHelper.post(Constant.URL_USER_UPLOAD_REAL, picPost,HeadRespBean.class,false,false,AttestationActivity.this);
+        uploadRealTask = RequestHelper.post(Constant.URL_USER_UPLOAD_REAL, picPost, HeadRespBean.class, false, false, AttestationActivity.this);
     }
 
     private boolean check() {
-        if(otherPic == null) {
-            T.showShort(activity,"必须上传认证相片");
+        if (otherPic == null) {
+            T.showShort(activity, "必须上传认证相片");
             return false;
         }
         sayStr = etSay.getText().toString();
         realNameStr = etRealName.getText().toString();
         cityStr = etCity.getText().toString();
         jigouStr = etJigou.getText().toString();
-        contactStr =etContact.getText().toString();
-        if(TextUtils.isEmpty(realNameStr)){
-            T.showShort(activity,"必须填写认证姓名");
+        contactStr = etContact.getText().toString();
+        if (TextUtils.isEmpty(realNameStr)) {
+            T.showShort(activity, "必须填写认证姓名");
             return false;
         }
-        if(TextUtils.isEmpty(cityStr)){
-            T.showShort(activity,"必须填写从业城市");
+        if (TextUtils.isEmpty(cityStr)) {
+            T.showShort(activity, "必须填写从业城市");
             return false;
         }
-        if(TextUtils.isEmpty(jigouStr)){
-            T.showShort(activity,"必须填写所属机构");
+        if (TextUtils.isEmpty(jigouStr)) {
+            T.showShort(activity, "必须填写所属机构");
             return false;
         }
-        if(TextUtils.isEmpty(contactStr)){
-            T.showShort(activity,"必须填写联系方式");
+        if (TextUtils.isEmpty(contactStr)) {
+            T.showShort(activity, "必须填写联系方式");
             return false;
         }
 
-        return  true;
+        return true;
     }
 
     @Override
     protected void ui() {
-        cbs[0] =cb1;
-        cbs[1] =cb2;
-        cbs[2] =cb3;
-        cbs[3] =cb4;
+        cbs[0] = cb1;
+        cbs[1] = cb2;
+        cbs[2] = cb3;
+        cbs[3] = cb4;
+        cb1.setSelected(true);
         selectPhotoDialog.setOnSelectPicPopCallback(this);
         // 认证判断 只有认证中才渲染数据
-        int qualifystate = getIntent().getExtras().getInt(Constant.KEY_INT);
-        if(qualifystate == 1){
+        int qualifystate = getIntent().getIntExtra(Constant.KEY_INT, 0);
+        if (qualifystate == 1) {
             renderUi();
         }
     }
@@ -186,14 +193,14 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
         ViewUtils.showLayout(gap);
         User loginUser = MyApplication.getInstance().getLoginUser();
         String avatar = loginUser.getAvatar();
-        if(!TextUtils.isEmpty(avatar))
-            DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(UrlHelper.checkUrl(avatar)),ivHead);
+        if (!TextUtils.isEmpty(avatar))
+            DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(UrlHelper.checkUrl(avatar)), ivHead);
         String realphoto = loginUser.getRealphoto();
-        if(!TextUtils.isEmpty(realphoto))
-            DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(realphoto),ivOther);
+        if (!TextUtils.isEmpty(realphoto))
+            DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(realphoto), ivOther);
         int worktype = loginUser.getWorktype();
-        for(ImageView c :cbs)c.setSelected(false);
-        switch(worktype){
+        for (ImageView c : cbs) c.setSelected(false);
+        switch (worktype) {
             case 1:
             default:
                 cb1.setSelected(true);
@@ -209,7 +216,7 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
                 break;
         }
         String say = loginUser.getRemark();
-        if(!TextUtils.isEmpty(say)){
+        if (!TextUtils.isEmpty(say)) {
             etSay.setText(say);
         }
         etRealName.setText(loginUser.getRealname());
@@ -220,59 +227,64 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-        if(tag.equals(uploadHeadTask)){
+        if (tag.equals(uploadHeadTask)) {
             HeadRespBean bean = (HeadRespBean) data;
             realPicNet = UrlHelper.checkUrl(bean.getData().getAvatar());
-            L.d("上传头像成功地址为:"+ realPicNet);
+            L.d("上传头像成功地址为:" + realPicNet);
             uploadReal();
-        }else if(tag.equals(uploadRealTask)){
+        } else if (tag.equals(uploadRealTask)) {
             HeadRespBean bean = (HeadRespBean) data;
-            otherPicNet =UrlHelper.checkUrl(bean.getData().getRealphoto());
-            L.d("上传证件成功地址为:"+ otherPicNet);
+            otherPicNet = UrlHelper.checkUrl(bean.getData().getRealphoto());
+            L.d("上传证件成功地址为:" + otherPicNet);
             // 提交所有信息
             Map<String, String> post = DataUtils.getSidPostMap(loginUser.getSid());
-            post.put("remark",sayStr);
-            post.put("worktype",worktype+"");
-            post.put("realname",realNameStr);
-            post.put("remark",sayStr);
-            post.put("workcity",cityStr);
-            post.put("organization",jigouStr);
+            post.put("remark", sayStr);
+            post.put("worktype", worktype + "");
+            post.put("realname", realNameStr);
+            post.put("remark", sayStr);
+            post.put("workcity", cityStr);
+            post.put("organization", jigouStr);
             // TODO 缺少联系方式字段
 //            post.put("phone", contactStr);
-           submitTask =  RequestHelper.post(Constant.URL_ADD_DETAIL,post,BaseResponse.class,false,false,AttestationActivity.this);
-        }else if(tag.equals(submitTask)){
+            submitTask = RequestHelper.post(Constant.URL_ADD_DETAIL, post, BaseResponse.class, false, false, AttestationActivity.this);
+        } else if (tag.equals(submitTask)) {
             // 更新个人信息
-            userInfoTask=  CommonHelper.getUserInfo(loginUser.getSid(),AttestationActivity.this);
-        }else if(tag.equals(userInfoTask)){
+            userInfoTask = CommonHelper.getUserInfo(loginUser.getSid(), AttestationActivity.this);
+        } else if (tag.equals(userInfoTask)) {
             showLoadView(false);
             GetUserInfoByIdResBean bean = (GetUserInfoByIdResBean) data;
             MyApplication.getInstance().setLoginuser(bean.getData().getList());
             MyApplication.getInstance().userInfoChange = true;
-            T.showShort(activity,"提交认证成功");
+            T.showShort(activity, "提交认证成功");
+            // 回传信号
+            if (cur_action == ACTION_USERINFO) {
+                setResult(cur_action);
+            }
             back();
         }
     }
-    @OnClick({R.id.cb1,R.id.cb2,R.id.cb3,R.id.cb4})
-    protected void selClickEvent(View view){
-        for(ImageView iv :cbs)iv.setSelected(false);
-        ((ImageView)view).setSelected(true);
+
+    @OnClick({R.id.cb1, R.id.cb2, R.id.cb3, R.id.cb4})
+    protected void selClickEvent(View view) {
+        for (ImageView iv : cbs) iv.setSelected(false);
+        ((ImageView) view).setSelected(true);
         switch (view.getId()) {
             case R.id.cb1:
-                worktype  = 1;
+                worktype = 1;
                 break;
             case R.id.cb2:
-                worktype  = 2;
+                worktype = 2;
                 break;
             case R.id.cb3:
-                worktype  = 3;
+                worktype = 3;
                 break;
             case R.id.cb4:
-                worktype  = 4;
+                worktype = 4;
                 break;
         }
     }
 
-    @OnClick({R.id.rl_head,R.id.rl_other,R.id.view_gap,R.id.cb1,R.id.cb2,R.id.cb3,R.id.cb4})
+    @OnClick({R.id.rl_head, R.id.rl_other, R.id.view_gap, R.id.cb1, R.id.cb2, R.id.cb3, R.id.cb4})
     protected void clickEvent(View view) {
         switch (view.getId()) {
             case R.id.rl_head:
@@ -286,7 +298,7 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
                 break;
 
             case R.id.view_gap:
-                T.showShort(activity,"认证中不可操作");
+                T.showShort(activity, "认证中不可操作");
                 break;
 
         }
@@ -305,10 +317,10 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
     @Override
     protected void getPicSucceed(String path) {
         Bitmap bitmap = ImageZoomUtils.decodeSampleBitmapFromPath(path, dp81, dp81);
-        if(cur_photo == PHOTO_HEAD) {
+        if (cur_photo == PHOTO_HEAD) {
             realPic = path;
             ivHead.setImageBitmap(bitmap);
-        }else if(cur_photo == PHOTO_OHTER){
+        } else if (cur_photo == PHOTO_OHTER) {
             otherPic = path;
             ivOther.setImageBitmap(bitmap);
         }

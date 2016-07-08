@@ -108,6 +108,7 @@
                 />
 
             <EditText
+                android:inputType="number"
                 android:id="@+id/et_code"
                 style="@style/text_black_14sp"
                 android:layout_weight="1"
