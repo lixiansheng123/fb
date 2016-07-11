@@ -1,7 +1,6 @@
 package com.yuedong.football_mad.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -13,19 +12,23 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.football_mad.R;
+import com.yuedong.football_mad.adapter.TouchAdapter;
 import com.yuedong.football_mad.adapter.UserArticleListAdapter;
 import com.yuedong.football_mad.app.Config;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.AbstractPagerAdapter;
-import com.yuedong.football_mad.framework.BaseActivity;
+import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.LocalPhotoActivity;
 import com.yuedong.football_mad.model.CommonCallback;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
+import com.yuedong.football_mad.model.bean.TouchBannerListBean;
+import com.yuedong.football_mad.model.bean.TouchBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
+import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
@@ -35,8 +38,10 @@ import com.yuedong.football_mad.view.SelectBallPosDialog;
 import com.yuedong.football_mad.view.SelectPhotoDialog;
 import com.yuedong.football_mad.view.SelectSexDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
+import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
+import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.Base64;
 import com.yuedong.lib_develop.utils.DimenUtils;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
@@ -83,14 +88,19 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
     private TextView tvNumJiandi, tvNumPost, tvNumComment, tvNumGenTie, tvZanArticle, tvZanComment, tvFriendNum, tvCollectNum, tvAttentionNum;
     private TextView etSex, etCity, etShangechange, etBirthday, etBindMobile, etJobType, etRealname, etJobCity, etJigou, etContact;
     private List<View> views = new ArrayList<View>();
-    private PulltoRefreshListView listView;
-    private UserArticleListAdapter adapter;
+    private PulltoRefreshListView newListView;
+    private PulltoRefreshListView zanListView;
+    private RefreshProxy<TouchBean> newRefreshProxy = new RefreshProxy<>();
+    private RefreshProxy<TouchBean> zanRefreshProxy = new RefreshProxy<>();
+    private UserArticleListAdapter newAdapter;
+    private UserArticleListAdapter zanAdapter;
     private SelectSexDialog selectSexDialog;
     private SelectBallPosDialog selectBallPosDialog;
     private DaySelectDialog daySelectDialog;
-    private View view1, view2;
+    private View view1,view2, view3;
     private boolean other = false;// 用于区分是否是查看自己
-    private String userSid;
+    private String userSid; // 自己资料使用sid
+    private String userId; // 别人资料使用userid
     private User user;
     private String updateTask;
     private String userInfoTsak;
@@ -143,8 +153,10 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
                 R.layout.activity_user_info);
         title1Right = titleViewHelper.getTitle1Right();
         title1Right.setTag(0);
-        other = getIntent().getExtras().getBoolean(Constant.KEY_BOOL, false);
-        userSid = getIntent().getExtras().getString(Constant.KEY_STR);
+        Bundle extras = getIntent().getExtras();
+        other = extras.getBoolean(Constant.KEY_BOOL, false);
+        userSid = extras.getString(Constant.KEY_STR);
+        userId = extras.getString(Constant.KEY_STR2);
         selectSexDialog = new SelectSexDialog(this);
         selectBallPosDialog = new SelectBallPosDialog(this);
         daySelectDialog = new DaySelectDialog(this);
@@ -213,26 +225,81 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         tvZanArticle = (TextView) findViewById(R.id.tv_num_zan_article);
         tvZanComment = (TextView) findViewById(R.id.tv_num_zan_comment);
         view1 = getLayoutInflater().inflate(R.layout.layout_common_list, null);
-        view2 = getLayoutInflater().inflate(R.layout.layout_user_more_info, null);
-        List<User> data = new ArrayList<User>();
-        data.add(null);
-        data.add(null);
-        data.add(null);
-        adapter = new UserArticleListAdapter(this, data);
-        listView = (PulltoRefreshListView) view1.findViewById(R.id.listview);
-        listView.setAdapter(adapter);
+        view2 = getLayoutInflater().inflate(R.layout.layout_common_list,null);
+        view3 = getLayoutInflater().inflate(R.layout.layout_user_more_info, null);
+        newListView = (PulltoRefreshListView) view1.findViewById(R.id.listview);
+        zanListView = (PulltoRefreshListView) view2.findViewById(R.id.listview);
         views.add(view1);
         views.add(view2);
+        views.add(view3);
         viewPager.setAdapter(new AbstractPagerAdapter(2) {
             @Override
             public Object getView(ViewGroup container, int position) {
                 return views.get(position);
             }
         });
-        viewPager.setCurrentItem(1);
+        if(!other)
+             viewPager.setCurrentItem(2);
+        else
+            viewPager.setCurrentItem(1);
         item2Ui();
         getUserInfo();
     }
+
+    /**
+     * 获取用户新闻列表
+     */
+    private void getUserNews(final String userId) {
+        zanRefreshProxy.setPulltoRefreshRefreshProxy(zanListView, new RefreshProxy.ProxyRefreshListener<TouchBean>() {
+            @Override
+            public BaseAdapter<TouchBean> getAdapter(List<TouchBean> data) {
+                return new TouchAdapter(activity,data);
+            }
+
+            @Override
+            public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
+                Map<String, String> post = DataUtils.getListPostMapHasUserId(page + "", count + "", max + "", userId);
+                post.put("order","1");
+                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchBannerListBean.class, false, false, listener);
+            }
+
+            @Override
+            public void networkSucceed(ListResponse<TouchBean> list) {
+
+            }
+
+            @Override
+            public void contentIsEmpty() {
+
+            }
+        });
+        newRefreshProxy.setPulltoRefreshRefreshProxy(newListView, new RefreshProxy.ProxyRefreshListener<TouchBean>() {
+            @Override
+            public BaseAdapter<TouchBean> getAdapter(List<TouchBean> data) {
+                return new TouchAdapter(activity, data);
+            }
+
+            @Override
+            public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
+                Map<String, String> post = DataUtils.getListPostMapHasUserId(page + "", count + "", max + "", userId);
+                post.put("order","0");
+                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchBannerListBean.class, false, false, listener);
+            }
+
+            @Override
+            public void networkSucceed(ListResponse<TouchBean> list) {
+
+            }
+
+            @Override
+            public void contentIsEmpty() {
+
+            }
+        });
+
+//        newsListByTimeTask =
+    }
+
 
     // 获取用户信息
     private void getUserInfo() {
@@ -240,19 +307,19 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
     }
 
     private void item2Ui() {
-        etSex = (TextView) view2.findViewById(R.id.et_sex);
-        etCity = (TextView) view2.findViewById(R.id.et_city);
-        etShangechange = (TextView) view2.findViewById(R.id.et_shangchang);
-        etBirthday = (TextView) view2.findViewById(R.id.et_birthday);
-        etJobType = (TextView) view2.findViewById(R.id.et_job_type);
-        etRealname = (TextView) view2.findViewById(R.id.et_realname);
-        etBindMobile = (TextView) view2.findViewById(R.id.et_mobile);
-        etJobCity = (TextView) view2.findViewById(R.id.et_job_city);
-        etJigou = (TextView) view2.findViewById(R.id.et_jigou);
-        etContact = (TextView) view2.findViewById(R.id.et_contact_info);
-        tvFriendNum = (TextView) view2.findViewById(R.id.tv_friend_num);
-        tvCollectNum = (TextView) view2.findViewById(R.id.tv_collect_num);
-        tvAttentionNum = (TextView) view2.findViewById(R.id.tv_attention_num);
+        etSex = (TextView) view3.findViewById(R.id.et_sex);
+        etCity = (TextView) view3.findViewById(R.id.et_city);
+        etShangechange = (TextView) view3.findViewById(R.id.et_shangchang);
+        etBirthday = (TextView) view3.findViewById(R.id.et_birthday);
+        etJobType = (TextView) view3.findViewById(R.id.et_job_type);
+        etRealname = (TextView) view3.findViewById(R.id.et_realname);
+        etBindMobile = (TextView) view3.findViewById(R.id.et_mobile);
+        etJobCity = (TextView) view3.findViewById(R.id.et_job_city);
+        etJigou = (TextView) view3.findViewById(R.id.et_jigou);
+        etContact = (TextView) view3.findViewById(R.id.et_contact_info);
+        tvFriendNum = (TextView) view3.findViewById(R.id.tv_friend_num);
+        tvCollectNum = (TextView) view3.findViewById(R.id.tv_collect_num);
+        tvAttentionNum = (TextView) view3.findViewById(R.id.tv_attention_num);
         etSex.setOnClickListener(this);
         etCity.setOnClickListener(this);
         etShangechange.setOnClickListener(this);
@@ -265,7 +332,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         etContact.setOnClickListener(this);
         clickable(false);
         if (other) {
-            ViewUtils.hideLayout(view2.findViewById(R.id.ll_bangshouji));
+            ViewUtils.hideLayout(view3.findViewById(R.id.ll_bangshouji));
         }
     }
 
@@ -330,8 +397,8 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         text(etRealname, user.getRealname());
         text(etJobCity, user.getWorkcity());
         text(etJigou, user.getOrganization());
-        // TODO 联系方式字段缺失
-        text(etContact, "");
+        text(etContact, user.getContact());
+        getUserNews(user.getId());
     }
 
     @OnClick({R.id.iv_sel_new, R.id.iv_sel_zan, R.id.tv_more, R.id.rl_country, R.id.rl_team, R.id.rl_head})

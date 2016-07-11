@@ -59,6 +59,7 @@
     </LinearLayout>
 
     <ImageView
+        android:layout_marginTop="5dp"
         android:id="@+id/iv_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

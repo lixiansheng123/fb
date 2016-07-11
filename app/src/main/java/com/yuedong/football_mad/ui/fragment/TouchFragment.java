@@ -75,11 +75,6 @@ public class TouchFragment extends BaseFragment {
         iconChina.setTag(R.string.key_unclick_icon, R.drawable.ic_home_touch_china_unselect);
         tabs[0] = iconWorld;
         tabs[1] = iconChina;
-//        List<User> users = new ArrayList<User>();
-//        users.add(null);
-//        users.add(null);
-//        users.add(null);
-//        TouchAdapter = new TouchAdapter(getContext(), users);
         // 增加header
         View listHeadView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_touch_list_head, pulltoRefreshListView, false);
         small1 = (NetworkImageView) listHeadView.findViewById(R.id.image_small1);
@@ -87,7 +82,6 @@ public class TouchFragment extends BaseFragment {
         small3 = (NetworkImageView) listHeadView.findViewById(R.id.image_small3);
         bannerView = (BannerView<String>) listHeadView.findViewById(R.id.banner);
         pulltoRefreshListView.addHeaderView(listHeadView, null, false);
-//        pulltoRefreshListView.setAdapter(TouchAdapter);
         bannerRequest(1);
         listRequest(1);
     }

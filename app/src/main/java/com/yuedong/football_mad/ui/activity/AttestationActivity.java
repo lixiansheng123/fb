@@ -244,8 +244,7 @@ public class AttestationActivity extends LocalPhotoActivity implements SelectPho
             post.put("remark", sayStr);
             post.put("workcity", cityStr);
             post.put("organization", jigouStr);
-            // TODO 缺少联系方式字段
-//            post.put("phone", contactStr);
+            post.put("contact", contactStr);
             submitTask = RequestHelper.post(Constant.URL_ADD_DETAIL, post, BaseResponse.class, false, false, AttestationActivity.this);
         } else if (tag.equals(submitTask)) {
             // 更新个人信息

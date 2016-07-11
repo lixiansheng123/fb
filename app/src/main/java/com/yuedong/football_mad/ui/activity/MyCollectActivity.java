@@ -18,6 +18,7 @@ import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
+import com.yuedong.football_mad.ui.fragment.CollectCommentListFragment;
 import com.yuedong.football_mad.ui.fragment.CollectNewsListFragment;
 import com.yuedong.football_mad.view.DoubleTabView;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
@@ -37,6 +38,7 @@ public class MyCollectActivity extends BaseActivity {
     @ViewInject(R.id.tab)
     private DoubleTabView doubleTabView;
     private CollectNewsListFragment collectNewsListFragment;
+    private CollectCommentListFragment collectCommentListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MyCollectActivity extends BaseActivity {
 
     private void initFragment() {
         collectNewsListFragment = new CollectNewsListFragment();
+        collectCommentListFragment = new CollectCommentListFragment();
     }
 
     @Override
@@ -65,9 +68,13 @@ public class MyCollectActivity extends BaseActivity {
         doubleTabView.setITagClickListener(new DoubleTabView.ITagClickListener() {
             @Override
             public void onClick(View view, int position) {
+                Fragment f = null;
                 if(position == 0){
-                    switchContent(mDisplayContext,collectNewsListFragment,R.id.fragment_container);
+                    f = collectNewsListFragment;
+                }else{
+                    f = collectCommentListFragment;
                 }
+                switchContent(mDisplayContext,f,R.id.fragment_container);
             }
         });
     }

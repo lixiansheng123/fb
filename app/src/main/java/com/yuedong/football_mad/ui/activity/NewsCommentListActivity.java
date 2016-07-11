@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.adapter.CommentListAdapter;
 import com.yuedong.football_mad.app.Constant;
+import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.model.bean.CommentBean;
@@ -18,6 +19,7 @@ import com.yuedong.football_mad.model.bean.DbLikeRecord;
 import com.yuedong.football_mad.model.bean.CommentRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
@@ -50,7 +52,7 @@ public class NewsCommentListActivity extends BaseActivity {
     private EditText etContent;
     private View curTag;
     private String id;
-    private String listTask,replyTask,commentTask,zanTask,cancelZanTask;
+    private String listTask,replyTask,commentTask,zanTask,cancelZanTask,collectCommentTask,commentReportTask;
     private RefreshProxy<List<CommentBean>> refreshProxy = new RefreshProxy<>();
     private String order = "0";
     private CommonInteractPop pop;
@@ -110,7 +112,12 @@ public class NewsCommentListActivity extends BaseActivity {
 
             @Override
             public void onCollect() {
-
+                User loginUser = MyApplication.getInstance().getLoginUser();
+                if(loginUser == null)return;
+                String sid = loginUser.getSid();
+                Map<String, String> sidPostMap = DataUtils.getSidPostMap(sid);
+                sidPostMap.put("commentid",commentId);
+                collectCommentTask = RequestHelper.post(Constant.URL_COLLECT_COMMENT,sidPostMap,BaseResponse.class,false,false,NewsCommentListActivity.this);
             }
 
             @Override
@@ -120,7 +127,9 @@ public class NewsCommentListActivity extends BaseActivity {
 
             @Override
             public void onReport() {
-
+                Map<String,String> post = new HashMap<String, String>();
+                post.put("commentid",commentId);
+               commentReportTask =  RequestHelper.post(Constant.URL_COMMENT_ALARM, post, BaseResponse.class, false, false, NewsCommentListActivity.this);
             }
         });
         getCommentList(false,true);
@@ -298,6 +307,11 @@ public class NewsCommentListActivity extends BaseActivity {
             }
             zanStyleControl(false);
         }*/
+        else  if(tag.equals(collectCommentTask)){
+            T.showShort(activity,"收藏评论成功");
+        }else if(tag.equals(commentReportTask)){
+            T.showShort(activity,"评论举报成功");
+        }
     }
 
 

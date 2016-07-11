@@ -45,6 +45,7 @@ public class Constant {
     public static String URL_SPECIAL_BY_ID = URL + "special/getSpecialById";
 
     // news
+    public static String URL_USER_NEWS = URL +"news/getOwnNews";// 用户新闻列表
     public static String URL_WORLD_NEWS = URL + "news/getWorldNews";// 世界新闻
     public static String URL_HOME_NEWS = URL + "news/getHomeNews";// 国内新闻
     public static String URL_GET_CONTEST_NEWS = URL + "news/getContestNews";// 赛事新闻列表
@@ -89,6 +90,13 @@ public class Constant {
     public static String URL_UNATTENTION_DATA = URL + "athlete/UnInterestData";
     public static String URL_USER_INTEREST_DATA = URL + "athlete/getUserInterestData";
     public static String URL_SEARCH_COUNTRY_TEAM = URL +"country/SearchCountryTeam";
+    public static String URL_COLLECT_COMMENT= URL +"comment/InterestComment";// 收藏评论
+    public static String URL_USER_COLLECT_COMMENT_LIST= URL +"comment/getUserInterestComment";// 用户收藏评论列表
+    public static String URL_COMMENT_ALARM = URL +"comment/alarmComment";// 评论报警
+
+    //video
+    public static String URL_VIDEO_LIST = URL +"vedio/getVedios";
+
 
     // 注入
     public static boolean AUTO_INJECT = true;
@@ -100,6 +108,7 @@ public class Constant {
     public static String KEY_BOOL = "key-bool";
     public static String KEY_OBJ = "key-obj";
     public static String KEY_STR = "key-str";
+    public static String KEY_STR2 = "key-str2";
     public static String KEY_ACTION = "key-action";
     public static String KEY_ID = "key-id";
     public static String KEY_INT = "key-int";

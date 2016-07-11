@@ -27,6 +27,7 @@ import com.yuedong.football_mad.ui.activity.MyCommentListActivity;
 import com.yuedong.football_mad.ui.activity.MyHonorActivity;
 import com.yuedong.football_mad.ui.activity.MyMsgActivity;
 import com.yuedong.football_mad.ui.activity.UserInfoActivity;
+import com.yuedong.football_mad.ui.activity.VideoListActivity;
 import com.yuedong.football_mad.ui.activity.WatchBallActivity;
 import com.yuedong.lib_develop.app.App;
 import com.yuedong.lib_develop.bean.BaseResponse;
@@ -106,8 +107,8 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_watch_ball).setOnClickListener(this);
         menu.findViewById(R.id.ll_exit_logo).setOnClickListener(this);
         menu.findViewById(R.id.ll_setting).setOnClickListener(this);
-//        changeUi();
-//        getUserInfo();
+        menu.findViewById(R.id.ll_video_list).setOnClickListener(this);
+        changeUi();
     }
 
 //    @Override
@@ -187,7 +188,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 }
                 break;
             case R.id.rl_user_info:
-                if (CommonHelper.checkLogin(activity) == null) return;
+                if ( CommonHelper.checkLogin(activity) == null) return;
                 Bundle data = new Bundle();
                 data.putString(Constant.KEY_STR, loginUser.getSid());
                 LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class, data);
@@ -241,6 +242,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
 
             case R.id.ll_setting:
                 LaunchWithExitUtils.startActivity(activity, AppSettingActivity.class);
+                break;
+
+            case R.id.ll_video_list:
+                LaunchWithExitUtils.startActivity(activity, VideoListActivity.class);
                 break;
         }
     }

@@ -46,6 +46,15 @@ public class User implements Serializable{
     private String favoriteteam;
     private String countrylogo;
     private String teamlogo;
+    private String contact;
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
     public String getCountrylogo() {
         return countrylogo;
