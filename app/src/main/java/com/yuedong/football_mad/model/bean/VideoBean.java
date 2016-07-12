@@ -9,12 +9,48 @@ public class VideoBean {
     private String remark;
     private String createtime;
     private String updatetime;
-    private String playtime;
+    private long playtime;
     private String size;
     private String source;
     private String playcount;
     private String editor;
     private String name;
+    private String thumbnail;
+    private String username;
+    private String avatar;
+    private int userlevel;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getUserlevel() {
+        return userlevel;
+    }
+
+    public void setUserlevel(int userlevel) {
+        this.userlevel = userlevel;
+    }
 
     public String getId() {
         return id;
@@ -56,11 +92,11 @@ public class VideoBean {
         this.updatetime = updatetime;
     }
 
-    public String getPlaytime() {
+    public long getPlaytime() {
         return playtime;
     }
 
-    public void setPlaytime(String playtime) {
+    public void setPlaytime(long playtime) {
         this.playtime = playtime;
     }
 

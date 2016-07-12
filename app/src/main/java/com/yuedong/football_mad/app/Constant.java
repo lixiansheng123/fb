@@ -13,6 +13,7 @@ public class Constant {
     public static String URL_FRIEND_LIST_BY_USER = URL +"user/getFriend";
     public static String URL_FANS_LIST_BY_USER = URL +"user/getFans";
     public static String URL_ADD_FRIEND = URL +"user/addFriend";
+    public static String URL_DELETE_FRIEND = URL +"user/delFriend";
     public static String URL_GET_GAMELIST = URL + "game/getGameList";
     public static String URL_GET_HOTTEAM = URL + "team/getHotTeam";
     public static String URL_GET_TEAM_LIST = URL + "team/getTeamList";

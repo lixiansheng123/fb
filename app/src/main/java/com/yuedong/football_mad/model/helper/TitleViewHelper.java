@@ -1,8 +1,6 @@
 package com.yuedong.football_mad.model.helper;
 
-import android.content.Context;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,7 @@ public class TitleViewHelper {
     private View title3;
     private ImageView title3Left;
     private TextView title3Title;
-    private TextView tvTitle3Right;
+    private ImageView ivTitle3Right;
     private LinearLayout title3Right;
     private FragmentActivity context;
 
@@ -99,8 +97,8 @@ public class TitleViewHelper {
         return  title1Right;
     }
 
-    public TextView getTitle3Right(){
-        return tvTitle3Right;
+    public ImageView getTitle3Right(){
+        return ivTitle3Right;
     }
 
     public View getTitle1NonentityCenter(@DrawableRes int leftIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
@@ -199,7 +197,7 @@ public class TitleViewHelper {
         title3Left = (ImageView) title3.findViewById(R.id.title_btn_left);
         title3Title = (TextView) title3.findViewById(R.id.tv_title);
         title3Right = (LinearLayout) title3.findViewById(R.id.title_btn_right);
-        tvTitle3Right = (TextView) title3.findViewById(R.id.tv_title3_right);
+        ivTitle3Right = (ImageView) title3.findViewById(R.id.iv_title3_right);
     }
 
 

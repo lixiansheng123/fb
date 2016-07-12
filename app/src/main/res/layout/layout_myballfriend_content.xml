@@ -43,7 +43,6 @@
         android:text="普通评论员"
         android:singleLine="true"
         />
-
     <ImageView
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
@@ -51,5 +50,15 @@
         android:layout_height="11dp"
         android:id="@+id/iv_icon"
         android:src="@drawable/bg_round_orangeff6600"
+        />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_delete"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_green_delete"
         />
 </RelativeLayout>

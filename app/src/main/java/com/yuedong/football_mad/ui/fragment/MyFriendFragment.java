@@ -38,12 +38,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 俊鹏 on 2016/7/12
  */
 public class MyFriendFragment extends BaseFragment {
-    private String hotFriendTask,friendListTask;
+    private String hotFriendTask,friendListTask,deleteFriendTask;
     @ViewInject(R.id.expandableListview)
     private ExpandableListView exListView;
     @ViewInject(R.id.spListView)
@@ -53,6 +54,8 @@ public class MyFriendFragment extends BaseFragment {
     private List<List<MyFriendBean>> child = new ArrayList<>();
     private MyAdapter expandableAdapter;
     private List<DbLookFriendBean> lookFriendLists;
+    // 是否编辑泪飙
+    private boolean isEditList = false;
 
     @Override
     protected View getTitleView() {
@@ -91,8 +94,17 @@ public class MyFriendFragment extends BaseFragment {
     /**
      * 获取好友列表
      */
-    private void getFriendList(){
+    public void getFriendList(){
         friendListTask = RequestHelper.post(Constant.URL_FRIEND_LIST_BY_USER, DataUtils.getListPostMapHasSId("1","500","0",loginUser.getSid()),BaseResponse.class,true,true,this);
+    }
+
+    /**
+     * 编辑列表
+     * @param isEdit
+     */
+    public void editList(boolean isEdit){
+        this.isEditList = isEdit;
+        expandableAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -127,7 +139,6 @@ public class MyFriendFragment extends BaseFragment {
                         Iterator<String> keys = listJsonObj.keys();
                         while (keys.hasNext()){
                             String key = keys.next();
-                            L.d("key===>>"+key);
                             group.add(key);
                             List<MyFriendBean> myFriendBeanList = new ArrayList<>();
                             JSONArray jsonArray = listJsonObj.getJSONArray(key);
@@ -160,6 +171,8 @@ public class MyFriendFragment extends BaseFragment {
             for (int i = 0; i < group.size(); i++) {
                 exListView.expandGroup(i);
             }
+        }else if(tag.equals(deleteFriendTask)){
+            getFriendList();
         }
     }
 
@@ -210,11 +223,12 @@ public class MyFriendFragment extends BaseFragment {
         @Override
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = ViewHolder.get(getActivity(),convertView,parent,R.layout.layout_myballfriend_content,childPosition);
-            MyFriendBean myFriendBean = child.get(groupPosition).get(childPosition);
+            final MyFriendBean myFriendBean = child.get(groupPosition).get(childPosition);
             DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(myFriendBean.userlevel);
             RoundImageView ivHead= viewHolder.getIdByView(R.id.iv_user_head);
             TextView tvLevel = viewHolder.getIdByView(R.id.tv_level);
             ImageView ivIcon = viewHolder.getIdByView(R.id.iv_icon);
+            ImageView ivDelete = viewHolder.getIdByView(R.id.iv_delete);
             viewHolder.getIdByView(R.id.rl_head).setBackgroundResource(userLevelDisplayInfo.headBg);
             DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(myFriendBean.avatar), ivHead);
             viewHolder.setText(R.id.tv_name, myFriendBean.name);
@@ -222,6 +236,20 @@ public class MyFriendFragment extends BaseFragment {
             // 处理红点
             boolean light = DataUtils.redPointLignt(myFriendBean.id,loginUser.getId(),myFriendBean.lastpublishtime,lookFriendLists);
             if(light) ViewUtils.showLayout(ivIcon);else ViewUtils.hideLayout(ivIcon);
+            if(isEditList){
+                ViewUtils.showLayout(ivDelete);
+                ivDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, String> post = DataUtils.getSidPostMap(loginUser.getSid());
+                        post.put("friendid",myFriendBean.id);
+                        deleteFriendTask = RequestHelper.post(Constant.URL_DELETE_FRIEND,post,BaseResponse.class,false,false,MyFriendFragment.this);
+                    }
+                });
+            }else{
+                ViewUtils.hideLayout(ivDelete);
+                ivDelete.setOnClickListener(null);
+            }
             return viewHolder.getConvertView();
         }
 

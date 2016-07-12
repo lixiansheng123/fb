@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseActivity;
@@ -21,7 +20,7 @@ public class MyBallFriendActivity extends BaseActivity {
     private MyFansFragment myFansFragment;
     @ViewInject(R.id.tab)
     private DoubleTabView tabView;
-    private TextView tvTitle3Right;
+    private ImageView ivTitle3Right;
     private  boolean isEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +30,16 @@ public class MyBallFriendActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(!isEdit){
-                    isEdit = true ;
-                    tvTitle3Right.setText("");
-                    tvTitle3Right.setBackgroundResource(R.drawable.ic_green_finish);
+                    isEdit = true;
+                    ivTitle3Right.setImageResource(R.drawable.ic_green_finish);
                 }else{
                     isEdit = false;
-                    tvTitle3Right.setText("编辑");
-                    tvTitle3Right.setBackgroundResource(R.drawable.bg_round_borderwhite1dp);
+                    ivTitle3Right.setImageResource(R.drawable.ic_white_edit);
                 }
+                myFriendFragment.editList(isEdit);
             }
         }), R.layout.activity_my_ball_friend);
-        tvTitle3Right = titleViewHelper.getTitle3Right();
+        ivTitle3Right = titleViewHelper.getTitle3Right();
         initFragment();
         if(savedInstanceState == null)
             addFragment(myFriendFragment,R.id.fragment_container,false);
@@ -63,10 +61,10 @@ public class MyBallFriendActivity extends BaseActivity {
             @Override
             public void onClick(View view, int position) {
                 if(position == 0){
-                    ViewUtils.showLayout(tvTitle3Right);
+                    ViewUtils.showLayout(ivTitle3Right);
                     switchContent(mDisplayContext, myFriendFragment, R.id.fragment_container);
                 }else{
-                    ViewUtils.hideLayout(tvTitle3Right);
+                    ViewUtils.hideLayout(ivTitle3Right);
                     switchContent(mDisplayContext, myFansFragment, R.id.fragment_container);
                 }
             }
