@@ -199,9 +199,11 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.ll_my_comment:
+                if (CommonHelper.checkLogin(activity) == null) return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyCommentListActivity.class);
                 break;
             case R.id.ll_my_ball_friend:
+                if (CommonHelper.checkLogin(activity) == null) return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyBallFriendActivity.class);
                 break;
 

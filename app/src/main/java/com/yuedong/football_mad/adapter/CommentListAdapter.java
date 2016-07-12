@@ -132,7 +132,7 @@ public class CommentListAdapter extends BaseAdapter<List<CommentBean>> {
         ViewUtils.hideLayout(ivMore);
         ivMore.setTag(UNFOLD);
         ivMore.setImageResource(R.drawable.ic_blue_more_text);
-        ivMore.setTag(R.drawable.ic_blue_more_text);
+//        ivMore.setTag(R.drawable.ic_blue_more_text);
         ivMore.setOnClickListener(null);
         tvContent.setMaxLines(Integer.MAX_VALUE);
         tvContent.setTag(R.string.str_key_id, bean.getId());// 设置id-tag

@@ -10,6 +10,7 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.model.bean.DbAttention;
+import com.yuedong.football_mad.model.bean.DbLookFriendBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.db.sqlite.Selector;
@@ -224,6 +225,64 @@ public class DataUtils {
        return RequestHelper.post(url, post, BaseResponse.class, false, false, callback);
     }
 
+    /**
+     * 获取查看好友信息列表
+     * @param userId
+     * @return
+     */
+    public static List<DbLookFriendBean> getLookFriendList(String userId){
+        try{
+            return db.findAll(Selector.from(DbLookFriendBean.class).where("user_id","=",userId));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 好友红点判断是否显示(判断列表的)
+     * @param id 好友的id
+     * @param userId 用户id
+     * @param updateArticleTime 好友最后更新文章时间
+     * @param lookFriendLists 我观看好友的信息列表
+     * @return
+     */
+    public static boolean redPointLignt(String id,String userId,long updateArticleTime,List<DbLookFriendBean> lookFriendLists){
+        boolean has = false;
+        if(lookFriendLists != null && !lookFriendLists.isEmpty()){
+            for (DbLookFriendBean bean : lookFriendLists){
+                if(bean.getFriendId().equals(id) && bean.getUserId().equals(userId)){
+                    has = true;
+                    if(bean.getUpdateArticleTime() == updateArticleTime){
+                        return false;
+                    }else{
+                        bean.setUpdateArticleTime(updateArticleTime);
+                        try {
+                            db.update(bean);
+                        } catch (DbException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        if(!has) insertFriendLookInfo(id,userId,updateArticleTime);
+        return  true;
+    }
+
+    private static void insertFriendLookInfo(String friendId,String userId,long updateArticleTime){
+        try {
+            DbLookFriendBean dbLookFriendBean = new DbLookFriendBean();
+            dbLookFriendBean.setFriendId(friendId);
+            dbLookFriendBean.setUserId(userId);
+            dbLookFriendBean.setUpdateArticleTime(updateArticleTime);
+            db.save(dbLookFriendBean);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static Map<String, String> getUserIdPostMap(String userId) {
         Map<String, String> post = new HashMap<>();
@@ -266,5 +325,7 @@ public class DataUtils {
             post.put("max", max);
         return post;
     }
+
+
 
 }

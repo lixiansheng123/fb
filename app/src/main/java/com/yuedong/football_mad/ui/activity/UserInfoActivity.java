@@ -398,6 +398,11 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         text(etJobCity, user.getWorkcity());
         text(etJigou, user.getOrganization());
         text(etContact, user.getContact());
+        //TODO 处理是否看过对方资料
+//        User loginUser = MyApplication.getInstance().getLoginUser();
+//        if(loginUser!=null){
+//
+//        }
         getUserNews(user.getId());
     }
 

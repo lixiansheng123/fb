@@ -8,6 +8,8 @@ import com.yuedong.lib_develop.utils.WindowUtils;
 public class MyApplication extends App {
     public User user;
     private static MyApplication instance;
+    // 好友变化
+//    public boolean friendChange = false;
     // 用户信息变更
     public boolean userInfoChange = false;
     // 关注比赛变更

@@ -30,6 +30,7 @@
         android:minWidth="50dp">
 
         <TextView
+            android:id="@+id/tv_title3_right"
             style="@style/text_white_14sp"
             android:background="@drawable/bg_round_borderwhite1dp"
             android:padding="4dp"

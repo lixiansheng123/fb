@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:paddingLeft="13dp"
+    android:paddingRight="11dp"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_centerVertical="true"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:background="@drawable/level_quan_common"
+        >
+        <com.yuedong.lib_develop.view.RoundImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/haizeiwang"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/rl_head"
+        android:singleLine="true"
+        android:layout_width="126dp"
+        style="@style/text_bold_blue_14sp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:text="@string/str_test"
+        />
+
+    <TextView
+        android:id="@+id/tv_level"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_centerVertical="true"
+        style="@style/text_bold_blue_12sp"
+        android:text="普通评论员"
+        android:singleLine="true"
+        />
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:id="@+id/iv_icon"
+        android:src="@drawable/bg_round_orangeff6600"
+        />
+</RelativeLayout>

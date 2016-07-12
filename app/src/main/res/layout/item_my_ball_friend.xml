@@ -4,80 +4,11 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical">
+    <include
+        android:id="@+id/ll_tag"
+        layout="@layout/layout_myballfriend_tag"/>
 
-    <LinearLayout
-        android:paddingLeft="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:gravity="center_vertical"
-        android:background="@color/whiteF8F8F7"
-        android:orientation="horizontal">
-
-        <TextView
-            android:gravity="center"
-            android:text="推荐"
-            android:layout_width="43dp"
-            android:layout_height="20dp"
-            style="@style/text_greyEEEEEE_12sp"
-            android:background="@drawable/bggreen_round3dp"
-            />
-
-    </LinearLayout>
-    <View
-        style="@style/line_grey_1px"/>
-    <RelativeLayout
-        android:paddingLeft="13dp"
-        android:paddingRight="11dp"
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-
-        <RelativeLayout
-            android:id="@+id/rl_head"
-            android:layout_centerVertical="true"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:background="@drawable/level_quan_common"
-            >
-            <com.yuedong.lib_develop.view.RoundImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/haizeiwang"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/rl_head"
-            android:singleLine="true"
-            android:layout_width="126dp"
-            style="@style/text_bold_blue_14sp"
-            android:layout_marginLeft="23dp"
-            android:layout_marginRight="23dp"
-            android:text="@string/str_test"
-            />
-        
-        <TextView
-            android:id="@+id/tv_level"
-            android:layout_toRightOf="@+id/tv_name"
-            android:layout_centerVertical="true"
-            style="@style/text_bold_blue_12sp"
-            android:text="普通评论员"
-            android:singleLine="true"
-            />
-
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="11dp"
-            android:layout_height="11dp"
-            android:id="@+id/iv_icon"
-            android:src="@drawable/bg_round_orangeff6600"
-            />
-    </RelativeLayout>
-    
+    <include layout="@layout/layout_myballfriend_content"/>
 
 
 </LinearLayout>

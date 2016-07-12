@@ -28,6 +28,7 @@ public class TitleViewHelper {
     private View title3;
     private ImageView title3Left;
     private TextView title3Title;
+    private TextView tvTitle3Right;
     private LinearLayout title3Right;
     private FragmentActivity context;
 
@@ -96,6 +97,10 @@ public class TitleViewHelper {
 
     public ImageView getTitle1Right(){
         return  title1Right;
+    }
+
+    public TextView getTitle3Right(){
+        return tvTitle3Right;
     }
 
     public View getTitle1NonentityCenter(@DrawableRes int leftIcon, @DrawableRes int rightIcon, final View.OnClickListener leftListenr, final View.OnClickListener rightListenr) {
@@ -194,6 +199,7 @@ public class TitleViewHelper {
         title3Left = (ImageView) title3.findViewById(R.id.title_btn_left);
         title3Title = (TextView) title3.findViewById(R.id.tv_title);
         title3Right = (LinearLayout) title3.findViewById(R.id.title_btn_right);
+        tvTitle3Right = (TextView) title3.findViewById(R.id.tv_title3_right);
     }
 
 

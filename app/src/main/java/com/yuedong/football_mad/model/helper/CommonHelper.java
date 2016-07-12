@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
+import com.yuedong.football_mad.model.bean.DbLookFriendBean;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
 import com.yuedong.football_mad.model.bean.User;
@@ -26,6 +27,7 @@ import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.T;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**

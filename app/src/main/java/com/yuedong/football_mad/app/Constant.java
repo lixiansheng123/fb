@@ -9,7 +9,10 @@ public class Constant {
     public static String URL = "http://www.zqfeng.com/crazyfootball/";
     public static String URL_PIC = "http://www.zqfeng.com/";
     // 用户
-
+    public static String URL_HOT_FRIEND_LIST = URL+"user/getHotFriend";
+    public static String URL_FRIEND_LIST_BY_USER = URL +"user/getFriend";
+    public static String URL_FANS_LIST_BY_USER = URL +"user/getFans";
+    public static String URL_ADD_FRIEND = URL +"user/addFriend";
     public static String URL_GET_GAMELIST = URL + "game/getGameList";
     public static String URL_GET_HOTTEAM = URL + "team/getHotTeam";
     public static String URL_GET_TEAM_LIST = URL + "team/getTeamList";
@@ -93,6 +96,7 @@ public class Constant {
     public static String URL_COLLECT_COMMENT= URL +"comment/InterestComment";// 收藏评论
     public static String URL_USER_COLLECT_COMMENT_LIST= URL +"comment/getUserInterestComment";// 用户收藏评论列表
     public static String URL_COMMENT_ALARM = URL +"comment/alarmComment";// 评论报警
+    public static String URL_COMMENT_LIST_BY_USER = URL +"comment/getCommentByUser";// 用户评论列表
 
     //video
     public static String URL_VIDEO_LIST = URL +"vedio/getVedios";
