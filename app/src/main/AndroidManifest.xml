@@ -57,7 +57,8 @@
         <activity
             android:name=".ui.activity.VideoActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".ui.activity.VideoListActivity"></activity>
+        <activity android:name=".ui.activity.VideoListActivity" />
+        <activity android:name=".ui.activity.PostDetailActivity"></activity>
     </application>
 
 </manifest>

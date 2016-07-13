@@ -25,6 +25,7 @@ import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
 import com.yuedong.football_mad.model.bean.TouchBannerListBean;
 import com.yuedong.football_mad.model.bean.TouchBean;
+import com.yuedong.football_mad.model.bean.TouchListRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
@@ -92,15 +93,13 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
     private PulltoRefreshListView zanListView;
     private RefreshProxy<TouchBean> newRefreshProxy = new RefreshProxy<>();
     private RefreshProxy<TouchBean> zanRefreshProxy = new RefreshProxy<>();
-    private UserArticleListAdapter newAdapter;
-    private UserArticleListAdapter zanAdapter;
     private SelectSexDialog selectSexDialog;
     private SelectBallPosDialog selectBallPosDialog;
     private DaySelectDialog daySelectDialog;
     private View view1,view2, view3;
-    private boolean other = false;// 用于区分是否是查看自己
-    private String userSid; // 自己资料使用sid
-    private String userId; // 别人资料使用userid
+    private boolean other = true;// 用于区分是否是查看自己
+    private String userSid; // 自己sid
+    private String userId;
     private User user;
     private String updateTask;
     private String userInfoTsak;
@@ -109,7 +108,8 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
     private ImageView title1Right;
     private SelectPhotoDialog selectPhotoDialog;
     private int dp65;
-    private String headTask;
+    private String headTask,addFriendTask,deleteFriendTask;
+    private String  isFriend;
 
     //--------------------------post参数----------------------
     private int mSex = -1;
@@ -117,11 +117,26 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
     private String birthday;
     private String countryId;
     private String teamId;
+    private User loginUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+//        other = extras.getBoolean(Constant.KEY_BOOL, true);
+//        userSid = extras.getString(Constant.KEY_STR);
+        userId = extras.getString(Constant.KEY_STR2);
+        L.d("userId:"+userId);
+        loginUser  = MyApplication.getInstance().getLoginUser();
+        if(loginUser!=null){
+            L.d("loginUserId:"+loginUser.getId());
+            if(loginUser.getId().equals(userId)){
+                other = false;
+                userSid = loginUser.getSid();
+            }
+        }
+        L.d("other:"+other);
         final TitleViewHelper titleViewHelper = new TitleViewHelper(this);
         // 控制头部
         int rightIcon = -1;
@@ -147,16 +162,34 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
                 }
             };
         } else {
+            rightClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loginUser = CommonHelper.checkLogin(activity);
+                    if(loginUser == null)return;
+                    if(isFriend == null)return;
+                    if(isFriend.equals("0")){
+                        // 添加好友
+                        Map<String, String> post = DataUtils.getSidPostMap(loginUser.getSid());
+                        post.put("friendid",user.getId());
+                        addFriendTask = RequestHelper.post(Constant.URL_ADD_FRIEND,post,BaseResponse.class,false,false,UserInfoActivity.this);
+                    }else{
+                        // 取消添加好友
+                        Map<String, String> post = DataUtils.getSidPostMap(loginUser.getSid());
+                        post.put("friendid",user.getId());
+                        deleteFriendTask = RequestHelper.post(Constant.URL_DELETE_FRIEND,post,BaseResponse.class,false,false,UserInfoActivity.this);
+
+                    }
+                }
+            };
             rightIcon = R.drawable.ic_white_add_friend;
         }
         buildUi(titleViewHelper.getTitle1NomarlCenterTitle(R.drawable.ic_round_return, "作者用户名", rightIcon, null, rightClickListener),
                 R.layout.activity_user_info);
         title1Right = titleViewHelper.getTitle1Right();
         title1Right.setTag(0);
-        Bundle extras = getIntent().getExtras();
-        other = extras.getBoolean(Constant.KEY_BOOL, false);
-        userSid = extras.getString(Constant.KEY_STR);
-        userId = extras.getString(Constant.KEY_STR2);
+
+
         selectSexDialog = new SelectSexDialog(this);
         selectBallPosDialog = new SelectBallPosDialog(this);
         daySelectDialog = new DaySelectDialog(this);
@@ -232,7 +265,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         views.add(view1);
         views.add(view2);
         views.add(view3);
-        viewPager.setAdapter(new AbstractPagerAdapter(2) {
+        viewPager.setAdapter(new AbstractPagerAdapter(3) {
             @Override
             public Object getView(ViewGroup container, int position) {
                 return views.get(position);
@@ -240,8 +273,10 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         });
         if(!other)
              viewPager.setCurrentItem(2);
-        else
-            viewPager.setCurrentItem(1);
+        else {
+            viewPager.setCurrentItem(0);
+            ivZan.setSelected(false);
+        }
         item2Ui();
         getUserInfo();
     }
@@ -260,7 +295,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
             public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
                 Map<String, String> post = DataUtils.getListPostMapHasUserId(page + "", count + "", max + "", userId);
                 post.put("order","1");
-                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchBannerListBean.class, false, false, listener);
+                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchListRespBean.class, false, false, listener);
             }
 
             @Override
@@ -283,7 +318,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
             public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
                 Map<String, String> post = DataUtils.getListPostMapHasUserId(page + "", count + "", max + "", userId);
                 post.put("order","0");
-                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchBannerListBean.class, false, false, listener);
+                RequestHelper.post(Constant.URL_USER_NEWS, post, TouchListRespBean.class, false, false, listener);
             }
 
             @Override
@@ -303,7 +338,16 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
 
     // 获取用户信息
     private void getUserInfo() {
-        userInfoTsak = CommonHelper.getUserInfo(userSid, this);
+        if(!other)
+          userInfoTsak = CommonHelper.getUserInfo(userSid, this);
+        else{
+            String sid = "";
+            if(loginUser!=null)sid = loginUser.getSid();
+            Map<String, String> post = DataUtils.getSidPostMap(sid);
+            post.put("requireid",userId);
+            userInfoTsak =  RequestHelper.post(Constant.URL_GET_USERINFO,post,GetUserInfoByIdResBean.class,false,false,this);
+        }
+
     }
 
     private void item2Ui() {
@@ -398,12 +442,22 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
         text(etJobCity, user.getWorkcity());
         text(etJigou, user.getOrganization());
         text(etContact, user.getContact());
+        if(other){
+            isFriend = user.getIsfriend();
+            friendIcon();
+        }
         //TODO 处理是否看过对方资料
-//        User loginUser = MyApplication.getInstance().getLoginUser();
-//        if(loginUser!=null){
-//
-//        }
-        getUserNews(user.getId());
+        User loginUser = MyApplication.getInstance().getLoginUser();
+        if(loginUser!=null){
+
+        }
+    }
+
+    private void friendIcon(){
+        if(isFriend.equals("0"))
+            title1Right.setImageResource(R.drawable.ic_white_add_friend);
+        else
+            title1Right.setImageResource(R.drawable.ic_grey_add_friend);
     }
 
     @OnClick({R.id.iv_sel_new, R.id.iv_sel_zan, R.id.tv_more, R.id.rl_country, R.id.rl_team, R.id.rl_head})
@@ -412,7 +466,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
             case R.id.iv_sel_new:
                 ivNew.setSelected(true);
                 ivZan.setSelected(false);
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(1);
                 break;
             case R.id.iv_sel_zan:
                 ivNew.setSelected(false);
@@ -420,7 +474,7 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
                 viewPager.setCurrentItem(0);
                 break;
             case R.id.tv_more:
-                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(2);
                 break;
 
             case R.id.rl_country:
@@ -477,14 +531,15 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-        if (!tag.equals(userInfoTsak)) T.showShort(this, R.string.str_modify_succeed);
         if (tag.equals(updateTask)) {
+            T.showShort(this, R.string.str_modify_succeed);
 //            updateInfo = true;
             getUserInfo();
         } else if (tag.equals(userInfoTsak)) {
             GetUserInfoByIdResBean bean = (GetUserInfoByIdResBean) data;
             this.user = bean.getData().getList();
             renderUserInfo();
+            getUserNews(user.getId());
             if (updateInfo) {
                 // 更新用户信息
                 MyApplication.getInstance().setLoginuser(this.user);
@@ -492,8 +547,17 @@ public class UserInfoActivity extends LocalPhotoActivity implements View.OnClick
                 updateInfo = false;
             }
         } else if (tag.equals(headTask)) {
+            T.showShort(this, R.string.str_modify_succeed);
             updateInfo = true;
             getUserInfo();
+        }else if(tag.equals(addFriendTask)){
+            T.showShort(activity, "增加好友成功");
+            isFriend = "1";
+            friendIcon();
+        }else if(tag.equals(deleteFriendTask)){
+            T.showShort(activity, "删除好友成功");
+            isFriend = "0";
+            friendIcon();
         }
     }
 

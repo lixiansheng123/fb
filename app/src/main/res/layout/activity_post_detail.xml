@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+  >
+    <include layout="@layout/title_2" />
+    <include layout="@layout/layout_news_detail_top"/>
+
+    <View style="@style/line_blue_1px" />
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/greyEEEEEE"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_green_long_reply"
+            />
+
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/ll_attention"
+            android:id="@+id/ll_zan"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sel_green_zan" />
+
+            <TextView
+                android:id="@+id/tv_zan_num"
+                style="@style/text_green_12sp"
+                android:layout_marginTop="2dp"
+                android:text="0" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:id="@+id/ll_attention"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_collect"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/sel_collect" />
+
+            <TextView
+                style="@style/text_green_12sp"
+                android:layout_marginTop="2dp"
+                android:text="收藏" />
+        </LinearLayout>
+
+        </RelativeLayout>
+
+</LinearLayout>

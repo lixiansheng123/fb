@@ -11,6 +11,15 @@ public class TouchBean {
     private String thumbnail;
     private String good;
     private String comment;
+    private long createtime;
+
+    public long getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(long createtime) {
+        this.createtime = createtime;
+    }
 
     public String getId() {
         return id;

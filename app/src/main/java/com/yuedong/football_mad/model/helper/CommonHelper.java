@@ -289,5 +289,26 @@ public class CommonHelper {
         });
     }
 
+    /**
+     * 获取文章类型icon
+     * @param type
+     * @return
+     */
+    public static int getNewsTypeIcon(int type){
+        int res = R.drawable.ic_label_jiandi;
+        switch(type){
+            case 3:
+                res = R.drawable.ic_label_post;
+                break;
+            case 5:
+                res = R.drawable.ic_label_saiping;
+                break;
+            case 6:
+                res = R.drawable.ic_label_baike;
+                break;
+        }
+        return res;
+    }
+
 
 }

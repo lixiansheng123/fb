@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="41dp"
@@ -11,7 +6,7 @@
     android:gravity="center_vertical"
     android:paddingRight="11dp"
     android:orientation="horizontal"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include layout="@layout/layout_my_acticle_main"/>
     <ImageView
@@ -20,11 +15,4 @@
         android:layout_height="11dp"
         android:src="@drawable/bg_round_orangeff6600"
         />
-</LinearLayout>
-    <include layout="@layout/layout_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-7dp"
-        />
-
 </LinearLayout>

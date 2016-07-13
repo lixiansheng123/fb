@@ -6,62 +6,7 @@
 
     <include layout="@layout/title_2" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="11dp">
-
-            <RelativeLayout
-                android:id="@+id/rl_head"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/level_quan_common">
-
-                <com.yuedong.lib_develop.view.RoundImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:id="@+id/iv_user_head"
-                    android:layout_centerInParent="true"
-               />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/rl_head"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    style="@style/text_bold_blue_12sp"
-                    android:singleLine="true"
-                    android:text="@string/str_test" />
-
-                <TextView
-                    android:id="@+id/tv_level"
-                    style="@style/text_blue_9sp"
-                    android:layout_marginTop="2dp"
-                    android:text="资深评论员" />
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <com.yuedong.lib_develop.view.BannerView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.55" />
-
-    </LinearLayout>
+   <include layout="@layout/layout_news_detail_top"/>
 
     <View style="@style/line_blue_1px" />
 <FrameLayout

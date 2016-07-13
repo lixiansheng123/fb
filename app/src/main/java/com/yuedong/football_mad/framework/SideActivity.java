@@ -190,7 +190,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
             case R.id.rl_user_info:
                 if ( CommonHelper.checkLogin(activity) == null) return;
                 Bundle data = new Bundle();
-                data.putString(Constant.KEY_STR, loginUser.getSid());
+                data.putString(Constant.KEY_STR2, loginUser.getId());
                 LaunchWithExitUtils.startActivity(SideActivity.this, UserInfoActivity.class, data);
                 break;
             case R.id.ll_my_attention:
@@ -221,6 +221,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.ll_msg:
+                if (CommonHelper.checkLogin(activity) == null) return;
                 LaunchWithExitUtils.startActivity(SideActivity.this, MyMsgActivity.class);
                 break;
 

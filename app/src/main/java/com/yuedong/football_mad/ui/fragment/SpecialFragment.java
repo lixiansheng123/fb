@@ -113,11 +113,4 @@ public class SpecialFragment extends BaseFragment {
             specialTopAdapter.notifyDataSetChanged();
         }
     }
-    @OnItemClick(value = R.id.listview)
-    protected  void itemClickEvent(AdapterView<?> parent, View view, int position, long id){
-        SpecialBean bean = (SpecialBean) parent.getAdapter().getItem(position);
-        Bundle bundle = new Bundle();
-        bundle.putString(Constant.KEY_ID,bean.getId());
-        LaunchWithExitUtils.startActivity(getActivity(), SpecialDetailActivity.class,bundle);
-    }
 }

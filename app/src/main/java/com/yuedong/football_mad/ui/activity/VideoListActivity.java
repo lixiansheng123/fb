@@ -1,14 +1,11 @@
 package com.yuedong.football_mad.ui.activity;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
@@ -24,9 +21,12 @@ import com.yuedong.football_mad.model.helper.TitleViewHelper;
 import com.yuedong.football_mad.view.SpaceItemDecoration;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
-import com.yuedong.lib_develop.utils.DateUtils;
 import com.yuedong.lib_develop.utils.DimenUtils;
+import com.yuedong.lib_develop.utils.L;
+import com.yuedong.lib_develop.utils.T;
+import com.yuedong.lib_develop.utils.ViewUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +38,19 @@ public class VideoListActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     @ViewInject(R.id.recyclerView)
     private RecyclerView recyclerView;
+    @ViewInject(R.id.ll_footer)
+    private View footerView;
     private VideoListAdapter adapter;
     private int page = 1;
     private int count = Config.PAGER_SIZE;
     private int max = 0;
     private String listTask;
+    private boolean isLoad,loadFull;
+    private int[] lastPositions;
+    private int type = 1;// 1刷新  2上拉更多
+    //用来标记是否正在向最后一个滑动，既是否向下滑动
+    boolean isSlidingToLast = false;
+    private List<VideoBean> data = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +62,7 @@ public class VideoListActivity extends BaseActivity {
             }
         }), R.layout.activity_video_list);
         adapter = new VideoListAdapter(this);
+        autoLoadView = false;
     }
 
     @Override
@@ -62,13 +71,65 @@ public class VideoListActivity extends BaseActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                type = 1;
                 videoList();
             }
         });
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new SpaceItemDecoration(DimenUtils.dip2px(activity, 8)));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                L.d("newState:" + newState);
+                L.d("isSlidingToLast:"+isSlidingToLast);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE && isSlidingToLast){
+                //获取最后一个完全显示的ItemPosition
+                int[] lastVisiblePositions = layoutManager.findLastVisibleItemPositions(new int[layoutManager.getSpanCount()]);
+                int lastVisiblePos = findMax(lastVisiblePositions);
+                int totalItemCount = layoutManager.getItemCount();
+                    if (lastVisiblePos >= totalItemCount - 1) {
+                        T.showShort(activity,"尝试加载更多");
+                        if (!isLoad && !loadFull){
+                            ViewUtils.showLayout(footerView);
+                            type = 2;
+                            isLoad =true;
+                            page++;
+                            videoList();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //dx用来判断横向滑动方向，dy用来判断纵向滑动方向
+                L.d("dx:"+dx);
+                L.d("dy:"+dy);
+                if(dy > 0){
+                    //大于0表示，正在向下滚动
+                    isSlidingToLast = true;
+                }else{
+                    //小于等于0 表示停止或向上滚动
+                    isSlidingToLast = false;
+                }
+
+            }
+        });
+    }
+
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
     }
 
     private void videoList() {
@@ -101,7 +162,16 @@ public class VideoListActivity extends BaseActivity {
     }
 
     private void renderUi(List<VideoBean> list) {
-        adapter.setData(list);
+        if(type == 1){
+            data.clear();
+            page = 1;
+        }else{
+            ViewUtils.hideLayout(footerView);
+            isLoad = false;
+        }
+        if(list.size()<count)loadFull = true;
+        data.addAll(list);
+        adapter.setData(data);
         adapter.notifyDataSetChanged();
     }
 }

@@ -47,6 +47,15 @@ public class User implements Serializable{
     private String countrylogo;
     private String teamlogo;
     private String contact;
+    private String isfriend;
+
+    public String getIsfriend() {
+        return isfriend;
+    }
+
+    public void setIsfriend(String isfriend) {
+        this.isfriend = isfriend;
+    }
 
     public String getContact() {
         return contact;

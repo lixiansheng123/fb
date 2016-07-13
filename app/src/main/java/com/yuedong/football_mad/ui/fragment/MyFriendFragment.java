@@ -1,9 +1,12 @@
 package com.yuedong.football_mad.ui.fragment;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.framework.ViewHolder;
 import com.yuedong.football_mad.model.bean.DbLookFriendBean;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
+import com.yuedong.football_mad.model.bean.IdAvatarNameUserLeveLastPublishTimelBean;
 import com.yuedong.football_mad.model.bean.IdAvatarNameUserLevelRespBean;
 import com.yuedong.football_mad.model.bean.MyFriendBean;
 import com.yuedong.football_mad.model.bean.User;
@@ -24,10 +28,12 @@ import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.L;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.ViewUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
 import com.yuedong.lib_develop.view.SupportScrollConflictListView;
@@ -54,7 +60,7 @@ public class MyFriendFragment extends BaseFragment {
     private List<List<MyFriendBean>> child = new ArrayList<>();
     private MyAdapter expandableAdapter;
     private List<DbLookFriendBean> lookFriendLists;
-    // 是否编辑泪飙
+    // 是否编辑列表
     private boolean isEditList = false;
 
     @Override
@@ -114,6 +120,17 @@ public class MyFriendFragment extends BaseFragment {
             HotFriendAdapter adapter = new HotFriendAdapter(getActivity(),bean.getData().getList());
             adapter.setLookFriendBeans(lookFriendLists);
             spListView.setAdapter(adapter);
+            spListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    IdAvatarNameUserLeveLastPublishTimelBean bean = (IdAvatarNameUserLeveLastPublishTimelBean) parent.getAdapter().getItem(position);
+                    Bundle data = new Bundle();
+                    data.putString(Constant.KEY_STR2, bean.getId());
+                    LaunchWithExitUtils.startActivity(getActivity(), UserInfoActivity.class, data);
+
+
+                }
+            });
             expandableAdapter =  new MyAdapter();
             exListView.setAdapter(expandableAdapter);
             exListView.setGroupIndicator(null);
@@ -171,6 +188,16 @@ public class MyFriendFragment extends BaseFragment {
             for (int i = 0; i < group.size(); i++) {
                 exListView.expandGroup(i);
             }
+            exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                    MyFriendBean myFriendBean = child.get(groupPosition).get(childPosition);
+                    Bundle data = new Bundle();
+                    data.putString(Constant.KEY_STR2, myFriendBean.id);
+                    LaunchWithExitUtils.startActivity(getActivity(), UserInfoActivity.class, data);
+                    return true;
+                }
+            });
         }else if(tag.equals(deleteFriendTask)){
             getFriendList();
         }

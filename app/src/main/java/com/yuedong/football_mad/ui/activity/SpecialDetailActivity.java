@@ -17,6 +17,7 @@ import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
+import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
 import com.yuedong.lib_develop.utils.T;
 import com.yuedong.lib_develop.utils.ViewUtils;
 
@@ -80,13 +81,19 @@ public class SpecialDetailActivity extends BaseActivity {
         if(interest == 1){
             ivRightIcon.setImageResource(R.drawable.ic_detail_collect_select);
         }
-        llRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isAttention = true;
-                if(interest == 1)isAttention = false;
-                attentionTask=  DataUtils.attentionNews(activity,2,id,SpecialDetailActivity.this,isAttention);
-            }
-        });
+    }
+    @OnClick({R.id.title_btn_left,R.id.title_btn_right})
+    protected void clickEvent(View view){
+        switch(view.getId()){
+            case R.id.title_btn_left:
+                back();
+                break;
+
+            case R.id.title_btn_right:
+                    boolean isAttention = true;
+                    if(interest == 1)isAttention = false;
+                    attentionTask=  DataUtils.attentionNews(activity,2,id,SpecialDetailActivity.this,isAttention);
+                break;
+        }
     }
 }

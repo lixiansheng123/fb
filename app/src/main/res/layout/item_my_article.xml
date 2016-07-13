@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="41dp"
     android:gravity="center_vertical"
+    android:paddingRight="3dp"
     android:orientation="horizontal"
     android:paddingLeft="11dp">
 
@@ -24,6 +25,7 @@
                 android:src="@drawable/ic_small_blue_zan" />
 
             <TextView
+                android:id="@+id/tv_zan_num"
                 style="@style/text_blue_9sp"
                 android:text="100" />
         </LinearLayout>
@@ -41,6 +43,7 @@
                 android:src="@drawable/ic_small_blue_say" />
 
             <TextView
+                android:id="@+id/tv_comment_num"
                 style="@style/text_blue_9sp"
                 android:text="99" />
         </LinearLayout>

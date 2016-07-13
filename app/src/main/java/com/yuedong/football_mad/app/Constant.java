@@ -10,6 +10,8 @@ public class Constant {
     public static String URL_PIC = "http://www.zqfeng.com/";
     // 用户
     public static String URL_HOT_FRIEND_LIST = URL+"user/getHotFriend";
+    public static String URL_USER_MSG = URL+"user/getUserNotify";
+    public static String URL_USER_SYSTEMMSG = URL+"user/getSystemNotify";
     public static String URL_FRIEND_LIST_BY_USER = URL +"user/getFriend";
     public static String URL_FANS_LIST_BY_USER = URL +"user/getFans";
     public static String URL_ADD_FRIEND = URL +"user/addFriend";
@@ -21,7 +23,7 @@ public class Constant {
     public static String URL_GET_HOTATHLETE = URL + "athlete/getHotAthlete";
     public static String URL_GET_ATHLETELIST = URL + "athlete/getAthleteList";
     public static String URL_GET_ATHLETE_BY_ID = URL + "athlete/getAthleteById";
-
+    public static String URL_GET_USERINFO = URL + "user/getUserInfo";
     public static String URL_SEARCH_ALL = URL + "athlete/SearchAll";
     public static String URL_GET_HOTCOUNTRY = URL + "country/getHotCountry";
     public static String URL_GET_COUNTRYLIST = URL + "country/getCountryList";

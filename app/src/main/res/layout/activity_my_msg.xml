@@ -9,6 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="41dp"
         app:text1="用户消息"
+        android:id="@+id/tab"
         app:text2="官方消息"/>
-    <include layout="@layout/layout_common_list"/>
+   <FrameLayout
+       android:id="@+id/fragment_container"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"></FrameLayout>
 </LinearLayout>
