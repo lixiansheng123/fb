@@ -93,6 +93,7 @@ public class Constant {
     public static String URL_GET_INTEREST_CONTEST = URL + "contest/getInterestContest";// 关注比赛列表
     public static String URL_GET_GAME_INFO_BYID = URL + "contest/getContestById";// 关注比赛列表
     // 评论
+    public static String URL_CANCEL_COLLECT_COMMENT = URL + "comment/UnInterestComment";// 取消收藏评论
     public static String URL_GET_COMMENT_BY_NEWS = URL + "comment/getCommentByNews";
     public static String URL_ADD_COMMENT = URL + "comment/addComment";// 增加评论
     public static String URL_COMMENT_ZAN = URL + "comment/goodComment";

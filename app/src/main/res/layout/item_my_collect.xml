@@ -39,12 +39,23 @@
             />
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:id="@+id/tv_content"
             android:text="@string/str_test"
             style="@style/text_bold_blue_14sp"
             android:singleLine="true"
+            android:layout_marginRight="11dp"
             android:layout_marginLeft="14dp"
             />
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_green_delete"
+            />
+
 
     </LinearLayout>
 </LinearLayout>

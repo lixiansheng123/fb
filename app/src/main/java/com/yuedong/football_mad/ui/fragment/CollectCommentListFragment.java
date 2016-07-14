@@ -19,6 +19,7 @@ import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.T;
 
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class CollectCommentListFragment extends BaseFragment {
     private PulltoRefreshListView listView;
     private RefreshProxy<CollectCommentBean> refreshProxy = new RefreshProxy<>();
     private User loginUser;
+    private CollectCommentListAdapter adapter;
+    private CollectCommentBean bean;
+    private String cancelCollectTask;
     @Override
     protected View getTitleView() {
         return null;
@@ -40,20 +44,37 @@ public class CollectCommentListFragment extends BaseFragment {
         return R.layout.layout_common_list;
     }
 
+
+    public void editList(boolean edit){
+        if(!createUi)return;
+        adapter.isEdit = edit;
+        adapter.notifyDataSetChanged();
+    }
+
+
     @Override
     public void ui() {
         loginUser = MyApplication.getInstance().getLoginUser();
         refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<CollectCommentBean>() {
             @Override
             public BaseAdapter<CollectCommentBean> getAdapter(List<CollectCommentBean> data) {
-                return new CollectCommentListAdapter(getActivity(),data);
+                adapter = new CollectCommentListAdapter(getActivity(),data);
+                adapter.setOnDeleteListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                         bean = (CollectCommentBean) v.getTag();
+                        cancelCollectTask =  DataUtils.cancelCollectComment(loginUser.getSid(),bean.getId(),CollectCommentListFragment.this);
+
+                    }
+                });
+                return adapter;
             }
 
             @Override
             public void executeTask(int page, int count, int max, VolleyNetWorkCallback listener, int type) {
                 boolean useCache = false;
                 if(type == 1)useCache = true;
-                RequestHelper.post(Constant.URL_USER_COLLECT_COMMENT_LIST, DataUtils.getListPostMapHasSId(page + "", count + "", max + "", loginUser.getSid()), CollectCommentRespBean.class,true,useCache,listener);
+                cancelCollectTask =  RequestHelper.post(Constant.URL_USER_COLLECT_COMMENT_LIST, DataUtils.getListPostMapHasSId(page + "", count + "", max + "", loginUser.getSid()), CollectCommentRespBean.class,true,useCache,listener);
             }
 
             @Override
@@ -70,6 +91,9 @@ public class CollectCommentListFragment extends BaseFragment {
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-
+        if(tag.equals(cancelCollectTask)){
+            adapter.getData().remove(bean);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

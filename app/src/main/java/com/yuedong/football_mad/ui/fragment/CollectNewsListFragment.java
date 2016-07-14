@@ -20,6 +20,7 @@ import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +33,19 @@ public class CollectNewsListFragment extends BaseFragment {
     @ViewInject(R.id.listview)
     private PulltoRefreshListView listView;
     private RefreshProxy<CollectListBean> refreshProxy = new RefreshProxy<>();
+    private MyCollectAdapter myCollectAdapter;
+    private String cancelAttentionNewsTask;
+    private CollectListBean bean;
 
     @Override
     protected View getTitleView() {
         return null;
+    }
+
+    public void editList(boolean edit){
+        if(!createUi)return;
+        myCollectAdapter.isEdit = edit;
+        myCollectAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -49,7 +59,17 @@ public class CollectNewsListFragment extends BaseFragment {
         refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<CollectListBean>() {
             @Override
             public BaseAdapter<CollectListBean> getAdapter(List<CollectListBean> data) {
-                return new MyCollectAdapter(getActivity(), data);
+                myCollectAdapter =  new MyCollectAdapter(getActivity(), data);
+                myCollectAdapter.setDeleteClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bean = (CollectListBean) v.getTag();
+                        int type = 1;
+                        if(bean.type == 1)type = 2;
+                        cancelAttentionNewsTask =  DataUtils.attentionNews(getActivity(),type,bean.getId(),CollectNewsListFragment.this,false);
+                    }
+                });
+                return myCollectAdapter;
             }
 
             @Override
@@ -104,6 +124,9 @@ public class CollectNewsListFragment extends BaseFragment {
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-
+        if(tag.equals(cancelAttentionNewsTask)){
+            myCollectAdapter.getData().remove(bean);
+            myCollectAdapter.notifyDataSetChanged();
+        }
     }
 }

@@ -32,24 +32,49 @@ import java.util.List;
  * @author 俊鹏 on 2016/6/17
  */
 public class MyAttentionStarAdapter extends BaseAdapter<AttentionStarBean> {
-
+    public boolean isEdit;
+    private View.OnClickListener onClickListener;
+    public void setOnDeleteClickListener(View.OnClickListener onClickListener){
+        this.onClickListener = onClickListener;
+    }
     public MyAttentionStarAdapter(Context con, List<AttentionStarBean> data) {
         super(con, data, R.layout.item_my_attention);
+    }
+
+    public void deleteItem(String id){
+        for(AttentionStarBean b : mDatas){
+            if(b.getId().equals(id) && "".equals(b.getInterest())){
+                mDatas.remove(b);
+                notifyDataSetChanged();
+                return;
+            }
+        }
     }
 
     @Override
     public void convert(ViewHolder viewHolder, final AttentionStarBean bean, int position, View convertView) {
         TextView tvLabel = viewHolder.getIdByView(R.id.tv_label);
         final ImageView ivAttention = viewHolder.getIdByView(R.id.iv_attention);
+        ImageView ivDelete = viewHolder.getIdByView(R.id.iv_delete) ;
         RoundImageView ivHead = viewHolder.getIdByView(R.id.iv_head);
         DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(bean.getAvatar()),ivHead);
         viewHolder.setText(R.id.tv_name,bean.getName());
         View llLabel = viewHolder.getIdByView(R.id.ll_label);
         final String interest = bean.getInterest();
+        ViewUtils.hideLayout(ivDelete);
         // label控制....
         if(TextUtils.isEmpty(interest)){
             tvLabel.setText("关注");
             ViewUtils.invisibleLayout(ivAttention);
+            ivAttention.setOnClickListener(null);
+            if(isEdit){
+                ViewUtils.showLayout(ivDelete);
+                ivDelete.setTag(bean);
+                ivDelete.setOnClickListener(onClickListener);
+            }else{
+                ViewUtils.hideLayout(ivDelete);
+                ivDelete.setOnClickListener(null);
+            }
         }
         else {
             tvLabel.setText("热门");
@@ -60,7 +85,12 @@ public class MyAttentionStarAdapter extends BaseAdapter<AttentionStarBean> {
             }else{
                 ivAttention.setImageResource(R.drawable.ic_attention_select);
             }
-            ivAttention.setOnClickListener(new View.OnClickListener() {
+            ivAttention.setTag(bean);
+            ivAttention.setOnClickListener(onClickListener);
+            /*
+            *
+            *
+            * new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean isAttention = false;
@@ -90,7 +120,9 @@ public class MyAttentionStarAdapter extends BaseAdapter<AttentionStarBean> {
                         }
                     },isAttention);
                 }
-            });
+            }
+            *
+            * */
         }
         if(position != 0){
             AttentionStarBean preBean = mDatas.get(position - 1);

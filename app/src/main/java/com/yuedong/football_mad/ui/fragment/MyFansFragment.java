@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.framework.ViewHolder;
+import com.yuedong.football_mad.model.OnNotifyListener;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.FansBean;
 import com.yuedong.football_mad.model.bean.MyFriendBean;
@@ -50,6 +52,13 @@ public class MyFansFragment extends BaseFragment{
     private List<List<FansBean>> child = new ArrayList<>();
     private ImageView ivAddFriend;
     private String isFriend;
+    private OnNotifyListener notifyListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        notifyListener = (OnNotifyListener) getActivity();
+    }
 
     @Override
     protected View getTitleView() {
@@ -63,6 +72,7 @@ public class MyFansFragment extends BaseFragment{
 
     @Override
     public void ui() {
+        if(!createUi)return;
         loginUser = MyApplication.getInstance().getLoginUser();
         fansListTask=  RequestHelper.post(Constant.URL_FANS_LIST_BY_USER, DataUtils.getListPostMapHasSId("1", "500", "0", loginUser.getSid()),BaseResponse.class,true,true,this);
     }
@@ -136,6 +146,7 @@ public class MyFansFragment extends BaseFragment{
             T.showShort(getActivity(), "增加好友成功");
             ivAddFriend.setImageResource(R.drawable.ic_friend_already_add);
             isFriend = "1";
+            notifyListener.onNotifyAddFriend();
         }
 
     }

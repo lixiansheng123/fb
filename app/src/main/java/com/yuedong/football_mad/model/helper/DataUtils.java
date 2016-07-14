@@ -172,37 +172,12 @@ public class DataUtils {
     /**
      * 关注球星
      */
-    public static void attentionBallStar(final Context con, String sid, String authorid, final VolleyNetWorkCallback listener, final boolean isAttention) {
+    public static String attentionBallStar(final Context con, String sid, String authorid, final VolleyNetWorkCallback listener, final boolean isAttention) {
         Map<String, String> post = getSidPostMap(sid);
         post.put("starid", authorid);
         String url = Constant.URL_INTEREST_STAR;
         if (!isAttention) url = Constant.URL_UNINTEREST_STAR;
-        RequestHelper.post(url, post, BaseResponse.class, false, false, new VolleyNetWorkCallback() {
-            @Override
-            public void onNetworkStart(String tag) {
-
-            }
-
-            @Override
-            public void onNetworkSucceed(String tag, BaseResponse data) {
-                if(data == null)return;
-                if ( data.getState().getCode() == Constant.OK) {
-                    String msg = "关注成功";
-                    if (!isAttention) msg = "取消关注成功";
-                    T.showShort(con, msg);
-                    listener.onNetworkSucceed(tag, data);
-                }else{
-                    // TODO 后面加入登录异常的判断
-                }
-            }
-
-            @Override
-            public void onNetworkError(String tag, VolleyError error) {
-                if (error != null)
-                    T.showShort(con, error.getMessage());
-            }
-        });
-        post = null;
+        return RequestHelper.post(url, post, BaseResponse.class, false, false,listener);
     }
 
 
@@ -223,6 +198,19 @@ public class DataUtils {
         String url = Constant.URL_NEWS_INTEREST ;
         if(!isAttention)url = Constant.URL_NEWS_UNINTEREST;
        return RequestHelper.post(url, post, BaseResponse.class, false, false, callback);
+    }
+
+    /**
+     * 取消收藏评论
+     * @param sid
+     * @param commonId
+     * @param callback
+     * @return
+     */
+    public static String cancelCollectComment(String sid,String commonId,VolleyNetWorkCallback callback){
+        Map<String, String> post = DataUtils.getSidPostMap(sid);
+        post.put("commentid",commonId);
+       return  RequestHelper.post(Constant.URL_CANCEL_COLLECT_COMMENT,post,BaseResponse.class,false,false,callback);
     }
 
     /**

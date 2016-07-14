@@ -1,6 +1,7 @@
 package com.yuedong.football_mad.ui.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
@@ -32,9 +33,12 @@ public class AttentionStarFragment extends BaseFragment {
     @ViewInject(R.id.listview)
     private PulltoRefreshListView listView;
     private RefreshProxy<AttentionStarBean> refreshProxy = new RefreshProxy<>();
-    private String hotListTask;
+    private String hotListTask,attentionTask,cancelAttentionTask;
     private User loginUser;
     private boolean one = true;
+    private MyAttentionStarAdapter adapter;
+    private ImageView ivIcon;// 删除按钮和关注按钮
+    private AttentionStarBean starBean;
 
     @Override
     protected View getTitleView() {
@@ -53,6 +57,12 @@ public class AttentionStarFragment extends BaseFragment {
 
     }
 
+    public void editList(boolean edit){
+        if(!createUi)return;
+        adapter.isEdit = edit;
+        adapter.notifyDataSetChanged();
+    }
+
     private void getHotList() {
         User loginUser = MyApplication.getInstance().getLoginUser();
         hotListTask = RequestHelper.post(Constant.URL_NEWS_HOT_STAR, DataUtils.getSidPostMap(loginUser.getSid()), AttentionStarRespBean.class, false, false, this);
@@ -62,12 +72,32 @@ public class AttentionStarFragment extends BaseFragment {
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
         if (tag.equals(hotListTask)) {
-            AttentionStarRespBean bean = (AttentionStarRespBean) data;
+            final AttentionStarRespBean bean = (AttentionStarRespBean) data;
             final List<AttentionStarBean> hotList = bean.getDataList();
             refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<AttentionStarBean>() {
                 @Override
                 public BaseAdapter<AttentionStarBean> getAdapter(List<AttentionStarBean> data) {
-                    return new MyAttentionStarAdapter(getActivity(), data);
+                    adapter = new MyAttentionStarAdapter(getActivity(), data);
+                    adapter.setOnDeleteClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            starBean   = (AttentionStarBean) v.getTag();
+                            switch(v.getId()){
+                                case R.id.iv_delete:
+                                    cancelAttentionTask=   DataUtils.attentionBallStar(getActivity(),loginUser.getSid(),starBean.getId(),AttentionStarFragment.this,false);
+                                    break;
+                                case R.id.iv_attention:
+                                    ivIcon = (ImageView) v;
+                                    boolean isAttention = false;
+                                    if("0".equals(starBean.getInterest())) isAttention = true;
+                                    User loginUser = MyApplication.getInstance().getLoginUser();
+                                    final boolean finalIsAttention = isAttention;
+                                    attentionTask=   DataUtils.attentionBallStar(getActivity(), loginUser.getSid(), starBean.getId(),AttentionStarFragment.this,isAttention);
+                                    break;
+                            }
+                        }
+                    });
+                    return adapter;
                 }
 
                 @Override
@@ -110,6 +140,24 @@ public class AttentionStarFragment extends BaseFragment {
 
                 }
             });
+        }else if(tag.equals(attentionTask)){
+            if(starBean.getInterest().equals("0")) {
+                starBean.setInterest("1");
+                ivIcon.setImageResource(R.drawable.ic_attention_select);
+                AttentionStarBean newBean = new AttentionStarBean();
+                newBean.setName(starBean.getName());
+                newBean.setAvatar(starBean.getAvatar());
+                newBean.setId(starBean.getId());
+                adapter.getData().add(newBean);
+                adapter.notifyDataSetChanged();
+            } else {
+                starBean.setInterest("0");
+                ivIcon.setImageResource(R.drawable.ic_attention_unselect);
+                adapter.deleteItem(starBean.getId());
+            }
+        }else if(tag.equals(cancelAttentionTask)){
+            adapter.getData().remove(starBean);
+            adapter.notifyDataSetChanged();
         }
     }
 }

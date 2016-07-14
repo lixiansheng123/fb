@@ -96,8 +96,8 @@
 
                 <com.yuedong.lib_develop.view.RoundImageView
                     android:id="@+id/iv_user_head"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="69dp"
+                    android:layout_height="69dp"
                     android:layout_centerInParent="true"
                     />
             </RelativeLayout>

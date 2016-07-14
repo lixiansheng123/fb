@@ -34,6 +34,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
     protected LinearLayout mTitleLayout;
     public MultiStateView mMultiStateView;
     private boolean one = true;
+    protected boolean createUi = false;
     private LoadDialog loadDialog;
     private boolean cancelAll;
 
@@ -74,6 +75,7 @@ public abstract class BaseFragment extends Fragment implements VolleyNetWorkCall
     public void onResume() {
         super.onResume();
         if (one) {
+            createUi = true;
             one = false;
             if (Constant.AUTO_INJECT)
                 ViewUtils.inject(this, mMainLayout);

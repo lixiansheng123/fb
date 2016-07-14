@@ -22,7 +22,7 @@ import com.yuedong.lib_develop.exception.DbException;
 import java.util.*;
 
 /**
- * Build "insert", "replace",，"update", "delete" and "create" sql.
+ * Build "insert", "replace",，"update", "deleteItem" and "create" sql.
  */
 public class SqlInfoBuilder {
 
@@ -93,7 +93,7 @@ public class SqlInfoBuilder {
         return result;
     }
 
-    //*********************************************** delete sql ***********************************************
+    //*********************************************** deleteItem sql ***********************************************
 
     private static String buildDeleteSqlByTableName(String tableName) {
         return "DELETE FROM " + tableName;

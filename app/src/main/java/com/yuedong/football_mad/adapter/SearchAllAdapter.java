@@ -2,6 +2,7 @@ package com.yuedong.football_mad.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -19,7 +20,11 @@ import java.util.List;
  * @author 俊鹏 on 2016/6/24
  */
 public class SearchAllAdapter extends BaseAdapter<FinalSearchAllBean> {
-
+    public boolean isEdit;
+    private View.OnClickListener listener;
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
     public SearchAllAdapter(Context con) {
         super(con, R.layout.item_dataku_competition);
     }
@@ -35,6 +40,7 @@ public class SearchAllAdapter extends BaseAdapter<FinalSearchAllBean> {
         View llLable = viewHolder.getIdByView(R.id.ll_label);
         TextView tvLabel = viewHolder.getIdByView(R.id.tv_label);
         TextView tvContent = viewHolder.getIdByView(R.id.tv_content);
+        ImageView ivDelete = viewHolder.getIdByView(R.id.iv_delete);
         NetworkImageView imageView = viewHolder.getIdByView(R.id.iv_pic);
         int type = finalSearchAllBean.getType();
         String lable = "";
@@ -61,6 +67,15 @@ public class SearchAllAdapter extends BaseAdapter<FinalSearchAllBean> {
             }else{
                 ViewUtils.showLayouts(llLable);
             }
+        }
+
+        if(isEdit){
+            ViewUtils.showLayout(ivDelete);
+            ivDelete.setTag(finalSearchAllBean);
+            ivDelete.setOnClickListener(listener);
+        }else {
+            ViewUtils.hideLayout(ivDelete);
+            ivDelete.setOnClickListener(null);
         }
 
     }

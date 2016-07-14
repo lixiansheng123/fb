@@ -44,7 +44,15 @@ public class AttentionDataFragment extends BaseFragment {
     @ViewInject(R.id.listview)
     private PulltoRefreshListView listView;
     private RefreshProxy<FinalSearchAllBean> refreshProxy = new RefreshProxy<>();
+    private SearchAllAdapter adapter;
+    private FinalSearchAllBean bean;
+    private String attentionTask;
 
+    public void editList(boolean edit){
+        if(!createUi)return;
+        adapter.isEdit = edit;
+        adapter.notifyDataSetChanged();
+    }
     @Override
     protected View getTitleView() {
         return null;
@@ -61,8 +69,34 @@ public class AttentionDataFragment extends BaseFragment {
         refreshProxy.setPulltoRefreshRefreshProxy(listView, new RefreshProxy.ProxyRefreshListener<FinalSearchAllBean>() {
             @Override
             public BaseAdapter<FinalSearchAllBean> getAdapter(List<FinalSearchAllBean> data) {
-                SearchAllAdapter adapter = new SearchAllAdapter(getActivity());
+                 adapter = new SearchAllAdapter(getActivity());
                 adapter.setEmptyData(data);
+                adapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bean = (FinalSearchAllBean) v.getTag();
+                        int type = 1;
+                        switch(bean.getType()){
+                            case 1:
+                                type =  2;
+                                break;
+                            case 2:
+                                type = 3;
+                                break;
+                            case 3:
+                                type = 4;
+                                break;
+                            case 4:
+                                type = 1;
+                                break;
+                            case 5:
+                                type = 5;
+                                break;
+                        }
+                        attentionTask =    DataUtils.attentionData(user.getSid(),type,bean.getId(),AttentionDataFragment.this,false);
+
+                    }
+                });
                 return adapter;
             }
 
@@ -151,7 +185,10 @@ public class AttentionDataFragment extends BaseFragment {
 
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
-
+        if(tag.equals(attentionTask)){
+            adapter.getData().remove(bean);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 

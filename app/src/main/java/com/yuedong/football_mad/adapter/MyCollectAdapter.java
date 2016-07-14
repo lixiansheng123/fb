@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,11 @@ import java.util.List;
  * @author 俊鹏 on 2016/6/20
  */
 public class MyCollectAdapter extends BaseAdapter<CollectListBean> {
+    public boolean isEdit;
+    private View.OnClickListener deleteClickListener;
+    public void setDeleteClickListener(View.OnClickListener deleteClickListener){
+        this.deleteClickListener = deleteClickListener;
+    }
     public MyCollectAdapter(Context con, List<CollectListBean> data) {
         super(con, data, R.layout.item_my_collect);
     }
@@ -38,6 +44,7 @@ public class MyCollectAdapter extends BaseAdapter<CollectListBean> {
         RelativeLayout rlLable = viewHolder.getIdByView(R.id.rl_top);
         View rlHead = viewHolder.getIdByView(R.id.rl_head);
         RoundImageView ivHead = viewHolder.getIdByView(R.id.iv_user_head);
+        ImageView ivDelete = viewHolder.getIdByView(R.id.iv_delete);
         viewHolder.setText(R.id.tv_name, bean.getAuthorname())
                 .setText(R.id.tv_content, bean.getTitle());
         int userlevel = bean.getUserlevel();
@@ -73,5 +80,13 @@ public class MyCollectAdapter extends BaseAdapter<CollectListBean> {
                 LaunchWithExitUtils.startActivity((Activity)mCon, UserInfoActivity.class,data);
             }
         });
+        if(isEdit){
+            ViewUtils.showLayout(ivDelete);
+            ivDelete.setTag(bean);
+            ivDelete.setOnClickListener(deleteClickListener);
+        }else{
+            ViewUtils.invisibleLayout(ivDelete);
+            ivDelete.setOnClickListener(null);
+        }
     }
 }

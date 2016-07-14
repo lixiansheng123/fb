@@ -1,6 +1,7 @@
 package com.yuedong.football_mad.ui.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.framework.ViewHolder;
+import com.yuedong.football_mad.model.OnNotifyListener;
 import com.yuedong.football_mad.model.bean.DbLookFriendBean;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.IdAvatarNameUserLeveLastPublishTimelBean;
@@ -62,6 +64,14 @@ public class MyFriendFragment extends BaseFragment {
     private List<DbLookFriendBean> lookFriendLists;
     // 是否编辑列表
     private boolean isEditList = false;
+    private int deleteGroupPos,deleteChildPos;
+    private OnNotifyListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        listener = (OnNotifyListener) getActivity();
+    }
 
     @Override
     protected View getTitleView() {
@@ -101,7 +111,8 @@ public class MyFriendFragment extends BaseFragment {
      * 获取好友列表
      */
     public void getFriendList(){
-        friendListTask = RequestHelper.post(Constant.URL_FRIEND_LIST_BY_USER, DataUtils.getListPostMapHasSId("1","500","0",loginUser.getSid()),BaseResponse.class,true,true,this);
+        if(createUi)
+          friendListTask = RequestHelper.post(Constant.URL_FRIEND_LIST_BY_USER, DataUtils.getListPostMapHasSId("1","500","0",loginUser.getSid()),BaseResponse.class,true,true,this);
     }
 
     /**
@@ -145,6 +156,8 @@ public class MyFriendFragment extends BaseFragment {
             });
             getFriendList();
         }else if(tag.equals(friendListTask)){
+            group.clear();
+            child.clear();
             showLoadView(false);
             String json = data.getJson();
             try {
@@ -199,7 +212,10 @@ public class MyFriendFragment extends BaseFragment {
                 }
             });
         }else if(tag.equals(deleteFriendTask)){
-            getFriendList();
+            child.get(deleteChildPos).remove(deleteChildPos);
+            expandableAdapter.notifyDataSetChanged();
+            listener.onNotifyDeleteFriend();
+//            getFriendList();
         }
     }
 
@@ -248,7 +264,7 @@ public class MyFriendFragment extends BaseFragment {
         }
 
         @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = ViewHolder.get(getActivity(),convertView,parent,R.layout.layout_myballfriend_content,childPosition);
             final MyFriendBean myFriendBean = child.get(groupPosition).get(childPosition);
             DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(myFriendBean.userlevel);
@@ -268,6 +284,8 @@ public class MyFriendFragment extends BaseFragment {
                 ivDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        deleteGroupPos = groupPosition;
+                        deleteChildPos = childPosition;
                         Map<String, String> post = DataUtils.getSidPostMap(loginUser.getSid());
                         post.put("friendid",myFriendBean.id);
                         deleteFriendTask = RequestHelper.post(Constant.URL_DELETE_FRIEND,post,BaseResponse.class,false,false,MyFriendFragment.this);

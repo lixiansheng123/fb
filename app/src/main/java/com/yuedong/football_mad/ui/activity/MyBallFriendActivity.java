@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.framework.BaseActivity;
+import com.yuedong.football_mad.model.OnNotifyListener;
 import com.yuedong.football_mad.model.helper.TitleViewHelper;
 import com.yuedong.football_mad.ui.fragment.MyFansFragment;
 import com.yuedong.football_mad.ui.fragment.MyFriendFragment;
@@ -15,7 +16,7 @@ import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.utils.ViewUtils;
 
-public class MyBallFriendActivity extends BaseActivity {
+public class MyBallFriendActivity extends BaseActivity implements OnNotifyListener {
     private MyFriendFragment myFriendFragment;
     private MyFansFragment myFansFragment;
     @ViewInject(R.id.tab)
@@ -76,4 +77,18 @@ public class MyBallFriendActivity extends BaseActivity {
     public void networdSucceed(String tag, BaseResponse data) {
 
     }
+
+    @Override
+    public void onNotifyDeleteFriend() {
+        // 删除了粉丝粉丝列表
+        myFansFragment.ui();
+    }
+
+    @Override
+    public void onNotifyAddFriend() {
+        // 添加了粉丝刷新好友列表
+        myFriendFragment.getFriendList();
+
+    }
+
 }

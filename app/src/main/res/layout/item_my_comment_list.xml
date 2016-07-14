@@ -65,7 +65,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/tv_title"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="15dp"
         style="@style/text_bold_blue_14sp"
         android:text="@string/str_test"
         android:singleLine="true"

@@ -32,7 +32,7 @@ public class MyCommentListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, "我的评论", R.drawable.ic_white_write_comment2, null, new View.OnClickListener() {
+        buildUi(new TitleViewHelper(this).getTitle1NomarlCenterTitle(R.drawable.ic_round_return, "我的评论", R.drawable.ic_title_send, null, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -43,13 +43,6 @@ public class MyCommentListActivity extends BaseActivity {
     @Override
     protected void ui() {
         loginUser = MyApplication.getInstance().getLoginUser();
-//        List<User> data = new ArrayList<User>();
-//        data.add(null);
-//        data.add(null);
-//        data.add(null);
-//        MyCommentListAdapter adapter = new MyCommentListAdapter(this,data);
-//        listView.setAdapter(adapter);
-
         getCommentList();
 
     }

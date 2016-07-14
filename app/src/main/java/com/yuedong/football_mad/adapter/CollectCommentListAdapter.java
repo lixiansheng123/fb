@@ -13,6 +13,7 @@ import com.yuedong.football_mad.model.bean.CommentBean;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
 import com.yuedong.lib_develop.utils.DateUtils;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
@@ -27,6 +28,11 @@ import java.util.List;
 public class CollectCommentListAdapter extends BaseAdapter<CollectCommentBean> {
     private static final int PACK_UP = 1;
     private static final int UNFOLD = 2;
+    public boolean isEdit;
+    private View.OnClickListener deleteListener;
+    public void setOnDeleteListener(View.OnClickListener deleteListener){
+        this.deleteListener = deleteListener;
+    }
     public CollectCommentListAdapter(Context con, List<CollectCommentBean> data) {
         super(con, data, R.layout.item_collect_comment_list);
     }
@@ -34,6 +40,7 @@ public class CollectCommentListAdapter extends BaseAdapter<CollectCommentBean> {
     @Override
     public void convert(ViewHolder viewHolder, CollectCommentBean bean, int position, View convertView) {
         View rlHead = viewHolder.getIdByView(R.id.rl_head);
+        ImageView ivDelete = viewHolder.getIdByView(R.id.iv_delete);
         final ImageView ivMore = viewHolder.getIdByView(R.id.iv_more);
         RoundImageView roundImageView = viewHolder.getIdByView(R.id.iv_head);
         TextView tvUserLevel = viewHolder.getIdByView(R.id.tv_level);
@@ -43,7 +50,7 @@ public class CollectCommentListAdapter extends BaseAdapter<CollectCommentBean> {
         String timeDesc = DateUtils.getDescriptionTimeFromTimestamp(bean.getCreatetime() * 1000);
         DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(userlevel);
         viewHolder.setText(R.id.tv_name, bean.getAuthorname())
-        .setText(R.id.tv_title,bean.getNewstitle());
+        .setText(R.id.tv_title, bean.getNewstitle());
         tvContent.setText(bean.getContent());
         tvUserLevel.setText(TextUtils.addTextColor(userLevelDisplayInfo.textDesc + " " + timeDesc, 0, 2, userLevelDisplayInfo.partTextColor));
         DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(bean.getAuthoravatar()), roundImageView);
@@ -84,5 +91,14 @@ public class CollectCommentListAdapter extends BaseAdapter<CollectCommentBean> {
                 }
             }
         });
+
+        if(isEdit){
+            ViewUtils.showLayout(ivDelete);
+            ivDelete.setTag(bean);
+            ivDelete.setOnClickListener(deleteListener);
+        }else{
+            ViewUtils.hideLayout(ivDelete);
+            ivDelete.setOnClickListener(null);
+        }
     }
 }
