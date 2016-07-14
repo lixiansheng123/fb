@@ -497,60 +497,86 @@
                     android:layout_weight="2">
 
                     <LinearLayout
+                        android:visibility="invisible"
+                        android:id="@+id/ll_honor1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-
-                        <ImageView
+                        <FrameLayout
                             android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_round_oranged6bc53a"/>
-
-
+                            android:background="@drawable/bg_round_oranged6bc53a"
+                            android:layout_height="28dp">
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:id="@+id/iv_honor1"
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                />
+                        </FrameLayout>
                         <TextView
+                            android:id="@+id/tv_honor1"
                             style="@style/text_bold_green_7sp"
                             android:layout_marginTop="2dp"
                             android:text="开山元老" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_honor2"
                         android:layout_width="0dp"
+                        android:visibility="invisible"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-
-                        <ImageView
+                        <FrameLayout
                             android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_round_oranged6bc53a" />
+                            android:background="@drawable/bg_round_oranged6bc53a"
+                            android:layout_height="28dp">
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:id="@+id/iv_honor2"
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                />
+                        </FrameLayout>
 
                         <TextView
+                            android:id="@+id/tv_honor2"
                             style="@style/text_bold_green_7sp"
                             android:layout_marginTop="2dp"
                             android:text="评论达人" />
                     </LinearLayout>
 
                     <RelativeLayout
+
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <LinearLayout
+                            android:visibility="invisible"
+                            android:id="@+id/ll_honor3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:gravity="center"
                             android:orientation="vertical">
-
-                            <ImageView
+                            <FrameLayout
                                 android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:background="@drawable/bg_round_oranged6bc53a" />
+                                android:background="@drawable/bg_round_oranged6bc53a"
+                                android:layout_height="28dp">
+                                <ImageView
+                                    android:layout_gravity="center"
+                                    android:id="@+id/iv_honor3"
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    />
+                            </FrameLayout>
 
                             <TextView
+                                android:id="@+id/tv_honor3"
                                 style="@style/text_bold_green_7sp"
                                 android:layout_marginTop="2dp"
                                 android:text="666" />
@@ -676,6 +702,7 @@
                 android:background="@color/greenBED965" />
 
             <LinearLayout
+                android:id="@+id/ll_ballplayer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -764,6 +791,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/orangeFF6600" />
             <LinearLayout
+                android:id="@+id/ll_active"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

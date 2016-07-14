@@ -28,7 +28,7 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
     private ViewPager mViewPager;
     private LinearLayout mPoints;
     private List<T> mData;
-    private int defaultShowPic = -1;
+//    private int defaultShowPic = -1;
     /**
      * 当前页面
      */
@@ -56,9 +56,9 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
         this.mClickListener = mClickListener;
     }
 
-    public void setDefaultShowPic(int defaultShowPic) {
-        this.defaultShowPic = defaultShowPic;
-    }
+//    public void setDefaultShowPic(int defaultShowPic) {
+//        this.defaultShowPic = defaultShowPic;
+//    }
 
     public void setIsNeedIndicator(boolean needIndicator) {
         this.mNeedIndicator = needIndicator;
@@ -85,6 +85,7 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
     }
 
     private void init() {
+        removeAllViews();
         if (mData == null && mData.isEmpty())
             throw new NullPointerException(ERROR_DATA_IS_NULL);
 //        initDisplayOptions();
@@ -94,6 +95,7 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
         } catch (Exception e) {
         }
         mViewPager = new ViewPager(getContext());
+        mViewPager.setBackgroundResource(android.R.color.transparent);
         addView(mViewPager, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         if (mNeedIndicator) {
             mPoints = new LinearLayout(getContext());
@@ -153,10 +155,11 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
         public Object instantiateItem(final ViewGroup container, final int position) {
             // 采用在这里new view的方式可以解决一些莫名的bug
             final int index = position % mData.size();
-            NetworkImageView iv = new NetworkImageView(getContext());
+            ImageView iv = new ImageView(getContext());
             iv.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             iv.setScaleType(ScaleType.CENTER_CROP);
             iv.setBackgroundResource(android.R.color.transparent);
+            iv.setImageResource(android.R.color.transparent);
             iv.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -165,16 +168,10 @@ public class BannerView<T> extends FrameLayout implements OnPageChangeListener {
                     }
                 }
             });
-            if (defaultShowPic != -1) {
-                iv.setImageResource(defaultShowPic);
-            } else {
-                iv.setImageResource(android.R.color.white);
-            }
             ((ViewPager) container).addView(iv);
             if (mData.get(index) instanceof String) {
                 // 加载网络图片
-                DisplayImageByVolleyUtils.loadImage(iv, (String) mData.get(index));
-//				ImageLoader.getInstance().displayImage((String) mData.get(index), iv, mDisplayImageOptions);
+                DisplayImageByVolleyUtils.loadImage((String) mData.get(index),iv);
             } else if (mData.get(index) instanceof Integer) {
                 iv.setImageResource((Integer) mData.get(index));
             }

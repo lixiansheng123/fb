@@ -116,6 +116,7 @@ public class TouchFragment extends BaseFragment {
             for (int i = 0; i < horlist.size(); i++) {
                 bannerList.add(UrlHelper.checkUrl(horlist.get(i).getPic()));
             }
+            bannerView.setBackgroundResource(android.R.color.transparent);
             bannerView.setIsNeedIndicator(true);
             bannerView.buildData(bannerList);
             bannerView.use();

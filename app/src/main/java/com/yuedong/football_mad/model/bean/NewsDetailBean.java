@@ -34,6 +34,24 @@ public class NewsDetailBean {
     private int rubishadv;
     private int badcopy;
     private int interest;
+    private int userlevel;
+    private String avatar;
+
+    public int getUserlevel() {
+        return userlevel;
+    }
+
+    public void setUserlevel(int userlevel) {
+        this.userlevel = userlevel;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public int getInterest() {
         return interest;

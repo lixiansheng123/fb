@@ -9,6 +9,8 @@ public class Constant {
     public static String URL = "http://www.zqfeng.com/crazyfootball/";
     public static String URL_PIC = "http://www.zqfeng.com/";
     // 用户
+    public static String URL_USER_HONOR = URL+"user/getUserHonor";
+    public static String URL_ALL_HONOR = URL+"user/getAllHonor";
     public static String URL_HOT_FRIEND_LIST = URL+"user/getHotFriend";
     public static String URL_USER_MSG = URL+"user/getUserNotify";
     public static String URL_USER_SYSTEMMSG = URL+"user/getSystemNotify";
@@ -52,6 +54,7 @@ public class Constant {
 
     // news
     public static String URL_USER_NEWS = URL +"news/getOwnNews";// 用户新闻列表
+    public static String URL_NEWS_LIST = URL +"news/getNewsList";// 用户新闻列表
     public static String URL_WORLD_NEWS = URL + "news/getWorldNews";// 世界新闻
     public static String URL_HOME_NEWS = URL + "news/getHomeNews";// 国内新闻
     public static String URL_GET_CONTEST_NEWS = URL + "news/getContestNews";// 赛事新闻列表
@@ -69,6 +72,8 @@ public class Constant {
     public static String URL_NEWS_INTEREST = URL + "news/InterestNews";// 关注新闻/专题
     public static String URL_NEWS_UNINTEREST = URL + "news/UnInterestNews";// 取消关注新闻/专题
     public static String URL_COLLECT_NEWS_LIST = URL + "news/getUserInterestNews";
+    public static String URL_QIUTAN_HOTLIST = URL + "news/getHotNewsWithAuthor";
+    public static String URL_QIUTAN_NEWLIST = URL + "news/getNewsWithAuthor";
 //    public static String URL_NEWS_GOODS = URL + "news/goodNews";// 新闻点赞
     // 见地
     public static String URL_HOT_INSIGNLIST = URL + "news/getHotInsign";
@@ -119,5 +124,6 @@ public class Constant {
     public static String KEY_ACTION = "key-action";
     public static String KEY_ID = "key-id";
     public static String KEY_INT = "key-int";
+    public static String KEY_SERIALIZABLE = "key-serializable";
 
 }

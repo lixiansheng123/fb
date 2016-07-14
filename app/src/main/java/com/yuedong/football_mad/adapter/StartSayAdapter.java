@@ -20,6 +20,7 @@ import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.football_mad.ui.activity.PlayerDetailActivity;
 import com.yuedong.football_mad.ui.activity.PostDetailActivity;
+import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
 import com.yuedong.lib_develop.utils.DateUtils;
@@ -97,9 +98,9 @@ public class StartSayAdapter extends BaseAdapter<StarSayBean> {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putString(Constant.KEY_ID, bean.getAuthorid());
-                b.putString(Constant.KEY_STR, bean.getUsername());
-                LaunchWithExitUtils.startActivity((Activity) mCon, PlayerDetailActivity.class, b);
+                b.putString(Constant.KEY_STR2, bean.getAuthorid());
+//                b.putString(Constant.KEY_STR, bean.getUsername());
+                LaunchWithExitUtils.startActivity((Activity) mCon, UserInfoActivity.class, b);
             }
         });
         viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {

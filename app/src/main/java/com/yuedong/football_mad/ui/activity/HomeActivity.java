@@ -85,10 +85,6 @@ public class HomeActivity extends SideActivity {
         tab5.setTag(R.string.key_unclick_icon, R.drawable.ic_special_unselect);
     }
 
-    @Override
-    public void networdSucceed(String tag, BaseResponse data) {
-
-    }
 
     @Override
     protected Fragment getDefaultFrag() {

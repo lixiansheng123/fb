@@ -16,12 +16,14 @@ import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.framework.BaseActivity;
 import com.yuedong.football_mad.model.bean.DbLikeRecord;
+import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.NewsDetailBean;
 import com.yuedong.football_mad.model.bean.NewsDetailRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RequestHelper;
+import com.yuedong.football_mad.model.helper.UrlHelper;
 import com.yuedong.football_mad.view.CriticismPop;
 import com.yuedong.football_mad.view.NewsStyleDialog;
 import com.yuedong.lib_develop.bean.BaseResponse;
@@ -30,6 +32,7 @@ import com.yuedong.lib_develop.exception.DbException;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.ioc.annotation.event.OnClick;
 import com.yuedong.lib_develop.utils.DbUtils;
+import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
 import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.T;
@@ -212,6 +215,11 @@ public class NewsDetailActivity extends BaseActivity {
         tvCaiNum.setText(caiNum + "");
         L.d("视频路径" + list.getVedios());
         interest = list.getInterest();
+        DisplayUserLevelBean userLevelDisplayInfo = CommonHelper.getUserLevelDisplayInfo(list.getUserlevel());
+        rlHead.setBackgroundResource(userLevelDisplayInfo.headBg);
+        DisplayImageByVolleyUtils.loadUserPic(UrlHelper.checkUrl(list.getAvatar()), ivUserHead);
+        tvUserName.setText(list.getAuthor());
+        tvLevel.setText(com.yuedong.lib_develop.utils.TextUtils.addTextColor(userLevelDisplayInfo.textDesc,0,2,userLevelDisplayInfo.partTextColor));
 
         if(interest == 1){
             ivCollect.setSelected(true);
@@ -225,7 +233,6 @@ public class NewsDetailActivity extends BaseActivity {
                 attentionTask =  DataUtils.attentionNews(activity,1,id,NewsDetailActivity.this,isAttention);
             }
         });
-
     }
 
     @OnClick({R.id.iv_icon, R.id.iv_icon2, R.id.iv_icon3, R.id.title_btn_left, R.id.title_btn_right, R.id.btn_comment,R.id.ll_font,R.id.iv_pack_up,R.id.iv_send,R.id.ll_zan,R.id.ll_cai})

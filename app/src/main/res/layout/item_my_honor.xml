@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_honor1"
+    android:layout_width="match_parent"
+    android:layout_height="106dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:id="@+id/fl_view"
+        android:layout_width="48dp"
+        android:background="@drawable/bg_round_oranged6bc53a"
+        android:layout_height="48dp">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/iv_honor"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+      />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_honor"
+        style="@style/text_grey666666_12sp"
+        android:layout_marginTop="2dp"
+        android:text="开山元老" />
+</LinearLayout>

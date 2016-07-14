@@ -1,12 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.activity.MyHonorActivity">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+  >
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        >
+        <TextView
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_bei_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text=" 荣誉陈列室"
+            android:textColor="@color/orangeD6BC53"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <com.yuedong.lib_develop.view.SupportScrollConflictGridView
+        android:id="@+id/gridview"
+        android:paddingTop="21dp"
+        android:numColumns="3"
+        android:paddingBottom="21dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        >
+        <TextView
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_bei_unselect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="  所有"
+            android:textColor="@color/orangeD6BC53"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <com.yuedong.lib_develop.view.SupportScrollConflictGridView
+        android:id="@+id/gridview2"
+        android:paddingTop="21dp"
+        android:numColumns="3"
+        android:paddingBottom="21dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

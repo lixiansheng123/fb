@@ -60,12 +60,19 @@ public class CommonHelper {
                 bean.headBg = R.drawable.level_quan_expert;
                 bean.partTextColor = Color.parseColor("#D6BC52");
                 break;
+
+            case 3:
+                bean.textDesc = "球星";
+                bean.headBg = R.drawable.ic_big_level_mingxing;
+                bean.partTextColor = Color.parseColor("#4B8D7F");
+                break;
             case 0:
             default:
                 bean.textDesc = "普通评论员";
                 bean.headBg = R.drawable.level_quan_common;
                 bean.partTextColor = Color.parseColor("#99CC33");
                 break;
+
 
         }
         return bean;

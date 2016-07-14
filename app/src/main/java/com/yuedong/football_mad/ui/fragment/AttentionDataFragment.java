@@ -1,6 +1,9 @@
 package com.yuedong.football_mad.ui.fragment;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.android.volley.VolleyError;
 import com.yuedong.football_mad.R;
@@ -18,11 +21,18 @@ import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RefreshProxy;
 import com.yuedong.football_mad.model.helper.RequestHelper;
+import com.yuedong.football_mad.ui.activity.CompetitionDetailActivity;
+import com.yuedong.football_mad.ui.activity.CountryDetailActivity;
+import com.yuedong.football_mad.ui.activity.OtherDetailActivity;
+import com.yuedong.football_mad.ui.activity.PlayerDetailActivity;
+import com.yuedong.football_mad.ui.activity.TeamDetailActivity;
 import com.yuedong.football_mad.view.PulltoRefreshListView;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.bean.ListResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
+import com.yuedong.lib_develop.ioc.annotation.event.OnItemClick;
 import com.yuedong.lib_develop.net.VolleyNetWorkCallback;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,5 +152,36 @@ public class AttentionDataFragment extends BaseFragment {
     @Override
     public void networdSucceed(String tag, BaseResponse data) {
 
+    }
+
+
+    @OnItemClick(value = R.id.listview)
+    protected void itemClickListener(AdapterView<?> parent,View view,int pos, long id){
+        FinalSearchAllBean bean = (FinalSearchAllBean) parent.getAdapter().getItem(pos);
+        if (bean == null) return;
+        int type = bean.getType();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.KEY_ID, bean.getId());
+        bundle.putString(Constant.KEY_STR, bean.getName());
+        Class<? extends Activity> cls = null;
+        switch (type) {
+            case 1:
+                cls = CompetitionDetailActivity.class;
+                break;
+            case 2:
+                cls = TeamDetailActivity.class;
+                break;
+            case 3:
+                cls = PlayerDetailActivity.class;
+                break;
+            case 4:
+                cls = CountryDetailActivity.class;
+                break;
+            case 5:
+                cls = OtherDetailActivity.class;
+                break;
+        }
+        if (cls != null)
+            LaunchWithExitUtils.startActivity(getActivity(), cls, bundle);
     }
 }

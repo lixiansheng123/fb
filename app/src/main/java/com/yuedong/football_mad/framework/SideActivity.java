@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -11,12 +12,17 @@ import com.yuedong.football_mad.R;
 import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.app.MyApplication;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
-import com.yuedong.football_mad.model.bean.GetUserInfoByIdResBean;
+import com.yuedong.football_mad.model.bean.HonorBean;
+import com.yuedong.football_mad.model.bean.HonorRespBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
+import com.yuedong.football_mad.model.helper.DataUtils;
+import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.football_mad.ui.activity.AcviteActivity;
 import com.yuedong.football_mad.ui.activity.AppSettingActivity;
 import com.yuedong.football_mad.ui.activity.AttestationActivity;
+import com.yuedong.football_mad.ui.activity.BallplayerActivity;
 import com.yuedong.football_mad.ui.activity.DataKuActivity;
 import com.yuedong.football_mad.ui.activity.LoginActivity;
 import com.yuedong.football_mad.ui.activity.MyArticleActivity;
@@ -36,9 +42,12 @@ import com.yuedong.lib_develop.utils.FileUtils;
 import com.yuedong.lib_develop.utils.L;
 import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
+import com.yuedong.lib_develop.utils.ViewUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -53,8 +62,12 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
     private View rlUserHead;
     private TextView tvUsername, tvUserLevel, tvNumJiandi, tvNumPost, tvNumComment, tvNumGenTie, tvZanArticle, tvZanComment, tvAStatus;
     private User loginUser;
-    private String infoTask;
+    private String userHonorList;
     private int qualifystate;
+    private View llHonor1,llHonor2,llHonor3;
+    private ImageView ivHonor1,ivHonor2,ivHonor3;
+    private TextView tvHonor1,tvHonor2,tvHonor3;;
+    private List<HonorBean> myHonorList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +109,15 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         tvZanArticle = (TextView) menu.findViewById(R.id.tv_num_zan_article);
         tvZanComment = (TextView) menu.findViewById(R.id.tv_num_zan_comment);
         tvAStatus = (TextView) menu.findViewById(R.id.tv_a_status);
+        llHonor1 = menu.findViewById(R.id.ll_honor1);
+        llHonor2 = menu.findViewById(R.id.ll_honor2);
+        llHonor3 = menu.findViewById(R.id.ll_honor3);
+        ivHonor1 = (ImageView) menu.findViewById(R.id.iv_honor1);
+        ivHonor2 = (ImageView) menu.findViewById(R.id.iv_honor2);
+        ivHonor3 = (ImageView) menu.findViewById(R.id.iv_honor3);
+        tvHonor1 = (TextView) menu.findViewById(R.id.tv_honor1);
+        tvHonor2 = (TextView) menu.findViewById(R.id.tv_honor2);
+        tvHonor3 = (TextView) menu.findViewById(R.id.tv_honor3);
         menu.findViewById(R.id.ll_my_attention).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_comment).setOnClickListener(this);
         menu.findViewById(R.id.ll_my_ball_friend).setOnClickListener(this);
@@ -108,6 +130,8 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         menu.findViewById(R.id.ll_exit_logo).setOnClickListener(this);
         menu.findViewById(R.id.ll_setting).setOnClickListener(this);
         menu.findViewById(R.id.ll_video_list).setOnClickListener(this);
+        menu.findViewById(R.id.ll_ballplayer).setOnClickListener(this);
+        menu.findViewById(R.id.ll_active).setOnClickListener(this);
         changeUi();
     }
 
@@ -145,7 +169,7 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
         tvZanArticle.setText(loginUser.getNewsgood());
         tvZanComment.setText(loginUser.getCommentgood());
         // 荣誉
-
+        getUserHonor();
         // 认证
         qualifystate = loginUser.getQualifystate();
         String msg = "未认证";
@@ -166,6 +190,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
         }
         tvAStatus.setText(msg);
+    }
+
+    private void getUserHonor() {
+        userHonorList = RequestHelper.post(Constant.URL_USER_HONOR, DataUtils.getSidPostMap(loginUser.getSid()), HonorRespBean.class,true,true,this);
     }
 
 
@@ -208,7 +236,10 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.ll_my_honor:
-                LaunchWithExitUtils.startActivity(SideActivity.this, MyHonorActivity.class);
+                if (CommonHelper.checkLogin(activity) == null) return;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.KEY_SERIALIZABLE,(Serializable)myHonorList);
+                LaunchWithExitUtils.startActivity(SideActivity.this, MyHonorActivity.class,bundle);
                 break;
 
             case R.id.ll_my_collect:
@@ -250,6 +281,40 @@ public abstract class SideActivity extends BaseActivity implements View.OnClickL
             case R.id.ll_video_list:
                 LaunchWithExitUtils.startActivity(activity, VideoListActivity.class);
                 break;
+
+            case R.id.ll_ballplayer:
+                LaunchWithExitUtils.startActivity(activity, BallplayerActivity.class);
+                break;
+
+            case R.id.ll_active:
+                LaunchWithExitUtils.startActivity(activity,AcviteActivity.class);
+                break;
+        }
+    }
+
+    @Override
+    public void networdSucceed(String tag, BaseResponse data) {
+        if(tag.equals(userHonorList)){
+            HonorRespBean bean = (HonorRespBean) data;
+            myHonorList = bean.getData().getList();
+            try {
+                HonorBean honorBean = myHonorList.get(0);
+                ViewUtils.showLayout(llHonor1);
+                DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(honorBean.getLogo()), ivHonor1);
+                tvHonor1.setText(honorBean.getName());
+
+                HonorBean honorBean1 = myHonorList.get(1);
+                ViewUtils.showLayout(llHonor2);
+                DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(honorBean1.getLogo()), ivHonor2);
+                tvHonor2.setText(honorBean1.getName());
+
+                HonorBean honorBean2 = myHonorList.get(0);
+                ViewUtils.showLayout(llHonor3);
+                DisplayImageByVolleyUtils.loadQuadratePic(UrlHelper.checkUrl(honorBean2.getLogo()), ivHonor3);
+                tvHonor3.setText(honorBean2.getName());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

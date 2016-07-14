@@ -1,5 +1,6 @@
 package com.yuedong.football_mad.ui.fragment;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,17 @@ import com.yuedong.football_mad.framework.BaseFragment;
 import com.yuedong.football_mad.framework.ViewHolder;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
 import com.yuedong.football_mad.model.bean.FansBean;
+import com.yuedong.football_mad.model.bean.MyFriendBean;
 import com.yuedong.football_mad.model.bean.User;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.RequestHelper;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.lib_develop.bean.BaseResponse;
 import com.yuedong.lib_develop.ioc.annotation.ViewInject;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.T;
 import com.yuedong.lib_develop.view.RoundImageView;
 
@@ -118,6 +122,16 @@ public class MyFansFragment extends BaseFragment{
             for (int i = 0; i < group.size(); i++) {
                 exListView.expandGroup(i);
             }
+            exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                    FansBean fansBean = child.get(groupPosition).get(childPosition);
+                    Bundle data = new Bundle();
+                    data.putString(Constant.KEY_STR2, fansBean.id);
+                    LaunchWithExitUtils.startActivity(getActivity(), UserInfoActivity.class, data);
+                    return true;
+                }
+            });
         }else if(tag .equals(addFriendTask)){
             T.showShort(getActivity(), "增加好友成功");
             ivAddFriend.setImageResource(R.drawable.ic_friend_already_add);

@@ -92,7 +92,7 @@ public class TitleViewHelper {
         }
         return titile1;
     }
-
+    public ImageView getTitle1Left(){return title1Left;}
     public ImageView getTitle1Right(){
         return  title1Right;
     }

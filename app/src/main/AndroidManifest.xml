@@ -58,7 +58,9 @@
             android:name=".ui.activity.VideoActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".ui.activity.VideoListActivity" />
-        <activity android:name=".ui.activity.PostDetailActivity"></activity>
+        <activity android:name=".ui.activity.PostDetailActivity" />
+        <activity android:name=".ui.activity.BallplayerActivity" />
+        <activity android:name=".ui.activity.AcviteActivity"></activity>
     </application>
 
 </manifest>

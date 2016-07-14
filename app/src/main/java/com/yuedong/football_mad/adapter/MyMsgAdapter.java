@@ -1,11 +1,14 @@
 package com.yuedong.football_mad.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuedong.football_mad.R;
+import com.yuedong.football_mad.app.Constant;
 import com.yuedong.football_mad.framework.BaseAdapter;
 import com.yuedong.football_mad.framework.ViewHolder;
 import com.yuedong.football_mad.model.bean.DisplayUserLevelBean;
@@ -14,8 +17,10 @@ import com.yuedong.football_mad.model.bean.UserMsgBean;
 import com.yuedong.football_mad.model.helper.CommonHelper;
 import com.yuedong.football_mad.model.helper.DataUtils;
 import com.yuedong.football_mad.model.helper.UrlHelper;
+import com.yuedong.football_mad.ui.activity.UserInfoActivity;
 import com.yuedong.lib_develop.utils.DateUtils;
 import com.yuedong.lib_develop.utils.DisplayImageByVolleyUtils;
+import com.yuedong.lib_develop.utils.LaunchWithExitUtils;
 import com.yuedong.lib_develop.utils.TextUtils;
 import com.yuedong.lib_develop.utils.ViewUtils;
 import com.yuedong.lib_develop.view.RoundImageView;
@@ -33,7 +38,7 @@ public class MyMsgAdapter extends BaseAdapter<UserMsgBean> {
     }
 
     @Override
-    public void convert(ViewHolder viewHolder, UserMsgBean bean, int position, View convertView) {
+    public void convert(ViewHolder viewHolder, final UserMsgBean bean, int position, View convertView) {
         // TODO 这里缺少两个时间
         ImageView ivIcon = viewHolder.getIdByView(R.id.iv_icon);
         final TextView tvContent = viewHolder.getIdByView(R.id.tv_content);
@@ -84,6 +89,14 @@ public class MyMsgAdapter extends BaseAdapter<UserMsgBean> {
             }
         });
 
-
+        rlHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putString(Constant.KEY_STR2, bean.getAuthor());
+//                b.putString(Constant.KEY_STR, bean.getUsername());
+                LaunchWithExitUtils.startActivity((Activity) mCon, UserInfoActivity.class, b);
+            }
+        });
     }
 }
